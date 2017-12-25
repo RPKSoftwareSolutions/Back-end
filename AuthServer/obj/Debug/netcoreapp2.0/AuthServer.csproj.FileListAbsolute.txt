@@ -1,0 +1,13 @@
+C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csprojResolveAssemblyReference.cache
+C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csproj.CoreCompileInputs.cache
+C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.AssemblyInfoInputs.cache
+C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.AssemblyInfo.cs
+C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.deps.json
+C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.runtimeconfig.json
+C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.runtimeconfig.dev.json
+C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.dll
+C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.pdb
+C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\DomainModel.dll
+C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\DomainModel.pdb
+C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.dll
+C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.pdb
