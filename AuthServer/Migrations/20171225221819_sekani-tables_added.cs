@@ -16,7 +16,8 @@ namespace AuthServer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Notes = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    UpdateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +31,8 @@ namespace AuthServer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Notes = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    UpdateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +45,6 @@ namespace AuthServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Deleted = table.Column<bool>(nullable: false),
                     LevelId = table.Column<int>(nullable: false),
                     Phonetic = table.Column<string>(nullable: true),
                     UpdateTime = table.Column<DateTime>(nullable: false),
@@ -67,7 +68,8 @@ namespace AuthServer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SekaniWordId = table.Column<int>(nullable: false),
-                    SekaniWordTypeId = table.Column<int>(nullable: false)
+                    SekaniWordTypeId = table.Column<int>(nullable: false),
+                    UpdateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +96,8 @@ namespace AuthServer.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<byte[]>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
-                    SekaniWwtId = table.Column<int>(nullable: false)
+                    SekaniWwtId = table.Column<int>(nullable: false),
+                    UpdateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +118,8 @@ namespace AuthServer.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<byte[]>(nullable: false),
                     Notes = table.Column<string>(nullable: true),
-                    SekaniWwtId = table.Column<int>(nullable: false)
+                    SekaniWwtId = table.Column<int>(nullable: false),
+                    UpdateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -138,7 +142,8 @@ namespace AuthServer.Migrations
                     Example2 = table.Column<string>(nullable: true),
                     Example3 = table.Column<string>(nullable: true),
                     SekaniWwtId = table.Column<int>(nullable: false),
-                    Translation = table.Column<string>(nullable: true)
+                    Translation = table.Column<string>(nullable: true),
+                    UpdateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

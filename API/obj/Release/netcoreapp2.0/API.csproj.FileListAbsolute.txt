@@ -1,0 +1,15 @@
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\API.deps.json
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\API.runtimeconfig.json
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\API.runtimeconfig.dev.json
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\API.dll
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\API.pdb
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\AuthServer.dll
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\DomainModel.dll
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\AuthServer.pdb
+C:\Projects\SekaniServer\API\bin\Release\netcoreapp2.0\DomainModel.pdb
+C:\Projects\SekaniServer\API\obj\Release\netcoreapp2.0\API.csprojResolveAssemblyReference.cache
+C:\Projects\SekaniServer\API\obj\Release\netcoreapp2.0\API.csproj.CoreCompileInputs.cache
+C:\Projects\SekaniServer\API\obj\Release\netcoreapp2.0\API.AssemblyInfoInputs.cache
+C:\Projects\SekaniServer\API\obj\Release\netcoreapp2.0\API.AssemblyInfo.cs
+C:\Projects\SekaniServer\API\obj\Release\netcoreapp2.0\API.dll
+C:\Projects\SekaniServer\API\obj\Release\netcoreapp2.0\API.pdb

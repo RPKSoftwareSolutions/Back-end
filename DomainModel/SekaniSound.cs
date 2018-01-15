@@ -23,8 +23,6 @@ namespace DomainModel
         // trackers
         public DateTime UpdateTime { get; set; }
 
-        [DefaultValue(false)]
-        public bool Deleted { get; set; }
 
         // v
 

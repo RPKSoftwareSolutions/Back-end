@@ -11,7 +11,7 @@ using System;
 namespace AuthServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20171224204643_sekani-tables_added")]
+    [Migration("20171225221819_sekani-tables_added")]
     partial class sekanitables_added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,8 @@ namespace AuthServer.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<DateTime>("UpdateTime");
+
                     b.HasKey("Id");
 
                     b.ToTable("Levels");
@@ -91,6 +93,8 @@ namespace AuthServer.Migrations
 
                     b.Property<int>("SekaniWwtId");
 
+                    b.Property<DateTime>("UpdateTime");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SekaniWwtId");
@@ -110,6 +114,8 @@ namespace AuthServer.Migrations
 
                     b.Property<int>("SekaniWwtId");
 
+                    b.Property<DateTime>("UpdateTime");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SekaniWwtId");
@@ -121,8 +127,6 @@ namespace AuthServer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Deleted");
 
                     b.Property<int>("LevelId");
 
@@ -148,6 +152,8 @@ namespace AuthServer.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<DateTime>("UpdateTime");
+
                     b.HasKey("Id");
 
                     b.ToTable("SekaniWordTypes");
@@ -161,6 +167,8 @@ namespace AuthServer.Migrations
                     b.Property<int>("SekaniWordId");
 
                     b.Property<int>("SekaniWordTypeId");
+
+                    b.Property<DateTime>("UpdateTime");
 
                     b.HasKey("Id");
 
@@ -201,6 +209,8 @@ namespace AuthServer.Migrations
                     b.Property<int>("SekaniWwtId");
 
                     b.Property<string>("Translation");
+
+                    b.Property<DateTime>("UpdateTime");
 
                     b.HasKey("Id");
 

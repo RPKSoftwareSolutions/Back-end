@@ -47,8 +47,6 @@ namespace AuthServer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<string>("Notes");
 
                     b.Property<string>("Title");
@@ -90,8 +88,6 @@ namespace AuthServer.Migrations
                     b.Property<byte[]>("Content")
                         .IsRequired();
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<string>("Notes");
 
                     b.Property<int>("SekaniWwtId");
@@ -113,8 +109,6 @@ namespace AuthServer.Migrations
                     b.Property<byte[]>("Content")
                         .IsRequired();
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<string>("Notes");
 
                     b.Property<int>("SekaniWwtId");
@@ -132,8 +126,6 @@ namespace AuthServer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Deleted");
 
                     b.Property<int>("LevelId");
 
@@ -155,8 +147,6 @@ namespace AuthServer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<string>("Notes");
 
                     b.Property<string>("Title");
@@ -172,8 +162,6 @@ namespace AuthServer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Deleted");
 
                     b.Property<int>("SekaniWordId");
 
@@ -210,8 +198,6 @@ namespace AuthServer.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Deleted");
 
                     b.Property<string>("Example1");
 
