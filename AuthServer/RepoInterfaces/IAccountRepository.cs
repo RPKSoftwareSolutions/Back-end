@@ -20,5 +20,6 @@ namespace AuthServer.RepoInterfaces
 
         User FindByPasswordResetToken(string token);
         User FindByEmailVerificationToken(string token);
+
     }
 }

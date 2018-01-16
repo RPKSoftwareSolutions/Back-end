@@ -10,7 +10,7 @@
 
   <ItemGroup>
 	<PackageReference Include="CryptoHelper" Version="3.0.0" />
-    <PackageReference Include="IdentityServer4" Version="2.0.4" />
+    <PackageReference Include="IdentityServer4" Version="2.1.1" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
@@ -23,5 +23,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
   </ItemGroup>
+
+  <!--<ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+  </ItemGroup>-->
 
 </Project>

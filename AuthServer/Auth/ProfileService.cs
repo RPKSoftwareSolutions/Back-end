@@ -41,6 +41,7 @@ namespace AuthServer.Auth
                     claims.Add(new Claim(c.ClaimType, c.ClaimValue));
                 }
                 context.IssuedClaims = claims;
+
                 return Task.FromResult(0);
             }
             catch (Exception x)
@@ -51,6 +52,7 @@ namespace AuthServer.Auth
 
         public Task IsActiveAsync(IsActiveContext context)
         {
+            
             //var user = repo.GetById(int.Parse(context.Subject.GetSubjectId()));
             var user = new UnitOfWork(this.context).Auth.Get(int.Parse(context.Subject.GetSubjectId()));
             context.IsActive = (user != null) && user.Active;

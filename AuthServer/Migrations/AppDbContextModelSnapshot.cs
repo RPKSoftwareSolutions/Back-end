@@ -20,6 +20,98 @@ namespace AuthServer.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DomainModel.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessTokenLifeTime");
+
+                    b.Property<bool>("AllowOfflineAccess");
+
+                    b.Property<string>("ClientId");
+
+                    b.Property<bool>("Enabled");
+
+                    b.Property<int>("RefreshTokenExpiration");
+
+                    b.Property<int>("SlidingRefreshTokenLifetime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("DomainModel.ClientCorsOrigin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<string>("Origin");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("ClientCorsOrigins");
+                });
+
+            modelBuilder.Entity("DomainModel.ClientGrantType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<string>("GrantType");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("ClientGrantTypes");
+                });
+
+            modelBuilder.Entity("DomainModel.ClientScope", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<string>("Scope");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("ClientScopes");
+                });
+
+            modelBuilder.Entity("DomainModel.ClientSecret", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime?>("Expiration");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("ClientSecrets");
+                });
+
             modelBuilder.Entity("DomainModel.EmailVerificationToken", b =>
                 {
                     b.Property<int>("Id")
@@ -269,6 +361,64 @@ namespace AuthServer.Migrations
                     b.ToTable("UserClaims");
                 });
 
+            modelBuilder.Entity("DomainModel.UserSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Browser");
+
+                    b.Property<string>("DeviceId");
+
+                    b.Property<string>("OperatingSystem");
+
+                    b.Property<string>("RefreshToken");
+
+                    b.Property<string>("SessionId");
+
+                    b.Property<DateTime?>("UpdateTime");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserSessions");
+                });
+
+            modelBuilder.Entity("DomainModel.ClientCorsOrigin", b =>
+                {
+                    b.HasOne("DomainModel.Client", "Client")
+                        .WithMany("AllowedCorsOrigins")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.ClientGrantType", b =>
+                {
+                    b.HasOne("DomainModel.Client", "Client")
+                        .WithMany("AllowedGrantTypes")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.ClientScope", b =>
+                {
+                    b.HasOne("DomainModel.Client", "Client")
+                        .WithMany("AllowedScopes")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.ClientSecret", b =>
+                {
+                    b.HasOne("DomainModel.Client", "Client")
+                        .WithMany("ClientSecrets")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("DomainModel.EmailVerificationToken", b =>
                 {
                     b.HasOne("DomainModel.User", "User")
@@ -334,6 +484,14 @@ namespace AuthServer.Migrations
                 {
                     b.HasOne("DomainModel.User", "User")
                         .WithMany("Claims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.UserSession", b =>
+                {
+                    b.HasOne("DomainModel.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

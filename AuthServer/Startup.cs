@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using IdentityServer4.Services;
 using AuthServer.Auth;
 using IdentityServer4.Validation;
+using IdentityServer4.Stores;
 
 namespace AuthServer
 {
@@ -38,20 +39,41 @@ namespace AuthServer
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
-            services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(connectionString)
-            );
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+            
 
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
+                    //.AddTransient<ITokenValidator, RefreshTokenValidator>()
+                    //.AddTransient<IRefreshTokenService, MyRefTokenService>()
+                    //.AddTransient<IPersistedGrantStore, PersistedGrantStore>()
                     .AddTransient<IProfileService, ProfileService>();
-                    //.AddTransient<IAuthRepository, AuthRepository>();
+            //.AddTransient<IAuthRepository, AuthRepository>();
 
             //services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddIdentityServer()
                 //.AddTestUsers(Config.GetTestUsers())
                 .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients())
+                //.AddInMemoryClients(Config.GetClients())
+                .AddClientStore<ClientStore>()
+                /*
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+                })*/
+                /*
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+
+                    // this enables automatic token cleanup. this is optional.
+                    options.EnableTokenCleanup = true;
+                    options.TokenCleanupInterval = 30;
+                })*/
                 .AddDeveloperSigningCredential()
                 .AddExtensionGrantValidator<GoogleGrant>()
                 .AddExtensionGrantValidator<FacebookGrant>();

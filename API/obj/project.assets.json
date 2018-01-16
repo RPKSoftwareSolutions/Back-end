@@ -43,7 +43,7 @@
           "lib/netstandard2.0/CryptoHelper.dll": {}
         }
       },
-      "IdentityModel/2.16.0": {
+      "IdentityModel/3.0.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "10.0.3"
@@ -70,10 +70,10 @@
           "lib/netstandard2.0/IdentityModel.AspNetCore.OAuth2Introspection.dll": {}
         }
       },
-      "IdentityServer4/2.0.4": {
+      "IdentityServer4/2.1.1": {
         "type": "package",
         "dependencies": {
-          "IdentityModel": "2.16.0",
+          "IdentityModel": "3.0.0",
           "Microsoft.AspNetCore.Authentication": "2.0.1",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.0.1",
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": "2.0.1",
@@ -82,8 +82,7 @@
           "Microsoft.Extensions.Logging": "2.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "2.0.0",
           "System.IdentityModel.Tokens.Jwt": "5.1.5",
-          "System.Security.Cryptography.Cng": "4.4.0",
-          "System.ValueTuple": "4.4.0"
+          "System.Security.Cryptography.Cng": "4.4.0"
         },
         "compile": {
           "lib/netstandard2.0/IdentityServer4.dll": {}
@@ -4904,7 +4903,7 @@
         "dependencies": {
           "CryptoHelper": "3.0.0",
           "DomainModel": "1.0.0",
-          "IdentityServer4": "2.0.4",
+          "IdentityServer4": "2.1.1",
           "IdentityServer4.EntityFramework": "2.1.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1",
@@ -4924,6 +4923,9 @@
       "DomainModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "IdentityServer4": "2.1.1"
+        },
         "compile": {
           "bin/placeholder/DomainModel.dll": {}
         },
@@ -4960,12 +4962,12 @@
         "lib/netstandard2.0/CryptoHelper.xml"
       ]
     },
-    "IdentityModel/2.16.0": {
-      "sha512": "EhzaHd3Elpa2GvJTpKQ3ec9FFZIN7Kkj5unDl/Z9QPosA5IkJpsh0KLNxnkXTDcdcjb7IjbRhlZ4ymXqm+4gcw==",
+    "IdentityModel/3.0.0": {
+      "sha512": "EKMOOUUqDzBR3goiA8eWJ1aQBz1AMfKVxxR7XnzAf5qq2k9vr6GT91SyHmzC14KINpNNJOrbmowXf5S04gQ0ZA==",
       "type": "package",
-      "path": "identitymodel/2.16.0",
+      "path": "identitymodel/3.0.0",
       "files": [
-        "identitymodel.2.16.0.nupkg.sha512",
+        "identitymodel.3.0.0.nupkg.sha512",
         "identitymodel.nuspec",
         "lib/net452/IdentityModel.dll",
         "lib/net452/IdentityModel.xml",
@@ -4988,14 +4990,15 @@
         "lib/netstandard2.0/IdentityModel.AspNetCore.OAuth2Introspection.xml"
       ]
     },
-    "IdentityServer4/2.0.4": {
-      "sha512": "/uDOI8uiNMsENg08O7MjPGKCY7cssal12T6yBwxglRdvPrNsBuOMfu/e9Co5HFFas6twvpp937v/kofpTJSAiA==",
+    "IdentityServer4/2.1.1": {
+      "sha512": "SeSGMMAT/FEnir5zxDrdDvenxtuPVAxTAUNYtYjVl40sAKsjwJJ9GE9kSv9QI3trU8vLft5ApRFQhOYAt6Itug==",
       "type": "package",
-      "path": "identityserver4/2.0.4",
+      "path": "identityserver4/2.1.1",
       "files": [
-        "identityserver4.2.0.4.nupkg.sha512",
+        "identityserver4.2.1.1.nupkg.sha512",
         "identityserver4.nuspec",
         "lib/netstandard2.0/IdentityServer4.dll",
+        "lib/netstandard2.0/IdentityServer4.pdb",
         "lib/netstandard2.0/IdentityServer4.xml"
       ]
     },

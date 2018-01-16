@@ -14,9 +14,17 @@ namespace AuthServer.Auth
         // Core Infrastructure
         public DbSet<User> Users { get; set; }
         public DbSet<UserClaim> UserClaims { get; set; }
+        public DbSet<UserSession> UserSessions { get; set; }
         public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
         public DbSet<EmailVerificationToken> EmailVerificationTokens { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        // extra core
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<ClientSecret> ClientSecrets { get; set; }
+        public DbSet<ClientGrantType> ClientGrantTypes { get; set; }
+        public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; }
+        public DbSet<ClientScope> ClientScopes { get; set; }
+
 
         // Words & Translations 
         public DbSet<Level> Levels { get; set; }
