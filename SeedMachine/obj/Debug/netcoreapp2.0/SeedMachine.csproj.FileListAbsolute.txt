@@ -1,0 +1,15 @@
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\SeedMachine.deps.json
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\SeedMachine.runtimeconfig.json
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\SeedMachine.runtimeconfig.dev.json
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\SeedMachine.dll
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\AuthServer.dll
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\DomainModel.dll
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\AuthServer.pdb
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\DomainModel.pdb
+C:\Projects\SekaniServer\SeedMachine\obj\Debug\netcoreapp2.0\SeedMachine.csprojResolveAssemblyReference.cache
+C:\Projects\SekaniServer\SeedMachine\obj\Debug\netcoreapp2.0\SeedMachine.csproj.CoreCompileInputs.cache
+C:\Projects\SekaniServer\SeedMachine\obj\Debug\netcoreapp2.0\SeedMachine.AssemblyInfoInputs.cache
+C:\Projects\SekaniServer\SeedMachine\obj\Debug\netcoreapp2.0\SeedMachine.AssemblyInfo.cs
+C:\Projects\SekaniServer\SeedMachine\bin\Debug\netcoreapp2.0\SeedMachine.pdb
+C:\Projects\SekaniServer\SeedMachine\obj\Debug\netcoreapp2.0\SeedMachine.dll
+C:\Projects\SekaniServer\SeedMachine\obj\Debug\netcoreapp2.0\SeedMachine.pdb

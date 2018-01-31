@@ -24,6 +24,7 @@ namespace AuthServer.Auth
         public DbSet<ClientGrantType> ClientGrantTypes { get; set; }
         public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; }
         public DbSet<ClientScope> ClientScopes { get; set; }
+        public DbSet<PersistedGrant> PersistedGrants { get; set; }
 
 
         // Words & Translations 

@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CryptoHelper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -20,6 +22,24 @@ namespace API.Controllers
             //this._configuration = config;
         }
 
-        
+        [Authorize]
+        [HttpGet("test/{param}")]
+        public ActionResult test(string param)
+        {
+            var s = param.Sha256();
+            var bil = CryptoHelper.Crypto.VerifyHashedPassword(s, "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=");
+
+            return Ok(bil);
+        }
+
+        [HttpGet("client")]
+        public ActionResult client(string param)
+        {
+            //this._unitOfWork.Clients.Add(new DomainModel.Client)
+
+            return Ok();
+        }
     }
+
+
 }

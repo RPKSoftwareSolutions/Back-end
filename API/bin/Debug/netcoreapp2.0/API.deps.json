@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "da9d4971051a24dcfcbe0bc3f4cc537ed0bde627"
+    "signature": "08b8b272340e76b9fc3612aaa4950493e7106ef5"
   },
   "compilationOptions": {
     "defines": [
@@ -26,7 +26,7 @@
           "AuthServer": "1.0.0",
           "CryptoHelper": "3.0.0",
           "DomainModel": "1.0.0",
-          "IdentityServer4.AccessTokenValidation": "2.1.0",
+          "IdentityServer4.AccessTokenValidation": "2.3.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.EntityFrameworkCore": "2.0.1",
           "Microsoft.NETCore.App": "2.0.0",
@@ -89,7 +89,7 @@
           "lib/netstandard2.0/IdentityModel.dll": {}
         }
       },
-      "IdentityModel.AspNetCore.OAuth2Introspection/3.0.1": {
+      "IdentityModel.AspNetCore.OAuth2Introspection/3.1.0": {
         "dependencies": {
           "IdentityModel": "3.0.0",
           "Microsoft.AspNetCore.Authentication": "2.0.1",
@@ -123,11 +123,11 @@
           "lib/netstandard2.0/IdentityServer4.dll": {}
         }
       },
-      "IdentityServer4.AccessTokenValidation/2.1.0": {
+      "IdentityServer4.AccessTokenValidation/2.3.0": {
         "dependencies": {
-          "IdentityModel.AspNetCore.OAuth2Introspection": "3.0.1",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.0.0",
-          "Microsoft.AspNetCore.Authorization": "2.0.0"
+          "IdentityModel.AspNetCore.OAuth2Introspection": "3.1.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.0.1",
+          "Microsoft.AspNetCore.Authorization": "2.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/IdentityServer4.AccessTokenValidation.dll": {}
@@ -273,12 +273,12 @@
           "Microsoft.AspNetCore.Authentication.Core": "2.0.1",
           "Microsoft.AspNetCore.Authentication.Facebook": "2.0.0",
           "Microsoft.AspNetCore.Authentication.Google": "2.0.0",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "2.0.1",
           "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "2.0.0",
           "Microsoft.AspNetCore.Authentication.OAuth": "2.0.1",
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": "2.0.1",
           "Microsoft.AspNetCore.Authentication.Twitter": "2.0.0",
-          "Microsoft.AspNetCore.Authorization": "2.0.0",
+          "Microsoft.AspNetCore.Authorization": "2.0.1",
           "Microsoft.AspNetCore.Authorization.Policy": "2.0.0",
           "Microsoft.AspNetCore.AzureAppServices.HostingStartup": "2.0.0",
           "Microsoft.AspNetCore.AzureAppServicesIntegration": "2.0.0",
@@ -510,7 +510,7 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Google.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Authentication.JwtBearer/2.0.0": {
+      "Microsoft.AspNetCore.Authentication.JwtBearer/2.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication": "2.0.1",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "2.1.4"
@@ -568,7 +568,7 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Authentication.Twitter.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Authorization/2.0.0": {
+      "Microsoft.AspNetCore.Authorization/2.0.1": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
           "Microsoft.Extensions.Options": "2.0.0"
@@ -583,7 +583,7 @@
       "Microsoft.AspNetCore.Authorization.Policy/2.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Abstractions": "2.0.1",
-          "Microsoft.AspNetCore.Authorization": "2.0.0"
+          "Microsoft.AspNetCore.Authorization": "2.0.1"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Authorization.Policy.dll": {}
@@ -4176,12 +4176,12 @@
       "path": "identitymodel/3.0.0",
       "hashPath": "identitymodel.3.0.0.nupkg.sha512"
     },
-    "IdentityModel.AspNetCore.OAuth2Introspection/3.0.1": {
+    "IdentityModel.AspNetCore.OAuth2Introspection/3.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ik13HLJD0POfqWPoBfJe5unHmN5JMsOS6xRKjaACI7oJLYVXTTNjagCofXszjxS2siU9Xd+x06tD4FRCBK71fQ==",
-      "path": "identitymodel.aspnetcore.oauth2introspection/3.0.1",
-      "hashPath": "identitymodel.aspnetcore.oauth2introspection.3.0.1.nupkg.sha512"
+      "sha512": "sha512-x8e2m1JAHpUG+u8fuYtda72ppeqCSux+YIytLLII9eDqm5mK7sofqWzPlXTUQ9bD6qGFZrK+frMyjRfARKTKPQ==",
+      "path": "identitymodel.aspnetcore.oauth2introspection/3.1.0",
+      "hashPath": "identitymodel.aspnetcore.oauth2introspection.3.1.0.nupkg.sha512"
     },
     "IdentityServer4/2.1.1": {
       "type": "package",
@@ -4190,12 +4190,12 @@
       "path": "identityserver4/2.1.1",
       "hashPath": "identityserver4.2.1.1.nupkg.sha512"
     },
-    "IdentityServer4.AccessTokenValidation/2.1.0": {
+    "IdentityServer4.AccessTokenValidation/2.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-yheejylkmVnaN+1LfWUFgiQancV3TLiTMVz7wZW0r1SD2TKQQEY5E7EgLol7KxnFZXLC4BhBfqlvPa2zALZKKw==",
-      "path": "identityserver4.accesstokenvalidation/2.1.0",
-      "hashPath": "identityserver4.accesstokenvalidation.2.1.0.nupkg.sha512"
+      "sha512": "sha512-pdM4gej6eWTJDK1Wii27zvmoFjh0d2qq9G5yX0EiP/DMENJ28PgdSl9bTVTMNpz2KTPX51yqfJzd80US2JFjmw==",
+      "path": "identityserver4.accesstokenvalidation/2.3.0",
+      "hashPath": "identityserver4.accesstokenvalidation.2.3.0.nupkg.sha512"
     },
     "IdentityServer4.EntityFramework/2.1.0": {
       "type": "package",
@@ -4302,12 +4302,12 @@
       "path": "microsoft.aspnetcore.authentication.google/2.0.0",
       "hashPath": "microsoft.aspnetcore.authentication.google.2.0.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Authentication.JwtBearer/2.0.0": {
+    "Microsoft.AspNetCore.Authentication.JwtBearer/2.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-67ae/cGmfB5q61HfkwHD+gZvdpcsWA743wEZo2hAcgX/TQwo3U7nhtpnyLaSR8FfzOgPMpHUAp3O0sCFgkS90g==",
-      "path": "microsoft.aspnetcore.authentication.jwtbearer/2.0.0",
-      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.2.0.0.nupkg.sha512"
+      "sha512": "sha512-GH1qVsm6b0JqWnlhnVKRl6JOux6t52KhjHkMV3gjEcRe0Rg6mOPjQh/TrIZuxpktfgGp8j4DYBOaMn+jjOL1wA==",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/2.0.1",
+      "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.2.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.MicrosoftAccount/2.0.0": {
       "type": "package",
@@ -4337,12 +4337,12 @@
       "path": "microsoft.aspnetcore.authentication.twitter/2.0.0",
       "hashPath": "microsoft.aspnetcore.authentication.twitter.2.0.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Authorization/2.0.0": {
+    "Microsoft.AspNetCore.Authorization/2.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-jyU6UjcqHmuzuzqUsmpgMXHbnybaPcNYKDEHHaCJ1YhIiSlStb1bGy7L0IDViqdZWmiRi3UPjdIMkaU6FbuDag==",
-      "path": "microsoft.aspnetcore.authorization/2.0.0",
-      "hashPath": "microsoft.aspnetcore.authorization.2.0.0.nupkg.sha512"
+      "sha512": "sha512-0nZ5slZMwvtEgoR5b/T/MB4uM5qPQqVhPxbtrWb9W0QsIktB0gkAmpD6ciNj4ltZ+zRaY3rWZSS09SaFrsUTIQ==",
+      "path": "microsoft.aspnetcore.authorization/2.0.1",
+      "hashPath": "microsoft.aspnetcore.authorization.2.0.1.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authorization.Policy/2.0.0": {
       "type": "package",

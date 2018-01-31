@@ -7,13 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
+using AuthServer.Uow;
 
 namespace AuthServer.Auth
 {
     public class PersistedGrantStore : IPersistedGrantStore
     {
-        private readonly ILogger logger;
-        private readonly IPersistedGrantService persistedGrantService;
+        //private readonly ILogger logger;
+        //private readonly IPersistedGrantService persistedGrantService;
+
+        private AppDbContext _context;
+        private UnitOfWork uow;
+
+        public PersistedGrantStore(AppDbContext context)
+        {
+            this._context = context;
+            this.uow = new UnitOfWork(this._context);
+        }
 
         public Task<IEnumerable<IdentityServer4.Models.PersistedGrant>> GetAllAsync(string subjectId)
         {
@@ -22,7 +32,21 @@ namespace AuthServer.Auth
 
         public Task<IdentityServer4.Models.PersistedGrant> GetAsync(string key)
         {
-            throw new NotImplementedException();
+            var pg = uow.PersistedGrants.Find(p => p.Key == key).FirstOrDefault();
+            if (pg == null)
+                return Task.FromResult<IdentityServer4.Models.PersistedGrant>(null);
+            IdentityServer4.Models.PersistedGrant ps = new IdentityServer4.Models.PersistedGrant()
+            {
+                ClientId = pg.ClientId,
+                CreationTime = pg.CreationTime,
+                Data = pg.Data,
+                Expiration = pg.Expiration,
+                Key = pg.Key,
+                SubjectId = pg.SubjectId,
+                Type = pg.Type
+            };
+            
+            return Task.FromResult<IdentityServer4.Models.PersistedGrant>(ps);
         }
 
         public Task RemoveAllAsync(string subjectId, string clientId)
@@ -37,13 +61,35 @@ namespace AuthServer.Auth
 
         public Task RemoveAsync(string key)
         {
-            throw new NotImplementedException();
+            var pg = uow.PersistedGrants.Find(p => p.Key == key).FirstOrDefault();
+
+            if (pg == null)
+                throw new KeyNotFoundException();
+            uow.PersistedGrants.Remove(pg);
+            uow.Complete();
+            return Task.CompletedTask;
         }
 
         public Task StoreAsync(IdentityServer4.Models.PersistedGrant grant)
         {
             //grant.
-            throw new NotImplementedException();
+
+            
+
+            uow.PersistedGrants.Add(new DomainModel.PersistedGrant()
+            {
+                ClientId = grant.ClientId,
+                CreationTime = grant.CreationTime,
+                Data = grant.Data,
+                Expiration = grant.Expiration,
+                Key = grant.Key,
+                SubjectId = grant.SubjectId,
+                Type = grant.Type
+            });
+            uow.Complete();
+
+            //throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

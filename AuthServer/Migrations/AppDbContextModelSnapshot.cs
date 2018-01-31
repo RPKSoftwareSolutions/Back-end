@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace AuthServer.Migrations
@@ -170,6 +168,28 @@ namespace AuthServer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PasswordResetTokens");
+                });
+
+            modelBuilder.Entity("DomainModel.PersistedGrant", b =>
+                {
+                    b.Property<string>("Key")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ClientId");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<string>("Data");
+
+                    b.Property<DateTime?>("Expiration");
+
+                    b.Property<string>("SubjectId");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("PersistedGrants");
                 });
 
             modelBuilder.Entity("DomainModel.SekaniPhoto", b =>

@@ -13,6 +13,7 @@ using IdentityServer4.Services;
 using AuthServer.Auth;
 using IdentityServer4.Validation;
 using IdentityServer4.Stores;
+using IdentityServer4.ResponseHandling;
 
 namespace AuthServer
 {
@@ -45,38 +46,33 @@ namespace AuthServer
 
             services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>()
                     //.AddTransient<ITokenValidator, RefreshTokenValidator>()
-                    //.AddTransient<IRefreshTokenService, MyRefTokenService>()
-                    //.AddTransient<IPersistedGrantStore, PersistedGrantStore>()
+                    //.AddTransient<IRefreshTokenService, RefreshTokenService>()
+                    .AddTransient<IPersistedGrantStore, PersistedGrantStore>()
+                    .AddTransient<ICorsPolicyService, Auth.CorsPolicyService>()
+                    //.AddTransient<ISecretValidator, Auth.SecretValidator>()
+                    //.AddTransient<IRefreshTokenStore, RefreshTokenStore>()
+                    //.AddTransient<ITokenResponseGenerator, Auth.TokenResponseGenerator>()
                     .AddTransient<IProfileService, ProfileService>();
-            //.AddTransient<IAuthRepository, AuthRepository>();
 
-            //services.AddSingleton<IConfiguration>(Configuration);
-
+            services.AddCors();
             services.AddIdentityServer()
-                //.AddTestUsers(Config.GetTestUsers())
                 .AddInMemoryApiResources(Config.GetApiResources())
-                //.AddInMemoryClients(Config.GetClients())
                 .AddClientStore<ClientStore>()
-                /*
-                .AddConfigurationStore(options =>
+                /*.AddOperationalStore(options =>
                 {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
-                })*/
-                /*
-                .AddOperationalStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(connectionString,
-                            sql => sql.MigrationsAssembly(migrationsAssembly));
+                    options.ConfigureDbContext = builder => builder.UseSqlServer(connectionString);
+
+                    
 
                     // this enables automatic token cleanup. this is optional.
                     options.EnableTokenCleanup = true;
-                    options.TokenCleanupInterval = 30;
+                    options.TokenCleanupInterval = 1000;
                 })*/
                 .AddDeveloperSigningCredential()
                 .AddExtensionGrantValidator<GoogleGrant>()
                 .AddExtensionGrantValidator<FacebookGrant>();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +84,13 @@ namespace AuthServer
             }
 
             app.UseIdentityServer();
+            app.UseCors(options =>
+            {
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+                options.AllowAnyOrigin();
+                options.AllowCredentials();
+            });
 
             app.Run(async (context) =>
             {

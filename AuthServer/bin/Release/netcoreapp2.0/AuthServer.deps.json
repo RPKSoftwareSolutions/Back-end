@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "a288d14bc7d4032d740d4f1ea23013be557d4eb2"
+    "signature": "4c56673b26a8349695526697ddb5e08144594a62"
   },
   "compilationOptions": {
     "defines": [
@@ -25,7 +25,7 @@
         "dependencies": {
           "CryptoHelper": "3.0.0",
           "DomainModel": "1.0.0",
-          "IdentityServer4": "2.0.4",
+          "IdentityServer4": "2.1.1",
           "IdentityServer4.EntityFramework": "2.1.0",
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1",
@@ -81,7 +81,7 @@
           "lib/netstandard2.0/CryptoHelper.dll": {}
         }
       },
-      "IdentityModel/2.16.0": {
+      "IdentityModel/3.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "10.0.3"
         },
@@ -92,9 +92,9 @@
           "lib/netstandard2.0/IdentityModel.dll": {}
         }
       },
-      "IdentityServer4/2.0.4": {
+      "IdentityServer4/2.1.1": {
         "dependencies": {
-          "IdentityModel": "2.16.0",
+          "IdentityModel": "3.0.0",
           "Microsoft.AspNetCore.Authentication": "2.0.1",
           "Microsoft.AspNetCore.Authentication.Cookies": "2.0.1",
           "Microsoft.AspNetCore.Authentication.OpenIdConnect": "2.0.1",
@@ -103,8 +103,7 @@
           "Microsoft.Extensions.Logging": "2.0.0",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "2.0.0",
           "System.IdentityModel.Tokens.Jwt": "5.1.5",
-          "System.Security.Cryptography.Cng": "4.4.0",
-          "System.ValueTuple": "4.4.0"
+          "System.Security.Cryptography.Cng": "4.4.0"
         },
         "runtime": {
           "lib/netstandard2.0/IdentityServer4.dll": {}
@@ -116,7 +115,7 @@
       "IdentityServer4.EntityFramework/2.1.0": {
         "dependencies": {
           "AutoMapper": "6.1.1",
-          "IdentityServer4": "2.0.4",
+          "IdentityServer4": "2.1.1",
           "Microsoft.EntityFrameworkCore": "2.0.1",
           "Microsoft.EntityFrameworkCore.Relational": "2.0.1"
         },
@@ -3858,6 +3857,9 @@
         }
       },
       "DomainModel/1.0.0": {
+        "dependencies": {
+          "IdentityServer4": "2.1.1"
+        },
         "runtime": {
           "DomainModel.dll": {}
         },
@@ -4063,19 +4065,19 @@
       "path": "cryptohelper/3.0.0",
       "hashPath": "cryptohelper.3.0.0.nupkg.sha512"
     },
-    "IdentityModel/2.16.0": {
+    "IdentityModel/3.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-EhzaHd3Elpa2GvJTpKQ3ec9FFZIN7Kkj5unDl/Z9QPosA5IkJpsh0KLNxnkXTDcdcjb7IjbRhlZ4ymXqm+4gcw==",
-      "path": "identitymodel/2.16.0",
-      "hashPath": "identitymodel.2.16.0.nupkg.sha512"
+      "sha512": "sha512-EKMOOUUqDzBR3goiA8eWJ1aQBz1AMfKVxxR7XnzAf5qq2k9vr6GT91SyHmzC14KINpNNJOrbmowXf5S04gQ0ZA==",
+      "path": "identitymodel/3.0.0",
+      "hashPath": "identitymodel.3.0.0.nupkg.sha512"
     },
-    "IdentityServer4/2.0.4": {
+    "IdentityServer4/2.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/uDOI8uiNMsENg08O7MjPGKCY7cssal12T6yBwxglRdvPrNsBuOMfu/e9Co5HFFas6twvpp937v/kofpTJSAiA==",
-      "path": "identityserver4/2.0.4",
-      "hashPath": "identityserver4.2.0.4.nupkg.sha512"
+      "sha512": "sha512-SeSGMMAT/FEnir5zxDrdDvenxtuPVAxTAUNYtYjVl40sAKsjwJJ9GE9kSv9QI3trU8vLft5ApRFQhOYAt6Itug==",
+      "path": "identityserver4/2.1.1",
+      "hashPath": "identityserver4.2.1.1.nupkg.sha512"
     },
     "IdentityServer4.EntityFramework/2.1.0": {
       "type": "package",

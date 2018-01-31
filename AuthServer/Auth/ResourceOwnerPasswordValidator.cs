@@ -4,6 +4,7 @@ using IdentityModel.Client;
 using IdentityServer4.Events;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using IdentityServer4.Stores;
 using IdentityServer4.Validation;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,15 @@ namespace AuthServer.Auth
         private UnitOfWork uow;
         private IEventService _events;
 
-        public ResourceOwnerPasswordValidator(AppDbContext context, IEventService events)
+        protected readonly IRefreshTokenStore RefreshTokenStore;
+
+        public ResourceOwnerPasswordValidator(AppDbContext context, IEventService events/*, IRefreshTokenStore _RefreshTokenStore*/)
         {
             //this.repo = auth;
             this._context = context;
             this.uow = new UnitOfWork(this._context);
             this._events = events;
+            //this.RefreshTokenStore = _RefreshTokenStore;
         }
 
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
@@ -56,7 +60,7 @@ namespace AuthServer.Auth
             var deviceId = context.Request.Raw.Get("device_id");
             var browser = context.Request.Raw.Get("browser");
             var os = context.Request.Raw.Get("os");
-            UserSession US = uow.UserSessions.Find(us => us.UserId == userId && String.Equals(us.SessionId, sessionId)).FirstOrDefault();
+            UserSession US = uow.UserSessions.Find(us => us.UserId == userId && String.Equals(us.DeviceId, deviceId)).FirstOrDefault();
             if (US == null)
             {
                 var newUs = new UserSession()

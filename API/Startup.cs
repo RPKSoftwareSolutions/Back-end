@@ -31,6 +31,7 @@ namespace API
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddMvc();
+            services.AddCors();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSwaggerGen(c =>
             {
@@ -60,12 +61,21 @@ namespace API
             }
 
             app.UseAuthentication();
+            app.UseCors(options =>
+            {
+                options.WithOrigins("http://localhost:4200/").AllowAnyMethod();
+                options.AllowAnyHeader();
+                options.AllowAnyMethod();
+                options.AllowAnyOrigin();
+                options.AllowCredentials();
+            });
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts API V1");
             });
+
         }
     }
 }

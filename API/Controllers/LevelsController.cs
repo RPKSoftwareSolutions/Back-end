@@ -1,27 +1,35 @@
 ﻿using AuthServer.Generic;
 using DomainModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Helpers;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
-    public class SekaniLevelsController: Controller
+    [Authorize]
+    public class LevelsController: Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public SekaniLevelsController(IUnitOfWork unitOfWork)
+        public LevelsController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
 
-        [HttpGet("get")]
-        public ActionResult GetAll()
+        [HttpGet("get/{pageSize}/{pageIndex}")]
+        public ActionResult GetAll(int pageSize = 20, int pageIndex = 1)
         {
-            var levels = this._unitOfWork.Levels.GetAll();
-            return Ok(levels);
+            var items = this._unitOfWork.Levels.GetAll()
+                .OrderBy(i => i.Id)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize);
+
+            var R = PageRecordsSelector.GetPageRecords(items, pageSize, pageIndex);
+            return Ok(R);
         }
 
         [HttpPost("post")]

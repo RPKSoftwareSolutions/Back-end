@@ -12,6 +12,7 @@ namespace AuthServer.Generic
         IAccountRepository Users { get; set; }
         IUserSessionRepository UserSessions { get; set; }
         IClientRepository Clients { get; set; }
+        IPersistedGrantRepository PersistedGrants { get; set; }
         ISettingsRepository Settings { get; set; }
         ILevelRepository Levels { get; set; }
         ISekaniPhotoRepository SekaniPhotos { get; set; }

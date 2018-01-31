@@ -18,6 +18,7 @@ namespace AuthServer.Uow
         public IUserSessionRepository UserSessions { get; set; }
         public ISettingsRepository Settings { get; set; }
         public IClientRepository Clients { get; set; }
+        public IPersistedGrantRepository PersistedGrants { get; set; }
         public ILevelRepository Levels { get; set; }
         public ISekaniWordTypeRepository SekaniWordTypes { get; set; }
         public ISekaniWordRepository SekaniWords { get; set; }
@@ -34,6 +35,7 @@ namespace AuthServer.Uow
             UserSessions = new UserSessionRepository(this._context);
             Settings = new SettingsRepository(this._context);
             Clients = new ClientRepository(this._context);
+            PersistedGrants = new PersistentGrantRepository(this._context);
             Levels = new LevelRepository(this._context);
             SekaniWordTypes = new SekaniWordTypeRepository(this._context);
             SekaniWords = new SekaniWordRepository(this._context);

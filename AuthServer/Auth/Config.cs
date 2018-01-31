@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Models;
+﻿//using IdentityServer4.EntityFramework.Entities;
+using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace AuthServer.Auth
                         "api1"
                     },
                     AllowOfflineAccess = true,
+                    
                     AccessTokenLifetime = 3600,
                     AllowedCorsOrigins = new List<string>
                     {
