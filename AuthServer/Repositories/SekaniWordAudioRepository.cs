@@ -1,4 +1,4 @@
-﻿using AuthServer.Auth;
+﻿using AuthServer.Auth; 
 using AuthServer.Generic;
 using AuthServer.RepoInterfaces;
 using DomainModel;
@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Repositories
 {
-    public class SekaniWWTRepository: Repository<SekaniWWT>, ISekaniWWTRepository
+    public class SekaniWordAudioRepository: Repository<SekaniWordAudio>, ISekaniWordAudioRepository
     {
-        public SekaniWWTRepository(AppDbContext _context): base(_context) { }
+        public SekaniWordAudioRepository(AppDbContext _context) : base(_context) { }
+
+
+
 
         public AppDbContext AppContext
         {

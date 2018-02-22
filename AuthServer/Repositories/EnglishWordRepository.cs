@@ -1,4 +1,4 @@
-﻿using AuthServer.Auth;
+﻿using AuthServer.Auth; 
 using AuthServer.Generic;
 using AuthServer.RepoInterfaces;
 using DomainModel;
@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Repositories
 {
-    public class SekaniPhotoRepository: Repository<SekaniPhoto>, ISekaniPhotoRepository
+    public class EnglishWordRepository: Repository<EnglishWord>, IEnglishWordRepository
     {
-        public SekaniPhotoRepository(AppDbContext _context): base(_context) { }
+        public EnglishWordRepository(AppDbContext _context) : base(_context) { }
+
+
+
 
         public AppDbContext AppContext
         {

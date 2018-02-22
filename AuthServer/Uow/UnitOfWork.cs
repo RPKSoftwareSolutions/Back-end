@@ -19,13 +19,19 @@ namespace AuthServer.Uow
         public ISettingsRepository Settings { get; set; }
         public IClientRepository Clients { get; set; }
         public IPersistedGrantRepository PersistedGrants { get; set; }
+
         public ILevelRepository Levels { get; set; }
-        public ISekaniWordTypeRepository SekaniWordTypes { get; set; }
         public ISekaniWordRepository SekaniWords { get; set; }
-        public ISekaniWWTRepository SekaniWWTs { get; set; }
-        public ITranslationOfSekaniRepository TranslationsOfSekani { get; set; }
-        public ISekaniPhotoRepository SekaniPhotos { get; set; }
-        public ISekaniSoundRepository SekaniSounds { get; set; }
+        public ITranslationRepository TranslationsOfSekani { get; set; }
+        public ICategoryRepository Categories { get; set; }
+        public ITopicRepository Topics { get; set; }
+        public IEnglishWordRepository EnglishWords { get; set; }
+        public ITranslation_TopicRepository Translations_Topics { get; set; }
+        public ISekaniWordAudioRepository SekaniWordAudios { get; set; }
+        public ITranslationExampleRepository TranslationExamples { get; set; }
+        public ITranslationPhotoRepository TranslationPhotos { get; set; }
+        public ITranslationExampleAudioRepository TranslationExampleAudios { get; set; }
+
 
         public UnitOfWork(AppDbContext context)
         {
@@ -36,13 +42,20 @@ namespace AuthServer.Uow
             Settings = new SettingsRepository(this._context);
             Clients = new ClientRepository(this._context);
             PersistedGrants = new PersistentGrantRepository(this._context);
+
             Levels = new LevelRepository(this._context);
-            SekaniWordTypes = new SekaniWordTypeRepository(this._context);
             SekaniWords = new SekaniWordRepository(this._context);
-            SekaniWWTs = new SekaniWWTRepository(this._context);
-            TranslationsOfSekani = new TranslationOfSekaniRepository(this._context);
-            SekaniPhotos = new SekaniPhotoRepository(this._context);
-            SekaniSounds = new SekaniSoundRepository(this._context);
+            TranslationsOfSekani = new TranslationRepository(this._context);
+            Categories = new CategoryRepository(this._context);
+            Topics  = new TopicRepository(this._context);
+            EnglishWords = new EnglishWordRepository(this._context);
+            Translations_Topics = new Translation_TopicRepository(this._context);
+            SekaniWordAudios = new SekaniWordAudioRepository(this._context);
+            TranslationExamples = new TranslationExampleRepository(this._context);
+            TranslationPhotos = new TranslationPhotoRepository(this._context);
+            TranslationExampleAudios = new TranslationExampleAudioRepository(this._context);
+
+
         }
 
         public int Complete()

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace AuthServer.RepoInterfaces
 {
-    public interface ITranslationOfSekaniRepository: IRepository<TranslationOfSekani>
+    public interface ITopicRepository: IRepository<Topic>
     {
+
     }
 }

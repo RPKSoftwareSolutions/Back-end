@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers
 {
@@ -30,6 +31,14 @@ namespace API.Controllers
 
             var R = PageRecordsSelector.GetPageRecords(items, pageSize, pageIndex);
             return Ok(R);
+        }
+
+        [HttpGet("get/{id}")]
+        public ActionResult Get(int id)
+        {
+            var item = this._unitOfWork.Levels.Get(id);
+            if (item == null) return new NotFoundResult();
+            return Ok(item);
         }
 
         [HttpPost("post")]

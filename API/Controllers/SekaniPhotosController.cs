@@ -22,9 +22,13 @@ namespace API.Controllers
             this._unitOfWork = unitOfWork;
         }
 
-        [HttpPost("postImage")]
-        public ActionResult PostImage([FromForm] IFormFile photoFile)
+        /*
+        [HttpPost("post")]
+        public ActionResult PostImage([FromForm] IFormFile photoFile, [FromForm] int sekaniWwtId, [FromForm] string notes)
         {
+            if (photoFile.Length > 505000)
+                return BadRequest("The file exceeds the maximum allowed size.");
+
             byte[] photoBytes = new byte[0];
             if (photoFile.Length > 0)
             {
@@ -36,15 +40,15 @@ namespace API.Controllers
             }
             SekaniPhoto sp = new SekaniPhoto()
             {
-                SekaniWwtId = 2,
-                Notes = "nothing!",
+                SekaniWwtId = sekaniWwtId,
+                Notes = notes,
                 Content = photoBytes,
                 UpdateTime = DateTime.Now
             };
 
             this._unitOfWork.SekaniPhotos.Add(sp);
             _unitOfWork.Complete();
-            return Ok();
+            return Ok(sp.Id);
         }
 
         [HttpGet("getBySekaniWwtId/{sekaniWwtId}/{pageSize}/{pageIndex}")]
@@ -68,5 +72,24 @@ namespace API.Controllers
             var R = PageRecordsSelector.GetPageRecords(items, pageSize, pageIndex);
             return Ok(R);
         }
+
+        [HttpGet("get/{id}")]
+        public ActionResult Get(int id)
+        {
+            var item = this._unitOfWork.SekaniPhotos.Get(id);
+            if (item == null) return new NotFoundResult();
+            return Ok(item);
+        }
+
+        [HttpDelete("delete/{id}")]
+        public ActionResult Delete(int id)
+        {
+            var item = _unitOfWork.SekaniPhotos.Get(id);
+            _unitOfWork.SekaniPhotos.Remove(item);
+            _unitOfWork.Complete();
+            return Ok();
+        }
+
+        */
     }
 }

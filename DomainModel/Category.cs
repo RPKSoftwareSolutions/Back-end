@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DomainModel
 {
-    public class SekaniWordType
+    public class Category
     {
         [Key]
         public int Id { get; set; }
@@ -16,16 +15,15 @@ namespace DomainModel
 
         public string Notes { get; set; }
 
-        // trackers
+        [Required]
         public DateTime UpdateTime { get; set; }
 
+        //v
+        public virtual ICollection<SekaniWord> SekaniWords { get; set; }
 
-        // v
-        public virtual ICollection<SekaniWWT> SekaniWWTs { get; set; }
-
-        public SekaniWordType()
+        public Category()
         {
-            this.SekaniWWTs = new Collection<SekaniWWT>();
+            this.SekaniWords = new Collection<SekaniWord>();
         }
     }
 }

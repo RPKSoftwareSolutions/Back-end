@@ -58,6 +58,7 @@ namespace API.Controllers
             return Ok(obj);
         }
 
+        /*
         [HttpGet("sekaniWordTypes/{timestamp}")]
         public ActionResult GetSekaniWordTypes(string timestamp)
         {
@@ -89,6 +90,7 @@ namespace API.Controllers
             };
             return Ok(obj);
         }
+        */
 
         [HttpGet("sekaniWords/{timestamp}")]
         public ActionResult GetSekaniWords(string timestamp)
@@ -123,6 +125,7 @@ namespace API.Controllers
             return Ok(obj);
         }
 
+        /*
         [HttpGet("sekaniWWTs/{timestamp}")]
         public ActionResult GetSekaniWWTs(string timestamp)
         {
@@ -155,6 +158,7 @@ namespace API.Controllers
             };
             return Ok(obj);
         }
+        */
 
         [HttpGet("translationsOfSekani/{timestamp}")]
         public ActionResult TranslationsOfSekani(string timestamp)
@@ -189,6 +193,8 @@ namespace API.Controllers
             return Ok(obj);
         }
 
+
+        /*
         [HttpGet("sekaniPhotos/{timestamp}")]
         public ActionResult SekaniPhotos(string timestamp)
         {
@@ -254,6 +260,8 @@ namespace API.Controllers
             };
             return Ok(obj);
         }
+
+        */
 
         public SyncController(IUnitOfWork unitOfWork)
         {

@@ -14,13 +14,18 @@ namespace AuthServer.Generic
         IClientRepository Clients { get; set; }
         IPersistedGrantRepository PersistedGrants { get; set; }
         ISettingsRepository Settings { get; set; }
+
         ILevelRepository Levels { get; set; }
-        ISekaniPhotoRepository SekaniPhotos { get; set; }
-        ISekaniSoundRepository SekaniSounds { get; set; }
         ISekaniWordRepository SekaniWords { get; set; }
-        ISekaniWordTypeRepository SekaniWordTypes { get; set; }
-        ISekaniWWTRepository SekaniWWTs { get; set; }
-        ITranslationOfSekaniRepository TranslationsOfSekani { get; set; }
+        ITranslationRepository TranslationsOfSekani { get; set; }
+        ICategoryRepository Categories { get; set; }
+        ITopicRepository Topics { get; set; }
+        IEnglishWordRepository EnglishWords { get; set; }
+        ITranslation_TopicRepository Translations_Topics { get; set; }
+        ISekaniWordAudioRepository SekaniWordAudios { get; set; }
+        ITranslationExampleRepository TranslationExamples { get; set; }
+        ITranslationPhotoRepository TranslationPhotos { get; set; }
+        ITranslationExampleAudioRepository TranslationExampleAudios { get; set; }
 
         int Complete();
     }
