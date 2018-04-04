@@ -160,6 +160,7 @@ namespace API.Controllers
         }
         */
 
+        /*
         [HttpGet("translationsOfSekani/{timestamp}")]
         public ActionResult TranslationsOfSekani(string timestamp)
         {
@@ -192,6 +193,7 @@ namespace API.Controllers
             };
             return Ok(obj);
         }
+        */
 
 
         /*
