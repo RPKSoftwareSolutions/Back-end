@@ -11,8 +11,8 @@ using System;
 namespace AuthServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180116231754_persisted-grant_added")]
-    partial class persistedgrant_added
+    [Migration("20180404214129_initial_auth_records")]
+    partial class initial_auth_records
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -135,20 +135,20 @@ namespace AuthServer.Migrations
                     b.ToTable("EmailVerificationTokens");
                 });
 
-            modelBuilder.Entity("DomainModel.Level", b =>
+            modelBuilder.Entity("DomainModel.EnglishWord", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Notes");
-
-                    b.Property<string>("Title");
+                    b.Property<bool>("Standard");
 
                     b.Property<DateTime>("UpdateTime");
 
+                    b.Property<string>("Word");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Levels");
+                    b.ToTable("EnglishWords");
                 });
 
             modelBuilder.Entity("DomainModel.PasswordResetToken", b =>
@@ -175,8 +175,8 @@ namespace AuthServer.Migrations
 
             modelBuilder.Entity("DomainModel.PersistedGrant", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Key")
+                        .HasMaxLength(430);
 
                     b.Property<string>("ClientId");
 
@@ -186,80 +186,16 @@ namespace AuthServer.Migrations
 
                     b.Property<DateTime?>("Expiration");
 
-                    b.Property<string>("Key");
-
                     b.Property<string>("SubjectId");
 
                     b.Property<string>("Type");
 
-                    b.HasKey("Id");
+                    b.HasKey("Key");
 
                     b.ToTable("PersistedGrants");
                 });
 
-            modelBuilder.Entity("DomainModel.SekaniPhoto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("Content")
-                        .IsRequired();
-
-                    b.Property<string>("Notes");
-
-                    b.Property<int>("SekaniWwtId");
-
-                    b.Property<DateTime>("UpdateTime");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SekaniWwtId");
-
-                    b.ToTable("SekaniPhotos");
-                });
-
-            modelBuilder.Entity("DomainModel.SekaniSound", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<byte[]>("Content")
-                        .IsRequired();
-
-                    b.Property<string>("Notes");
-
-                    b.Property<int>("SekaniWwtId");
-
-                    b.Property<DateTime>("UpdateTime");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SekaniWwtId");
-
-                    b.ToTable("SekaniSound");
-                });
-
-            modelBuilder.Entity("DomainModel.SekaniWord", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("LevelId");
-
-                    b.Property<string>("Phonetic");
-
-                    b.Property<DateTime>("UpdateTime");
-
-                    b.Property<string>("Word");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LevelId");
-
-                    b.ToTable("SekaniWords");
-                });
-
-            modelBuilder.Entity("DomainModel.SekaniWordType", b =>
+            modelBuilder.Entity("DomainModel.SekaniCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -272,17 +208,185 @@ namespace AuthServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SekaniWordTypes");
+                    b.ToTable("SekaniCategories");
                 });
 
-            modelBuilder.Entity("DomainModel.SekaniWWT", b =>
+            modelBuilder.Entity("DomainModel.SekaniForm", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SekaniForms");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniLevel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("Title");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SekaniLevels");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniRoot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsNull");
+
+                    b.Property<string>("RootWord");
+
+                    b.Property<int>("SekaniCategoryId");
+
+                    b.Property<int>("SekaniLevelId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniCategoryId");
+
+                    b.HasIndex("SekaniLevelId");
+
+                    b.ToTable("SekaniRoots");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniRoot_EnglishWord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EnglishWordId");
+
+                    b.Property<int>("SekaniRootId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnglishWordId");
+
+                    b.HasIndex("SekaniRootId");
+
+                    b.ToTable("SekaniRoots_EnglishWords");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniRoot_Topic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("SekaniRootId");
+
+                    b.Property<int>("TopicId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniRootId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("SekaniRoots_Topics");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniRootImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Content")
+                        .IsRequired();
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int>("SekaniRootId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniRootId");
+
+                    b.ToTable("SekaniRootImages");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniWord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Phonetic");
+
+                    b.Property<int>("SekaniFormId");
+
+                    b.Property<int>("SekaniRootId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<string>("Word");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniFormId");
+
+                    b.HasIndex("SekaniRootId");
+
+                    b.ToTable("SekaniWords");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniWordAttribute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Key");
+
                     b.Property<int>("SekaniWordId");
 
-                    b.Property<int>("SekaniWordTypeId");
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniWordId");
+
+                    b.ToTable("SekaniWordAttributes");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniWordAudio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Content")
+                        .IsRequired();
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int>("SekaniWordId");
 
                     b.Property<DateTime>("UpdateTime");
 
@@ -290,9 +394,50 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("SekaniWordId");
 
-                    b.HasIndex("SekaniWordTypeId");
+                    b.ToTable("SekaniWordAudios");
+                });
 
-                    b.ToTable("SekaniWWTs");
+            modelBuilder.Entity("DomainModel.SekaniWordExample", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("English");
+
+                    b.Property<string>("Sekani");
+
+                    b.Property<int>("SekaniWordId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniWordId");
+
+                    b.ToTable("SekaniWordExamples");
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniWordExampleAudio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<byte[]>("Content")
+                        .IsRequired();
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<int>("SekaniWordExampleId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniWordExampleId");
+
+                    b.ToTable("SekaniWordExampleAudios");
                 });
 
             modelBuilder.Entity("DomainModel.Setting", b =>
@@ -311,28 +456,20 @@ namespace AuthServer.Migrations
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("DomainModel.TranslationOfSekani", b =>
+            modelBuilder.Entity("DomainModel.Topic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Example1");
+                    b.Property<string>("Notes");
 
-                    b.Property<string>("Example2");
-
-                    b.Property<string>("Example3");
-
-                    b.Property<int>("SekaniWwtId");
-
-                    b.Property<string>("Translation");
+                    b.Property<string>("Title");
 
                     b.Property<DateTime>("UpdateTime");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SekaniWwtId");
-
-                    b.ToTable("TranslationsOfSekani");
+                    b.ToTable("Topics");
                 });
 
             modelBuilder.Entity("DomainModel.User", b =>
@@ -460,48 +597,95 @@ namespace AuthServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DomainModel.SekaniPhoto", b =>
+            modelBuilder.Entity("DomainModel.SekaniRoot", b =>
                 {
-                    b.HasOne("DomainModel.SekaniWWT", "SekaniWWT")
-                        .WithMany("SekaniPhotos")
-                        .HasForeignKey("SekaniWwtId")
+                    b.HasOne("DomainModel.SekaniCategory", "SekaniCategory")
+                        .WithMany("SekaniRoots")
+                        .HasForeignKey("SekaniCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DomainModel.SekaniLevel", "SekaniLevel")
+                        .WithMany("SekaniRoots")
+                        .HasForeignKey("SekaniLevelId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DomainModel.SekaniSound", b =>
+            modelBuilder.Entity("DomainModel.SekaniRoot_EnglishWord", b =>
                 {
-                    b.HasOne("DomainModel.SekaniWWT", "SekaniWWT")
-                        .WithMany("SekaniSounds")
-                        .HasForeignKey("SekaniWwtId")
+                    b.HasOne("DomainModel.EnglishWord", "EnglishWord")
+                        .WithMany("SekaniRoots_EnglishWords")
+                        .HasForeignKey("EnglishWordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DomainModel.SekaniRoot", "SekaniRoot")
+                        .WithMany("SekaniRoots_EnglishWords")
+                        .HasForeignKey("SekaniRootId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniRoot_Topic", b =>
+                {
+                    b.HasOne("DomainModel.SekaniRoot", "SekaniRoot")
+                        .WithMany("SekaniRoots_Topics")
+                        .HasForeignKey("SekaniRootId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DomainModel.Topic", "Topic")
+                        .WithMany("SekaniRoots_Topics")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniRootImage", b =>
+                {
+                    b.HasOne("DomainModel.SekaniRoot", "SekaniRoot")
+                        .WithMany("SekaniRootImages")
+                        .HasForeignKey("SekaniRootId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DomainModel.SekaniWord", b =>
                 {
-                    b.HasOne("DomainModel.Level", "Level")
+                    b.HasOne("DomainModel.SekaniForm", "SekaniForm")
                         .WithMany("SekaniWords")
-                        .HasForeignKey("LevelId")
+                        .HasForeignKey("SekaniFormId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DomainModel.SekaniRoot", "SekaniRoot")
+                        .WithMany("SekaniWords")
+                        .HasForeignKey("SekaniRootId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DomainModel.SekaniWWT", b =>
+            modelBuilder.Entity("DomainModel.SekaniWordAttribute", b =>
                 {
                     b.HasOne("DomainModel.SekaniWord", "SekaniWord")
-                        .WithMany("SekaniWWTs")
+                        .WithMany("SekaniWordAttributes")
                         .HasForeignKey("SekaniWordId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DomainModel.SekaniWordType", "SekaniWordType")
-                        .WithMany("SekaniWWTs")
-                        .HasForeignKey("SekaniWordTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DomainModel.TranslationOfSekani", b =>
+            modelBuilder.Entity("DomainModel.SekaniWordAudio", b =>
                 {
-                    b.HasOne("DomainModel.SekaniWWT", "SekaniWWT")
-                        .WithMany("TranslationsOfSekani")
-                        .HasForeignKey("SekaniWwtId")
+                    b.HasOne("DomainModel.SekaniWord", "SekaniWord")
+                        .WithMany("SekaniWordAudios")
+                        .HasForeignKey("SekaniWordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniWordExample", b =>
+                {
+                    b.HasOne("DomainModel.SekaniWord", "SekaniWord")
+                        .WithMany("SekaniWordExamples")
+                        .HasForeignKey("SekaniWordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.SekaniWordExampleAudio", b =>
+                {
+                    b.HasOne("DomainModel.SekaniWordExample", "SekaniWordExample")
+                        .WithMany("SekaniWordExampleAudios")
+                        .HasForeignKey("SekaniWordExampleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

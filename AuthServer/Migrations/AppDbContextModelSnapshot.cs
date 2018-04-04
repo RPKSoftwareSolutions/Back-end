@@ -175,7 +175,7 @@ namespace AuthServer.Migrations
             modelBuilder.Entity("DomainModel.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
-                        .ValueGeneratedOnAdd();
+                        .HasMaxLength(430);
 
                     b.Property<string>("ClientId");
 
