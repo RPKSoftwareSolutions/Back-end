@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class Level
+    public class SekaniLevel
     {
         [Key]
         public int Id { get; set; }
@@ -20,11 +20,11 @@ namespace DomainModel
         public DateTime UpdateTime { get; set; }
 
         // v
-        public virtual ICollection<SekaniWord> SekaniWords { get; set; }
+        public virtual ICollection<SekaniRoot> SekaniRoots { get; set; }
 
-        public Level()
+        public SekaniLevel()
         {
-            this.SekaniWords = new Collection<SekaniWord>();
+            this.SekaniRoots = new Collection<SekaniRoot>();
         }
     }
 }

@@ -14,42 +14,38 @@ namespace DomainModel
         public int Id { get; set; }
 
         [Required]
-        public int LevelId { get; set; }
+        public int SekaniFormId { get; set; }
 
         [Required]
-        public int CategoryId { get; set; }
-
-        public int? EnglishWordId { get; set; }
+        public int SekaniRootId { get; set; }
 
         public string Word { get; set; }
 
         public string  Phonetic { get; set; }
 
-       
         // trackers
         public DateTime UpdateTime { get; set; }
 
         
-        // virtuals
+        // virtuals     
+   
+        [ForeignKey("SekaniFormId")]
+        public virtual SekaniForm SekaniForm { get; set; }
 
-        [ForeignKey("LevelId")]
-        public virtual Level Level { get; set; }
+        [ForeignKey("SekaniRootId")]
+        public virtual SekaniRoot SekaniRoot { get; set; }
 
-        [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
-
-        [ForeignKey("EnglishWordId")]
-        public virtual EnglishWord EnglishWord { get; set; }
-
-        public virtual ICollection<Translation> TranslationsOfSekani { get; set; }
         
         public virtual ICollection<SekaniWordAudio> SekaniWordAudios { get; set; }
+        public virtual ICollection<SekaniWordExample> SekaniWordExamples { get; set; }
+        public virtual ICollection<SekaniWordAttribute> SekaniWordAttributes { get; set; }
 
 
         public SekaniWord()
         {
-            this.TranslationsOfSekani = new Collection<Translation>();
             this.SekaniWordAudios = new Collection<SekaniWordAudio>();
+            this.SekaniWordAttributes = new Collection<SekaniWordAttribute>();
+            this.SekaniWordExamples = new Collection<SekaniWordExample>();
         }
 
     }

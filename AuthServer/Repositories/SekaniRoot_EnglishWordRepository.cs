@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Repositories
 {
-    public class CategoryRepository: Repository<Category>, ICategoryRepository
+    public class SekaniRoot_EnglishWordRepository: Repository<SekaniRoot_EnglishWord>, ISekaniRoot_EnglishWordRepository
     {
-        public CategoryRepository(AppDbContext _context) : base(_context) { }
+        public SekaniRoot_EnglishWordRepository(AppDbContext _context) : base(_context) { }
 
 
 

@@ -6,25 +6,28 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class Translation_Topic
+    public class SekaniRoot_Topic
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public int TranslationId { get; set; }
+        public int SekaniRootId { get; set; }
 
         [Required]
         public int TopicId { get; set; }
 
         public DateTime UpdateTime { get; set; }
 
-        // v
-        [ForeignKey("TranslationId")]
-        public virtual Translation Translation { get; set; }
+        [ForeignKey("SekaniRootId")]
+        public virtual SekaniRoot SekaniRoot { get; set; }
 
         [ForeignKey("TopicId")]
         public virtual Topic Topic { get; set; }
 
+        public SekaniRoot_Topic()
+        {
+
+        }
     }
 }

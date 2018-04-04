@@ -25,5 +25,10 @@ namespace DomainModel
 
         [ForeignKey("SekaniWordId")]
         public virtual SekaniWord SekaniWord { get; set; }
+
+        public SekaniWordAudio()
+        {
+
+        }
     }
 }

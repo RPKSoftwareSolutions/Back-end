@@ -13,14 +13,16 @@ namespace DomainModel
 
         public string Word { get; set; }
 
+        // determines whether this word should show up in the English side of the dictionary
+        public bool Standard { get; set; }
+
         public DateTime UpdateTime { get; set; }
 
-        //v
-        public virtual ICollection<SekaniWord> SekaniWords { get; set; }
+        public virtual ICollection<SekaniRoot_EnglishWord> SekaniRoots_EnglishWords { get; set; }
 
         public EnglishWord()
         {
-            this.SekaniWords = new Collection<SekaniWord>();
+            this.SekaniRoots_EnglishWords = new Collection<SekaniRoot_EnglishWord>();
         }
     }
 }

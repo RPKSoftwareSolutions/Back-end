@@ -7,13 +7,13 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class TranslationExample
+    public class SekaniWordExample
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public int TranslationId { get; set; }
+        public int SekaniWordId { get; set; }
 
         public string Sekani { get; set; }
 
@@ -21,15 +21,14 @@ namespace DomainModel
 
         public DateTime UpdateTime { get; set; }
 
-        [ForeignKey("TranslationId")]
-        public virtual Translation Translation { get; set; }
+        [ForeignKey("SekaniWordId")]
+        public virtual SekaniWord SekaniWord { get; set; }
 
-        public virtual ICollection<TranslationExampleAudio> TranslationExampleAudios { get; set; }
+        public virtual ICollection<SekaniWordExampleAudio> SekaniWordExampleAudios { get; set; }
 
-        public TranslationExample()
+        public SekaniWordExample()
         {
-            this.TranslationExampleAudios = new Collection<TranslationExampleAudio>();
+            this.SekaniWordExampleAudios = new Collection<SekaniWordExampleAudio>();
         }
-
     }
 }

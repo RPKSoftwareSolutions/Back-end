@@ -6,6 +6,7 @@ using System.Text;
 
 namespace DomainModel
 {
+    
     public class Topic
     {
         [Key]
@@ -17,13 +18,12 @@ namespace DomainModel
 
         public DateTime UpdateTime { get; set; }
 
-        //v
-
-        public virtual ICollection<Translation_Topic> Translations_Topics { get; set; }
+        public virtual ICollection<SekaniRoot_Topic> SekaniRoots_Topics { get; set; }
 
         public Topic()
         {
-            this.Translations_Topics = new Collection<Translation_Topic>();
+            this.SekaniRoots_Topics = new Collection<SekaniRoot_Topic>();
         }
+
     }
 }

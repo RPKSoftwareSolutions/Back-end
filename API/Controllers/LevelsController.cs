@@ -42,7 +42,7 @@ namespace API.Controllers
         }
 
         [HttpPost("post")]
-        public ActionResult Post([FromBody] Level level)
+        public ActionResult Post([FromBody] SekaniLevel level)
         {
             level.UpdateTime = DateTime.Now;
             _unitOfWork.Levels.Add(level);
@@ -51,7 +51,7 @@ namespace API.Controllers
         }
 
         [HttpPut("put/{id}")]
-        public ActionResult Put(int id, [FromBody] Level level)
+        public ActionResult Put(int id, [FromBody] SekaniLevel level)
         {
             if (id != level.Id)
                 return StatusCode(400);

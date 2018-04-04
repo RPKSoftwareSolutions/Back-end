@@ -6,13 +6,13 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class TranslationPhoto
+    public class SekaniWordExampleAudio
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public int TranslationId { get; set; }
+        public int SekaniWordExampleId { get; set; }
 
         [Required]
         public byte[] Content { get; set; }
@@ -23,9 +23,12 @@ namespace DomainModel
 
         public DateTime UpdateTime { get; set; }
 
-        //v
+        [ForeignKey("SekaniWordExampleId")]
+        public virtual SekaniWordExample SekaniWordExample { get; set; }
 
-        [ForeignKey("TranslationId")]
-        public virtual Translation Translation { get; set; }
+        public SekaniWordExampleAudio()
+        {
+
+        }
     }
 }
