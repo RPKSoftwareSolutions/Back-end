@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AuthServer.RepoInterfaces
 {
-    public interface ITranslationExampleAudioRepository: IRepository<TranslationExampleAudio>
+    public interface ISekaniRoot_TopicRepository : IRepository<SekaniRoot_Topic>
     {
 
     }

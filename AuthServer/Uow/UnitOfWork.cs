@@ -20,17 +20,21 @@ namespace AuthServer.Uow
         public IClientRepository Clients { get; set; }
         public IPersistedGrantRepository PersistedGrants { get; set; }
 
-        public ILevelRepository Levels { get; set; }
+        public ISekaniLevelRepository Levels { get; set; }
         public ISekaniWordRepository SekaniWords { get; set; }
-        public ITranslationRepository TranslationsOfSekani { get; set; }
-        public ICategoryRepository Categories { get; set; }
+        public ISekaniCategoryRepository Categories { get; set; }
         public ITopicRepository Topics { get; set; }
         public IEnglishWordRepository EnglishWords { get; set; }
-        public ITranslation_TopicRepository Translations_Topics { get; set; }
         public ISekaniWordAudioRepository SekaniWordAudios { get; set; }
-        public ITranslationExampleRepository TranslationExamples { get; set; }
-        public ITranslationPhotoRepository TranslationPhotos { get; set; }
-        public ITranslationExampleAudioRepository TranslationExampleAudios { get; set; }
+
+        public ISekaniRootRepository SekaniRoots { get; set; }
+        public ISekaniRootImageRepository SekaniRootImages { get; set; }
+        public ISekaniFormRepository SekaniForms { get; set; }
+        public ISekaniWordExampleRepository SekaniWordExamples { get; set; }
+        public ISekaniWordExampleAudioRepository SekaniWordExampleAudios { get; set; }
+        public ISekaniWordAttributeRepository SekaniWordAttributes { get; set; }
+        public ISekaniRoot_EnglishWordRepository SekaniRoots_EnglishWords { get; set; }
+        public ISekaniRoot_TopicRepository SekaniRoots_Topics { get; set; }
 
 
         public UnitOfWork(AppDbContext context)
@@ -43,19 +47,20 @@ namespace AuthServer.Uow
             Clients = new ClientRepository(this._context);
             PersistedGrants = new PersistentGrantRepository(this._context);
 
-            Levels = new LevelRepository(this._context);
+            Levels = new SekaniLevelRepository(this._context);
             SekaniWords = new SekaniWordRepository(this._context);
-            TranslationsOfSekani = new TranslationRepository(this._context);
-            Categories = new CategoryRepository(this._context);
+            Categories = new SekaniCategoryRepository(this._context);
             Topics  = new TopicRepository(this._context);
             EnglishWords = new EnglishWordRepository(this._context);
-            Translations_Topics = new Translation_TopicRepository(this._context);
             SekaniWordAudios = new SekaniWordAudioRepository(this._context);
-            TranslationExamples = new TranslationExampleRepository(this._context);
-            TranslationPhotos = new TranslationPhotoRepository(this._context);
-            TranslationExampleAudios = new TranslationExampleAudioRepository(this._context);
-
-
+            SekaniRoots = new SekaniRootRepository(this._context);
+            SekaniRootImages = new SekaniRootImageRepository(this._context);
+            SekaniForms = new SekaniFormRepository(this._context);
+            SekaniWordExamples = new SekaniWordExampleRepository(this._context);
+            SekaniWordExampleAudios = new SekaniWordExampleAudioRepository(this._context);
+            SekaniWordAttributes = new SekaniWordAttributeRepository(this._context);
+            SekaniRoots_EnglishWords = new SekaniRoot_EnglishWordRepository(this._context);
+            SekaniRoots_Topics = new SekaniRoot_TopicRepository(this._context);
         }
 
         public int Complete()

@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Repositories
 {
-    public class TranslationExampleAudioRepository: Repository<TranslationExampleAudio>, ITranslationExampleAudioRepository
+    public class SekaniWordExampleAudioRepository: Repository<SekaniWordExampleAudio>, ISekaniWordExampleAudioRepository
     {
-        public TranslationExampleAudioRepository(AppDbContext _context) : base(_context) { }
+        public SekaniWordExampleAudioRepository(AppDbContext _context) : base(_context) { }
+
+
+
 
         public AppDbContext AppContext
         {

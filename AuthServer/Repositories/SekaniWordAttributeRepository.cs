@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Repositories
 {
-    public class TranslationPhotoRepository: Repository<TranslationPhoto>, ITranslationPhotoRepository
+    public class SekaniWordAttributeRepository: Repository<SekaniWordAttribute>, ISekaniWordAttributeRepository
     {
-        public TranslationPhotoRepository(AppDbContext _context) : base(_context) { }
+        public SekaniWordAttributeRepository(AppDbContext _context) : base(_context) { }
 
 
 

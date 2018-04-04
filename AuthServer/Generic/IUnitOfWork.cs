@@ -15,17 +15,20 @@ namespace AuthServer.Generic
         IPersistedGrantRepository PersistedGrants { get; set; }
         ISettingsRepository Settings { get; set; }
 
-        ILevelRepository Levels { get; set; }
+        ISekaniLevelRepository Levels { get; set; }
         ISekaniWordRepository SekaniWords { get; set; }
-        ITranslationRepository TranslationsOfSekani { get; set; }
-        ICategoryRepository Categories { get; set; }
+        ISekaniCategoryRepository Categories { get; set; }
         ITopicRepository Topics { get; set; }
         IEnglishWordRepository EnglishWords { get; set; }
-        ITranslation_TopicRepository Translations_Topics { get; set; }
         ISekaniWordAudioRepository SekaniWordAudios { get; set; }
-        ITranslationExampleRepository TranslationExamples { get; set; }
-        ITranslationPhotoRepository TranslationPhotos { get; set; }
-        ITranslationExampleAudioRepository TranslationExampleAudios { get; set; }
+        ISekaniRootRepository SekaniRoots { get; set; }
+        ISekaniRootImageRepository SekaniRootImages { get; set; }
+        ISekaniFormRepository SekaniForms { get; set; }
+        ISekaniWordExampleRepository SekaniWordExamples { get; set; }
+        ISekaniWordAttributeRepository SekaniWordAttributes { get; set; }
+        ISekaniWordExampleAudioRepository SekaniWordExampleAudios { get; set; }
+        ISekaniRoot_EnglishWordRepository SekaniRoots_EnglishWords { get; set; }
+        ISekaniRoot_TopicRepository SekaniRoots_Topics { get; set; }
 
         int Complete();
     }

@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Repositories
 {
-    public class LevelRepository: Repository<Level>, ILevelRepository
+    public class SekaniRootRepository: Repository<SekaniRoot>, ISekaniRootRepository
     {
-        public LevelRepository(AppDbContext _context) : base(_context) { }
-
-
-
+        public SekaniRootRepository(AppDbContext _context) : base(_context) { }
 
         public AppDbContext AppContext
         {

@@ -6,8 +6,7 @@ using System.Text;
 
 namespace DomainModel
 {
-    
-    public class Topic
+    public class SekaniForm
     {
         [Key]
         public int Id { get; set; }
@@ -18,12 +17,12 @@ namespace DomainModel
 
         public DateTime UpdateTime { get; set; }
 
-        public virtual ICollection<SekaniRoot_Topic> SekaniRoots_Topics { get; set; }
+        public virtual ICollection<SekaniWord> SekaniWords { get; set; }
 
-        public Topic()
+
+        public SekaniForm()
         {
-            this.SekaniRoots_Topics = new Collection<SekaniRoot_Topic>();
+            this.SekaniWords = new Collection<SekaniWord>();
         }
-
     }
 }

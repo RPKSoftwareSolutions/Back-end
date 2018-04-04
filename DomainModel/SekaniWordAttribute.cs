@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class SekaniWordAudio
+    public class SekaniWordAttribute
     {
         [Key]
         public int Id { get; set; }
@@ -14,19 +14,16 @@ namespace DomainModel
         [Required]
         public int SekaniWordId { get; set; }
 
-        [Required]
-        public byte[] Content { get; set; }
+        public string Key { get; set; }
 
-        public string Format { get; set; }
-
-        public string Notes { get; set; }
+        public string Value { get; set; }
 
         public DateTime UpdateTime { get; set; }
 
         [ForeignKey("SekaniWordId")]
         public virtual SekaniWord SekaniWord { get; set; }
 
-        public SekaniWordAudio()
+        public SekaniWordAttribute()
         {
 
         }
