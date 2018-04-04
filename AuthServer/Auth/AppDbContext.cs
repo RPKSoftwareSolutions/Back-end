@@ -28,13 +28,20 @@ namespace AuthServer.Auth
 
 
         // Words & Translations 
-        public DbSet<SekaniLevel> Levels { get; set; }
+        public DbSet<SekaniLevel> SekaniLevels { get; set; }
         public DbSet<SekaniWord> SekaniWords { get; set; }
-        
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<SekaniCategory> Categories{ get; set; }
+        public DbSet<SekaniCategory> SekaniCategories{ get; set; }
         public DbSet<EnglishWord> EnglishWords { get; set; }
         public DbSet<SekaniWordAudio> SekaniWordAudios { get; set; }
+        public DbSet<SekaniRoot> SekaniRoots { get; set; }
+        public DbSet<SekaniRootImage> SekaniRootImages { get; set; }
+        public DbSet<SekaniForm> SekaniForms { get; set; }
+        public DbSet<SekaniWordExample> SekaniWordExamples { get; set; }
+        public DbSet<SekaniWordAttribute> SekaniWordAttributes { get; set; }
+        public DbSet<SekaniWordExampleAudio> SekaniWordExampleAudios { get; set; }
+        public DbSet<SekaniRoot_EnglishWord> SekaniRoots_EnglishWords { get; set; }
+        public DbSet<SekaniRoot_Topic> SekaniRoots_Topics { get; set; }
         
     }
 }

@@ -13,3 +13,4 @@ C:\Projects\SekaniServer\API\obj\Debug\netcoreapp2.0\API.AssemblyInfoInputs.cach
 C:\Projects\SekaniServer\API\obj\Debug\netcoreapp2.0\API.AssemblyInfo.cs
 C:\Projects\SekaniServer\API\obj\Debug\netcoreapp2.0\API.dll
 C:\Projects\SekaniServer\API\obj\Debug\netcoreapp2.0\API.pdb
+C:\Projects\SekaniServer\API\obj\Debug\netcoreapp2.0\API.csproj.CopyComplete
