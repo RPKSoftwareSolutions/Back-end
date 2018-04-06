@@ -11,3 +11,4 @@ C:\Projects\SekaniServer\AuthServer\obj\Release\netcoreapp2.0\AuthServer.Assembl
 C:\Projects\SekaniServer\AuthServer\obj\Release\netcoreapp2.0\AuthServer.AssemblyInfo.cs
 C:\Projects\SekaniServer\AuthServer\obj\Release\netcoreapp2.0\AuthServer.dll
 C:\Projects\SekaniServer\AuthServer\obj\Release\netcoreapp2.0\AuthServer.pdb
+C:\Projects\SekaniServer\AuthServer\obj\Release\netcoreapp2.0\AuthServer.csproj.CopyComplete

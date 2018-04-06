@@ -20,9 +20,9 @@ namespace AuthServer.Uow
         public IClientRepository Clients { get; set; }
         public IPersistedGrantRepository PersistedGrants { get; set; }
 
-        public ISekaniLevelRepository Levels { get; set; }
+        public ISekaniLevelRepository SekaniLevels { get; set; }
         public ISekaniWordRepository SekaniWords { get; set; }
-        public ISekaniCategoryRepository Categories { get; set; }
+        public ISekaniCategoryRepository SekaniCategories { get; set; }
         public ITopicRepository Topics { get; set; }
         public IEnglishWordRepository EnglishWords { get; set; }
         public ISekaniWordAudioRepository SekaniWordAudios { get; set; }
@@ -47,9 +47,9 @@ namespace AuthServer.Uow
             Clients = new ClientRepository(this._context);
             PersistedGrants = new PersistentGrantRepository(this._context);
 
-            Levels = new SekaniLevelRepository(this._context);
+            SekaniLevels = new SekaniLevelRepository(this._context);
             SekaniWords = new SekaniWordRepository(this._context);
-            Categories = new SekaniCategoryRepository(this._context);
+            SekaniCategories = new SekaniCategoryRepository(this._context);
             Topics  = new TopicRepository(this._context);
             EnglishWords = new EnglishWordRepository(this._context);
             SekaniWordAudios = new SekaniWordAudioRepository(this._context);

@@ -15,9 +15,9 @@ namespace AuthServer.Generic
         IPersistedGrantRepository PersistedGrants { get; set; }
         ISettingsRepository Settings { get; set; }
 
-        ISekaniLevelRepository Levels { get; set; }
+        ISekaniLevelRepository SekaniLevels { get; set; }
         ISekaniWordRepository SekaniWords { get; set; }
-        ISekaniCategoryRepository Categories { get; set; }
+        ISekaniCategoryRepository SekaniCategories { get; set; }
         ITopicRepository Topics { get; set; }
         IEnglishWordRepository EnglishWords { get; set; }
         ISekaniWordAudioRepository SekaniWordAudios { get; set; }

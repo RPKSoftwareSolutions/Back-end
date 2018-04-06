@@ -34,7 +34,254 @@ namespace API.Controllers
             {
                 return StatusCode(400);
             }
-            var items = _unitOfWork.Levels.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            var items = _unitOfWork.SekaniLevels.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniCategories/{timestamp}")]
+        public ActionResult GetSekaniCategories(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniCategories.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniForms/{timestamp}")]
+        public ActionResult GetSekaniForms(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniForms.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("englishWords/{timestamp}")]
+        public ActionResult GetEnglishWords(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.EnglishWords.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniRootImages/{timestamp}")]
+        public ActionResult GetSekaniRootImages(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniRootImages.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniRoots/{timestamp}")]
+        public ActionResult GetSekaniRoots(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniRoots.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniRoots_EnglishWords/{timestamp}")]
+        public ActionResult GetSekaniRoot_EnglishWords(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniRoots_EnglishWords.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniRoots_Topics/{timestamp}")]
+        public ActionResult GetSekaniRoots_Topics(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniRoots_Topics.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniWordAttributes/{timestamp}")]
+        public ActionResult GetSekaniWordAttributes(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniWordAttributes.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniWordAudios/{timestamp}")]
+        public ActionResult GetSekaniWordAudios(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniWordAudios.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniWordExampleAudios/{timestamp}")]
+        public ActionResult GetSekaniWordExampleAudios(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniWordExampleAudios.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniWordExamples/{timestamp}")]
+        public ActionResult GetSekaniWordExamples(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniWordExamples.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("sekaniWords/{timestamp}")]
+        public ActionResult GetSekaniWords(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.SekaniWords.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [HttpGet("topics/{timestamp}")]
+        public ActionResult GetTopics(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.Topics.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
             return Ok(items);
         }
 
@@ -49,11 +296,206 @@ namespace API.Controllers
             if (ids.Ids.Length == 0)
                 return StatusCode(400);
 
-            var items = _unitOfWork.Levels.GetAll().Select(x => x.Id);
+            var items = _unitOfWork.SekaniLevels.GetAll().Select(x => x.Id);
             var deletedIds = ids.Ids.Except(items);
             var obj = new
             {
                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("englishWordsDeleted")]
+        public ActionResult GetEnglishWordsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.EnglishWords.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniCategoriesDeleted")]
+        public ActionResult GetSekaniCategoriesDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniCategories.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniFormsDeleted")]
+        public ActionResult GetSekaniFormsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniForms.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniRootImagesDeleted")]
+        public ActionResult GetSekaniRootImagesDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniRootImages.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniRootsDeleted")]
+        public ActionResult GetSekaniRootsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniRoots.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniRoots_EnglishWordsDeleted")]
+        public ActionResult GetSekaniRoots_EnglishWordsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniRoots_EnglishWords.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniRoots_TopicsDeleted")]
+        public ActionResult GetSekaniRoots_TopicsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniRoots_Topics.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniWordAttributesDeleted")]
+        public ActionResult GetSekaniWordAttributesDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniWordAttributes.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniWordAudiosDeleted")]
+        public ActionResult GetSekaniWordAudiosDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniWordAudios.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniWordExampleAudiosDeleted")]
+        public ActionResult GetSekaniWordExampleAudiosDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniWordExampleAudios.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniWordExamplesDeleted")]
+        public ActionResult GetSekaniWordExamplesDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniWordExamples.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("topicsDeleted")]
+        public ActionResult GetTopicsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.Topics.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("sekaniWordsDeleted")]
+        public ActionResult GetSekaniWordsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.SekaniWords.GetAll().Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
             };
             return Ok(obj);
         }
@@ -92,178 +534,8 @@ namespace API.Controllers
         }
         */
 
-        [HttpGet("sekaniWords/{timestamp}")]
-        public ActionResult GetSekaniWords(string timestamp)
-        {
-            if (String.IsNullOrEmpty(timestamp))
-                return StatusCode(400);
-
-            DateTime time;
-            try
-            {
-                time = Convert.ToDateTime(timestamp);
-            }
-            catch (FormatException)
-            {
-                return StatusCode(400);
-            }
-            var levels = _unitOfWork.SekaniWords.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
-            return Ok(levels);
-        }
-
-        [HttpPost("sekaniWordsDeleted")]
-        public ActionResult GetSekaniWordsDeleted([FromBody] IdArray ids)
-        {
-            if (ids.Ids.Length == 0)
-                return StatusCode(400);
-            var items = _unitOfWork.SekaniWords.GetAll().Select(x => x.Id);
-            var deletedIds = ids.Ids.Except(items);
-            var obj = new
-            {
-                extras = deletedIds
-            };
-            return Ok(obj);
-        }
-
-        /*
-        [HttpGet("sekaniWWTs/{timestamp}")]
-        public ActionResult GetSekaniWWTs(string timestamp)
-        {
-            if (String.IsNullOrEmpty(timestamp))
-                return StatusCode(400);
-
-            DateTime time;
-            try
-            {
-                time = Convert.ToDateTime(timestamp);
-            }
-            catch (FormatException)
-            {
-                return StatusCode(400);
-            }
-            var levels = _unitOfWork.SekaniWWTs.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
-            return Ok(levels);
-        }
-
-        [HttpPost("sekaniWWTsDeleted")]
-        public ActionResult GetSekaniWWTsDeleted([FromBody] IdArray ids)
-        {
-            if (ids.Ids.Length == 0)
-                return StatusCode(400);
-            var items = _unitOfWork.SekaniWWTs.GetAll().Select(x => x.Id);
-            var deletedIds = ids.Ids.Except(items);
-            var obj = new
-            {
-                extras = deletedIds
-            };
-            return Ok(obj);
-        }
-        */
-
-        /*
-        [HttpGet("translationsOfSekani/{timestamp}")]
-        public ActionResult TranslationsOfSekani(string timestamp)
-        {
-            if (String.IsNullOrEmpty(timestamp))
-                return StatusCode(400);
-
-            DateTime time;
-            try
-            {
-                time = Convert.ToDateTime(timestamp);
-            }
-            catch (FormatException)
-            {
-                return StatusCode(400);
-            }
-            var levels = _unitOfWork.TranslationsOfSekani.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
-            return Ok(levels);
-        }
-
-        [HttpPost("translationsOfSekaniDeleted")]
-        public ActionResult GetTranslationsOfSekaniDeleted([FromBody] IdArray ids)
-        {
-            if (ids.Ids.Length == 0)
-                return StatusCode(400);
-            var items = _unitOfWork.TranslationsOfSekani.GetAll().Select(x => x.Id);
-            var deletedIds = ids.Ids.Except(items);
-            var obj = new
-            {
-                extras = deletedIds
-            };
-            return Ok(obj);
-        }
-        */
 
 
-        /*
-        [HttpGet("sekaniPhotos/{timestamp}")]
-        public ActionResult SekaniPhotos(string timestamp)
-        {
-            if (String.IsNullOrEmpty(timestamp))
-                return StatusCode(400);
-
-            DateTime time;
-            try
-            {
-                time = Convert.ToDateTime(timestamp);
-            }
-            catch (FormatException)
-            {
-                return StatusCode(400);
-            }
-            var levels = _unitOfWork.SekaniPhotos.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
-            return Ok(levels);
-        }
-
-        [HttpPost("sekaniPhotosDeleted")]
-        public ActionResult GetSekaniPhotosDeleted([FromBody] IdArray ids)
-        {
-            if (ids.Ids.Length == 0)
-                return StatusCode(400);
-            var items = _unitOfWork.SekaniPhotos.GetAll().Select(x => x.Id);
-            var deletedIds = ids.Ids.Except(items);
-            var obj = new
-            {
-                extras = deletedIds
-            };
-            return Ok(obj);
-        }
-
-        [HttpGet("sekaniSounds/{timestamp}")]
-        public ActionResult SekaniSounds(string timestamp)
-        {
-            if (String.IsNullOrEmpty(timestamp))
-                return StatusCode(400);
-
-            DateTime time;
-            try
-            {
-                time = Convert.ToDateTime(timestamp);
-            }
-            catch (FormatException)
-            {
-                return StatusCode(400);
-            }
-            var levels = _unitOfWork.SekaniSounds.Find(x => DateTime.Compare(x.UpdateTime, time) > 0);
-            return Ok(levels);
-        }
-
-        [HttpPost("sekaniSoundsDeleted")]
-        public ActionResult GetSekaniSoundsDeleted([FromBody] IdArray ids)
-        {
-            if (ids.Ids.Length == 0)
-                return StatusCode(400);
-            var items = _unitOfWork.SekaniSounds.GetAll().Select(x => x.Id);
-            var deletedIds = ids.Ids.Except(items);
-            var obj = new
-            {
-                extras = deletedIds
-            };
-            return Ok(obj);
-        }
-
-        */
 
         public SyncController(IUnitOfWork unitOfWork)
         {

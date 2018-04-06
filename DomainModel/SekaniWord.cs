@@ -14,9 +14,6 @@ namespace DomainModel
         public int Id { get; set; }
 
         [Required]
-        public int SekaniFormId { get; set; }
-
-        [Required]
         public int SekaniRootId { get; set; }
 
         public string Word { get; set; }
@@ -28,9 +25,6 @@ namespace DomainModel
 
         
         // virtuals     
-   
-        [ForeignKey("SekaniFormId")]
-        public virtual SekaniForm SekaniForm { get; set; }
 
         [ForeignKey("SekaniRootId")]
         public virtual SekaniRoot SekaniRoot { get; set; }
