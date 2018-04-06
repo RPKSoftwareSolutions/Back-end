@@ -17,12 +17,12 @@ namespace DomainModel
 
         public DateTime UpdateTime { get; set; }
 
-        public virtual ICollection<SekaniWord> SekaniWords { get; set; }
+        public virtual ICollection<SekaniRoot> SekaniRoots { get; set; }
 
 
         public SekaniForm()
         {
-            this.SekaniWords = new Collection<SekaniWord>();
+            this.SekaniRoots = new Collection<SekaniRoot>();
         }
     }
 }

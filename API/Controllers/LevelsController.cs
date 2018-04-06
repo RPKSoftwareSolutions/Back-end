@@ -24,7 +24,7 @@ namespace API.Controllers
         [HttpGet("get/{pageSize}/{pageIndex}")]
         public ActionResult GetAll(int pageSize = 20, int pageIndex = 1)
         {
-            var items = this._unitOfWork.Levels.GetAll()
+            var items = this._unitOfWork.SekaniLevels.GetAll()
                 .OrderBy(i => i.Id)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize);
@@ -36,7 +36,7 @@ namespace API.Controllers
         [HttpGet("get/{id}")]
         public ActionResult Get(int id)
         {
-            var item = this._unitOfWork.Levels.Get(id);
+            var item = this._unitOfWork.SekaniLevels.Get(id);
             if (item == null) return new NotFoundResult();
             return Ok(item);
         }
@@ -45,7 +45,7 @@ namespace API.Controllers
         public ActionResult Post([FromBody] SekaniLevel level)
         {
             level.UpdateTime = DateTime.Now;
-            _unitOfWork.Levels.Add(level);
+            _unitOfWork.SekaniLevels.Add(level);
             _unitOfWork.Complete();
             return Ok(level.Id);
         }
@@ -56,7 +56,7 @@ namespace API.Controllers
             if (id != level.Id)
                 return StatusCode(400);
 
-            var l = _unitOfWork.Levels.Get(id);
+            var l = _unitOfWork.SekaniLevels.Get(id);
             l.Title = level.Title;
             l.Notes = level.Notes;
             l.UpdateTime = DateTime.Now;
@@ -67,8 +67,8 @@ namespace API.Controllers
         [HttpDelete("delete/{id}")]
         public ActionResult Delete(int id)
         {
-            var l = _unitOfWork.Levels.Get(id);
-            _unitOfWork.Levels.Remove(l);
+            var l = _unitOfWork.SekaniLevels.Get(id);
+            _unitOfWork.SekaniLevels.Remove(l);
             _unitOfWork.Complete();
             return Ok();
         }

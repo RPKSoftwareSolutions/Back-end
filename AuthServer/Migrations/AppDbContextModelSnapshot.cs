@@ -253,6 +253,8 @@ namespace AuthServer.Migrations
 
                     b.Property<int>("SekaniCategoryId");
 
+                    b.Property<int>("SekaniFormId");
+
                     b.Property<int>("SekaniLevelId");
 
                     b.Property<DateTime>("UpdateTime");
@@ -260,6 +262,8 @@ namespace AuthServer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SekaniCategoryId");
+
+                    b.HasIndex("SekaniFormId");
 
                     b.HasIndex("SekaniLevelId");
 
@@ -336,8 +340,6 @@ namespace AuthServer.Migrations
 
                     b.Property<string>("Phonetic");
 
-                    b.Property<int>("SekaniFormId");
-
                     b.Property<int>("SekaniRootId");
 
                     b.Property<DateTime>("UpdateTime");
@@ -345,8 +347,6 @@ namespace AuthServer.Migrations
                     b.Property<string>("Word");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SekaniFormId");
 
                     b.HasIndex("SekaniRootId");
 
@@ -603,6 +603,11 @@ namespace AuthServer.Migrations
                         .HasForeignKey("SekaniCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("DomainModel.SekaniForm", "SekaniForm")
+                        .WithMany("SekaniRoots")
+                        .HasForeignKey("SekaniFormId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("DomainModel.SekaniLevel", "SekaniLevel")
                         .WithMany("SekaniRoots")
                         .HasForeignKey("SekaniLevelId")
@@ -645,11 +650,6 @@ namespace AuthServer.Migrations
 
             modelBuilder.Entity("DomainModel.SekaniWord", b =>
                 {
-                    b.HasOne("DomainModel.SekaniForm", "SekaniForm")
-                        .WithMany("SekaniWords")
-                        .HasForeignKey("SekaniFormId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("DomainModel.SekaniRoot", "SekaniRoot")
                         .WithMany("SekaniWords")
                         .HasForeignKey("SekaniRootId")
