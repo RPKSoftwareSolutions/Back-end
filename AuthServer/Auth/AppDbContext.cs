@@ -9,7 +9,26 @@ namespace AuthServer.Auth
 {
     public class AppDbContext: DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Client>().ToTable("Clients", "auth");
+            modelBuilder.Entity<User>().ToTable("Users", "auth");
+            modelBuilder.Entity<UserClaim>().ToTable("UserClaims", "auth");
+            modelBuilder.Entity<UserSession>().ToTable("UserSessions", "auth");
+            modelBuilder.Entity<PasswordResetToken>().ToTable("PasswordResetTokens", "auth");
+            modelBuilder.Entity<EmailVerificationToken>().ToTable("EmailVerificationTokens", "auth");
+            modelBuilder.Entity<ClientSecret>().ToTable("ClientSecrets", "auth");
+            modelBuilder.Entity<ClientGrantType>().ToTable("ClientGrantTypes", "auth");
+            modelBuilder.Entity<ClientCorsOrigin>().ToTable("ClientCorsOrigins", "auth");
+            modelBuilder.Entity<ClientScope>().ToTable("ClientScopes", "auth");
+            modelBuilder.Entity<PersistedGrant>().ToTable("PersistedGrants", "auth");
+
+        }
 
         // Core Infrastructure
         public DbSet<User> Users { get; set; }
@@ -19,7 +38,7 @@ namespace AuthServer.Auth
         public DbSet<EmailVerificationToken> EmailVerificationTokens { get; set; }
         public DbSet<Setting> Settings { get; set; }
         // extra core
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Client> Clients { get; set; } 
         public DbSet<ClientSecret> ClientSecrets { get; set; }
         public DbSet<ClientGrantType> ClientGrantTypes { get; set; }
         public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; }

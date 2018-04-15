@@ -37,7 +37,10 @@ namespace API.Controllers
         {
             //this._unitOfWork.Clients.Add(new DomainModel.Client)
 
-            return Ok();
+            var i = this._unitOfWork.SekaniCategories.GetAll();
+
+            var items = this._unitOfWork.Clients.GetAll();
+            return Ok(items);
         }
     }
 

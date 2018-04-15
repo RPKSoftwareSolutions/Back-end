@@ -13,10 +13,10 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
-    public class LevelsController: Controller
+    public class SekaniLevelsController: Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public LevelsController(IUnitOfWork unitOfWork)
+        public SekaniLevelsController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
