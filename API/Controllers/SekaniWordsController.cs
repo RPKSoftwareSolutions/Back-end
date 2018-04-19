@@ -4,6 +4,8 @@ using DomainModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace API.Controllers
@@ -19,14 +21,37 @@ namespace API.Controllers
         }
 
         [HttpGet("get/{pageSize}/{pageIndex}")]
-        public ActionResult GetAll(int pageSize = 20, int pageIndex = 1)
+        public ActionResult GetAll(int pageSize = 20, int pageIndex = 1, int? sekaniRootId = 0)
         {
-            var items = this._unitOfWork.SekaniWords.GetAll()
-                .OrderBy(i => i.Id)
-                .Skip((pageIndex - 1) * pageSize)
-                .Take(pageSize);
+            IEnumerable<SekaniWord> items = this._unitOfWork.SekaniWords.GetAll();
 
-            var R = PageRecordsSelector.GetPageRecords(items, pageSize, pageIndex);
+            if (sekaniRootId != null && sekaniRootId != 0)
+                items = items.Where(i => i.SekaniRootId == sekaniRootId);
+
+            var count = items.Count();
+
+            IEnumerable<SekaniWord> subset = items
+                    .OrderBy(i => i.Id)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize);
+
+            var _items = subset.Select(i => new
+            {
+                i.Id,
+                i.Phonetic,
+                i.SekaniRootId,
+                i.UpdateTime,
+                i.Word,
+                Attributes = this._unitOfWork.SekaniWordAttributes.Find(a => a.SekaniWordId == i.Id).Select(a => new
+                {
+                    a.Id,
+                    a.Key,
+                    a.Value,
+                    a.UpdateTime
+                })
+            });
+
+            var R = PageRecordsSelector.GetPageRecords(_items, pageSize, pageIndex, count);
             return Ok(R);
         }
 
