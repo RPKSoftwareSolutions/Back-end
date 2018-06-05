@@ -39,7 +39,7 @@ namespace AuthServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients","auth");
                 });
 
             modelBuilder.Entity("DomainModel.ClientCorsOrigin", b =>
@@ -55,7 +55,7 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientCorsOrigins");
+                    b.ToTable("ClientCorsOrigins","auth");
                 });
 
             modelBuilder.Entity("DomainModel.ClientGrantType", b =>
@@ -71,7 +71,7 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientGrantTypes");
+                    b.ToTable("ClientGrantTypes","auth");
                 });
 
             modelBuilder.Entity("DomainModel.ClientScope", b =>
@@ -87,7 +87,7 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientScopes");
+                    b.ToTable("ClientScopes","auth");
                 });
 
             modelBuilder.Entity("DomainModel.ClientSecret", b =>
@@ -109,7 +109,7 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("ClientSecrets");
+                    b.ToTable("ClientSecrets","auth");
                 });
 
             modelBuilder.Entity("DomainModel.EmailVerificationToken", b =>
@@ -131,7 +131,7 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EmailVerificationTokens");
+                    b.ToTable("EmailVerificationTokens","auth");
                 });
 
             modelBuilder.Entity("DomainModel.EnglishWord", b =>
@@ -169,7 +169,7 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PasswordResetTokens");
+                    b.ToTable("PasswordResetTokens","auth");
                 });
 
             modelBuilder.Entity("DomainModel.PersistedGrant", b =>
@@ -191,7 +191,7 @@ namespace AuthServer.Migrations
 
                     b.HasKey("Key");
 
-                    b.ToTable("PersistedGrants");
+                    b.ToTable("PersistedGrants","auth");
                 });
 
             modelBuilder.Entity("DomainModel.SekaniCategory", b =>
@@ -496,12 +496,36 @@ namespace AuthServer.Migrations
 
                     b.Property<bool>("PhoneNumberVerified");
 
+                    b.Property<int>("SekaniLevelId");
+
                     b.Property<string>("Username")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.HasIndex("SekaniLevelId");
+
+                    b.ToTable("Users","auth");
+                });
+
+            modelBuilder.Entity("DomainModel.UserActivityStat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("Value");
+
+                    b.Property<string>("Variable");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserActivityStats");
                 });
 
             modelBuilder.Entity("DomainModel.UserClaim", b =>
@@ -519,7 +543,47 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserClaims");
+                    b.ToTable("UserClaims","auth");
+                });
+
+            modelBuilder.Entity("DomainModel.UserFailedWord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("SekaniWordId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniWordId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserFailedWords");
+                });
+
+            modelBuilder.Entity("DomainModel.UserLearntWord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("SekaniWordId");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SekaniWordId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLearntWords");
                 });
 
             modelBuilder.Entity("DomainModel.UserSession", b =>
@@ -545,7 +609,7 @@ namespace AuthServer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserSessions");
+                    b.ToTable("UserSessions","auth");
                 });
 
             modelBuilder.Entity("DomainModel.ClientCorsOrigin", b =>
@@ -688,10 +752,52 @@ namespace AuthServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("DomainModel.User", b =>
+                {
+                    b.HasOne("DomainModel.SekaniLevel", "SekaniLevel")
+                        .WithMany("Users")
+                        .HasForeignKey("SekaniLevelId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.UserActivityStat", b =>
+                {
+                    b.HasOne("DomainModel.User", "User")
+                        .WithMany("ActivityStats")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("DomainModel.UserClaim", b =>
                 {
                     b.HasOne("DomainModel.User", "User")
                         .WithMany("Claims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.UserFailedWord", b =>
+                {
+                    b.HasOne("DomainModel.SekaniWord", "SekaniWord")
+                        .WithMany("UsersFailed")
+                        .HasForeignKey("SekaniWordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DomainModel.User", "User")
+                        .WithMany("FailedWords")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainModel.UserLearntWord", b =>
+                {
+                    b.HasOne("DomainModel.SekaniWord", "SekaniWord")
+                        .WithMany("UsersLearnt")
+                        .HasForeignKey("SekaniWordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DomainModel.User", "User")
+                        .WithMany("LearntWords")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

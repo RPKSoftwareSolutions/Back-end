@@ -29,6 +29,9 @@ namespace AuthServer.Generic
         ISekaniWordExampleAudioRepository SekaniWordExampleAudios { get; set; }
         ISekaniRoot_EnglishWordRepository SekaniRoots_EnglishWords { get; set; }
         ISekaniRoot_TopicRepository SekaniRoots_Topics { get; set; }
+        IUserActivityStatRepository UserActivityStats { get; set; }
+        IUserLearntWordRepository UserLearntWords { get; set; }
+        IUserFailedWordRepository UserFailedWords { get; set; }
 
         int Complete();
     }

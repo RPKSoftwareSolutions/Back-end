@@ -1,9 +1,12 @@
-﻿using API.ParamModels;
+﻿using API.Helpers;
+using API.ParamModels;
 using AuthServer.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -285,6 +288,67 @@ namespace API.Controllers
             return Ok(items);
         }
 
+        [Authorize]
+        [HttpGet("userActivityStats/{timestamp}")]
+        public ActionResult GetUserActivityStats(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.UserActivityStats
+                    .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [Authorize]
+        [HttpGet("userLearntWords/{timestamp}")]
+        public ActionResult GetUserLearntWords(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.UserLearntWords.Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
+        [Authorize]
+        [HttpGet("userFailedWords/{timestamp}")]
+        public ActionResult GetUserFailedWords(string timestamp)
+        {
+            if (String.IsNullOrEmpty(timestamp))
+                return StatusCode(400);
+
+            DateTime time;
+            try
+            {
+                time = Convert.ToDateTime(timestamp);
+            }
+            catch (FormatException)
+            {
+                return StatusCode(400);
+            }
+            var items = _unitOfWork.UserFailedWords.Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && DateTime.Compare(x.UpdateTime, time) > 0);
+            return Ok(items);
+        }
+
         /// <summary>
         /// returns a set of IDs for all of the levels that exist in front-end but have been removed from the back-end.
         /// </summary>
@@ -500,6 +564,51 @@ namespace API.Controllers
             return Ok(obj);
         }
 
+        [HttpPost("userActivityStatsDeleted")]
+        public ActionResult GetUserActivityStatsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.UserActivityStats.GetAll().Where(x => x.UserId == UserHelper.GetCurrentUserId(User)).Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("userLearntWordsDeleted")]
+        public ActionResult GetUserLearntWordsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.UserLearntWords.GetAll().Where(x => x.UserId == UserHelper.GetCurrentUserId(User)).Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
+        [HttpPost("userFailedWordsDeleted")]
+        public ActionResult GetUserFailedWordsDeleted([FromBody] IdArray ids)
+        {
+            if (ids.Ids.Length == 0)
+                return StatusCode(400);
+
+            var items = _unitOfWork.UserFailedWords.GetAll().Where(x => x.UserId == UserHelper.GetCurrentUserId(User)).Select(x => x.Id);
+            var deletedIds = ids.Ids.Except(items);
+            var obj = new
+            {
+                extras = deletedIds
+            };
+            return Ok(obj);
+        }
+
         /*
         [HttpGet("sekaniWordTypes/{timestamp}")]
         public ActionResult GetSekaniWordTypes(string timestamp)
@@ -541,6 +650,11 @@ namespace API.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
+
+        /*private int GetCurrentUserId(ClaimsPrincipal User)
+        {
+            return int.Parse(User.Identities.FirstOrDefault().Claims.FirstOrDefault(c => c.Type == "sub").Value);
+        }*/
 
 
     }

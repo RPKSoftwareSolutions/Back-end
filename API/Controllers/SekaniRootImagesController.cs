@@ -52,6 +52,13 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpGet("get/{sekaniRootId}")]
+        public ActionResult Get(int sekaniRootId)
+        {
+            var image = this._unitOfWork.SekaniRootImages.GetAll().Where(i => i.SekaniRootId == sekaniRootId).FirstOrDefault();
+            return Ok(image);
+        }
+
         [HttpDelete("delete/{id}")]
         public ActionResult Delete(int id)
         {

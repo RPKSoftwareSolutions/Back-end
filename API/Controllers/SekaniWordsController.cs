@@ -64,12 +64,34 @@ namespace API.Controllers
         }
 
         [HttpPost("post")]
-        public ActionResult Post([FromBody] SekaniWord item)
+        public ActionResult Post([FromBody] SekaniWordAddVM item)
         {
+            /*
             item.UpdateTime = DateTime.Now;
             _unitOfWork.SekaniWords.Add(item);
             _unitOfWork.Complete();
-            return Ok(item.Id);
+            return Ok(item.Id);*/
+            SekaniWord sw = new SekaniWord()
+            {
+                Phonetic = item.Phonetic,
+                SekaniRootId = item.SekaniRootId,
+                Word = item.Word,
+                UpdateTime = DateTime.Now
+            };
+            this._unitOfWork.SekaniWords.Add(sw);
+            foreach(SekaniWordAttributeKeyValueVM x in item.Attributes)
+            {
+                var a = new SekaniWordAttribute()
+                {
+                    SekaniWordId = sw.Id,
+                    Key = x.Key,
+                    Value = x.Value,
+                    UpdateTime = DateTime.Now
+                };
+                this._unitOfWork.SekaniWordAttributes.Add(a);
+            }
+            this._unitOfWork.Complete();
+            return Ok(sw.Id);
         }
 
         [HttpPut("put/{id}")]
@@ -95,5 +117,19 @@ namespace API.Controllers
             _unitOfWork.Complete();
             return Ok();
         }
+    }
+
+    public class SekaniWordAddVM
+    {
+        public int SekaniRootId { get; set; }
+        public string Word { get; set; }
+        public string Phonetic { get; set; }
+        public SekaniWordAttributeKeyValueVM[] Attributes { get; set; }
+    }
+
+    public class SekaniWordAttributeKeyValueVM
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 }

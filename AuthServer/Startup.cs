@@ -58,16 +58,16 @@ namespace AuthServer
             services.AddIdentityServer()
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddClientStore<ClientStore>()
-                /*.AddOperationalStore(options =>
+                .AddOperationalStore(options =>
                 {
                     options.ConfigureDbContext = builder => builder.UseSqlServer(connectionString);
 
-                    
 
+                    options.DefaultSchema = "auth";
                     // this enables automatic token cleanup. this is optional.
                     options.EnableTokenCleanup = true;
-                    options.TokenCleanupInterval = 1000;
-                })*/
+                    options.TokenCleanupInterval = 3600;
+                })
                 .AddDeveloperSigningCredential()
                 .AddExtensionGrantValidator<GoogleGrant>()
                 .AddExtensionGrantValidator<FacebookGrant>();

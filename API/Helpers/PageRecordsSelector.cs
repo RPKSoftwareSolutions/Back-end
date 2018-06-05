@@ -7,7 +7,7 @@ namespace API.Helpers
 {
     public static class PageRecordsSelector
     {
-        public static object GetPageRecords(IEnumerable<object> items, int pageSize, int pageIndex)
+        /*public static object GetPageRecords(IEnumerable<object> items, int pageSize, int pageIndex)
         {
             var obj = new
             {
@@ -16,7 +16,7 @@ namespace API.Helpers
                 pages = Math.Ceiling((items.Count() + 0.0) / pageSize)
             };
             return obj;
-        }
+        }*/
 
         public static object GetPageRecords(IEnumerable<object> items, int pageSize, int pageIndex, int count)
         {

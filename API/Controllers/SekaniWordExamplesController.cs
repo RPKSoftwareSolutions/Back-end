@@ -19,14 +19,17 @@ namespace API.Controllers
         }
 
         [HttpGet("get/{pageSize}/{pageIndex}")]
-        public ActionResult GetAll(int pageSize = 20, int pageIndex = 1)
+        public ActionResult GetAll(int pageSize = 20, int pageIndex = 1, int sekaniWordId = 0)
         {
-            var items = this._unitOfWork.SekaniWordExamples.GetAll()
+            var items = this._unitOfWork.SekaniWordExamples.GetAll().Where(i => i.SekaniWordId == sekaniWordId);
+            var count = items.Count();
+
+            var subset = items
                 .OrderBy(i => i.Id)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize);
 
-            var R = PageRecordsSelector.GetPageRecords(items, pageSize, pageIndex);
+            var R = PageRecordsSelector.GetPageRecords(subset, pageSize, pageIndex, count);
             return Ok(R);
         }
 

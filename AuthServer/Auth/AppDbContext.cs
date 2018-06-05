@@ -61,6 +61,9 @@ namespace AuthServer.Auth
         public DbSet<SekaniWordExampleAudio> SekaniWordExampleAudios { get; set; }
         public DbSet<SekaniRoot_EnglishWord> SekaniRoots_EnglishWords { get; set; }
         public DbSet<SekaniRoot_Topic> SekaniRoots_Topics { get; set; }
+        public DbSet<UserActivityStat> UserActivityStats { get; set; }
+        public DbSet<UserLearntWord> UserLearntWords { get; set; }
+        public DbSet<UserFailedWord> UserFailedWords { get; set; }
         
     }
 }

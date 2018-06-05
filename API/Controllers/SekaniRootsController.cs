@@ -143,6 +143,58 @@ namespace API.Controllers
             return Ok(counter);
         }
 
+        [HttpGet("getTopics/{id}")]
+        public ActionResult GetTopics(int id)
+        {
+            var ids = this._unitOfWork.SekaniRoots_Topics.Find(i => i.SekaniRootId == id).Select(i => i.SekaniRootId).ToList();
+            var items = this._unitOfWork.Topics.Find(i => ids.Contains(i.Id))
+                            .OrderBy(i => i.Id)
+                            .Select(i => new
+                            {
+                                i.Id,
+                                i.Title,
+                                i.Notes,
+                                i.UpdateTime
+                            });
+            return Ok(items);
+        }
+
+        [HttpPost("removeTopics")]
+        public ActionResult RemoveTopics([FromBody] AddRemoveTopicsModel model)
+        {
+            var r = this._unitOfWork.SekaniRoots_Topics.Find(i => i.SekaniRootId == model.SekaniRootId &&
+                                                                  model.TopicIds.Contains(i.TopicId)).ToList();
+            this._unitOfWork.SekaniRoots_Topics.RemoveRange(r);
+            this._unitOfWork.Complete();
+            return Ok(r.Count());
+        }
+
+        [HttpPost("addTopics")]
+        public ActionResult AddTopics([FromBody] AddRemoveTopicsModel model)
+        {
+            int counter = 0;
+            foreach(int eid in model.TopicIds)
+            {
+                var item = new SekaniRoot_Topic()
+                {
+                    SekaniRootId = model.SekaniRootId,
+                    TopicId = eid,
+                    UpdateTime = DateTime.Now
+                };
+                this._unitOfWork.SekaniRoots_Topics.Add(item);
+                try
+                {
+                    this._unitOfWork.Complete();
+                    counter++;
+                }
+                catch(DbUpdateException x)
+                {
+                    // ignore
+                }
+            }
+            return Ok(counter);
+        }
+
         [HttpPost("post")]
         public ActionResult Post([FromBody] SekaniRoot item)
         {
@@ -183,5 +235,11 @@ namespace API.Controllers
     {
         public int SekaniRootId { get; set; }
         public int[] EnglishWordIds { get; set; }
+    }
+
+    public class AddRemoveTopicsModel
+    {
+        public int SekaniRootId { get; set; }
+        public int[] TopicIds { get; set; }
     }
 }

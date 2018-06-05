@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CryptoHelper;
 
 namespace API.Controllers
 {
@@ -22,6 +23,7 @@ namespace API.Controllers
         public ActionResult GetAll(int pageSize = 20, int pageIndex = 1)
         {
             var items = _unitOfWork.Users.GetAll();
+            var count = items.Count();
 
             var records = items
                    .OrderBy(s => s.Id)
@@ -38,7 +40,7 @@ namespace API.Controllers
                        x.Active,
                        x.EmailVerified
                    });
-            var R = PageRecordsSelector.GetPageRecords(records, pageSize, pageIndex);
+            var R = PageRecordsSelector.GetPageRecords(records, pageSize, pageIndex, count);
             return Ok(R);
         }
 
@@ -61,10 +63,46 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpGet("getSessions/{pageSize}/{pageIndex}")]
+        public ActionResult GetSessions(int pageSize = 20, int pageIndex = 1)
+        {
+            var items = this._unitOfWork.PersistedGrants.GetAll()
+                    .GroupBy(i => i.SubjectId)
+                    .Select(i => new
+                    {
+                        Username = this._unitOfWork.Users.GetAll().Where(u => u.Id == int.Parse(i.FirstOrDefault().SubjectId)).FirstOrDefault().Username,
+                        Count = i.Count()
+                    });
+
+            var count = items.Count();
+            var records = items.OrderBy(i => i.Username)
+                               .Skip((pageIndex - 1) * pageSize)
+                               .Take(pageSize);
+
+            var R = PageRecordsSelector.GetPageRecords(records, pageSize, pageIndex, count);
+            return Ok(R);
+        }
+
+        [HttpDelete("killSessions/{username}")]
+        public ActionResult KillSessions(string username)
+        {
+            var subj = this._unitOfWork.Users.GetAll().Where(u => u.Username == username && u.Email == username).FirstOrDefault();
+            if (subj == null)
+                return BadRequest("User was not found");
+
+            var id = subj.Id.ToString();
+            var persistedGrants = this._unitOfWork.PersistedGrants.GetAll().Where(p => String.Equals(p.SubjectId, id));
+            this._unitOfWork.PersistedGrants.RemoveRange(persistedGrants);
+            this._unitOfWork.Complete();
+
+            return Ok(persistedGrants.Count());
+        }
+
         [HttpPost("post")]
         public ActionResult Post([FromBody] User item)
         {
             //item.UpdateTime = DateTime.Now;
+            item.Password = Crypto.HashPassword(item.Password);
             _unitOfWork.Users.Add(item);
             _unitOfWork.Complete();
             return Ok(item.Id);

@@ -33,6 +33,8 @@ namespace DomainModel
         public virtual ICollection<SekaniWordAudio> SekaniWordAudios { get; set; }
         public virtual ICollection<SekaniWordExample> SekaniWordExamples { get; set; }
         public virtual ICollection<SekaniWordAttribute> SekaniWordAttributes { get; set; }
+        public virtual ICollection<UserLearntWord> UsersLearnt { get; set; }
+        public virtual ICollection<UserFailedWord> UsersFailed { get; set; }
 
 
         public SekaniWord()
@@ -40,6 +42,8 @@ namespace DomainModel
             this.SekaniWordAudios = new Collection<SekaniWordAudio>();
             this.SekaniWordAttributes = new Collection<SekaniWordAttribute>();
             this.SekaniWordExamples = new Collection<SekaniWordExample>();
+            this.UsersLearnt = new Collection<UserLearntWord>();
+            this.UsersFailed = new Collection<UserFailedWord>();
         }
 
     }
