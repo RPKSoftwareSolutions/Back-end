@@ -22,9 +22,12 @@ namespace DomainModel
         // v
         public virtual ICollection<SekaniRoot> SekaniRoots { get; set; }
 
+        public virtual ICollection<User> Users { get; set; }
+
         public SekaniLevel()
         {
             this.SekaniRoots = new Collection<SekaniRoot>();
+            this.Users = new Collection<User>();
         }
     }
 }

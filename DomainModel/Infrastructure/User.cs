@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainModel
 {
@@ -36,6 +37,12 @@ namespace DomainModel
         [DefaultValue(false)]
         public bool PhoneNumberVerified { get; set; }
 
+        
+        public int SekaniLevelId { get; set; }
+
+        [ForeignKey("SekaniLevelId")]
+        public virtual SekaniLevel SekaniLevel { get; set; }
+
         // user's claims...
         public virtual ICollection<UserClaim> Claims { get; set; }
 
@@ -45,11 +52,20 @@ namespace DomainModel
         // user's email verification token
         public virtual ICollection<EmailVerificationToken> EmailVerificationTokens { get; set; }
 
+        public virtual ICollection<UserActivityStat> ActivityStats { get; set; }
+
+        public virtual ICollection<UserLearntWord> LearntWords { get; set; }
+
+        public virtual ICollection<UserFailedWord> FailedWords { get; set; }
+
         public User()
         {
             Claims = new Collection<UserClaim>();
             PasswordResetTokens = new Collection<PasswordResetToken>();
             EmailVerificationTokens = new Collection<EmailVerificationToken>();
+            ActivityStats = new Collection<UserActivityStat>();
+            LearntWords = new Collection<UserLearntWord>();
+            FailedWords = new Collection<UserFailedWord>();
         }
 
     }

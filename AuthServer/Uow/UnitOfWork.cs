@@ -35,6 +35,9 @@ namespace AuthServer.Uow
         public ISekaniWordAttributeRepository SekaniWordAttributes { get; set; }
         public ISekaniRoot_EnglishWordRepository SekaniRoots_EnglishWords { get; set; }
         public ISekaniRoot_TopicRepository SekaniRoots_Topics { get; set; }
+        public IUserActivityStatRepository UserActivityStats { get; set; }
+        public IUserLearntWordRepository UserLearntWords { get; set; }
+        public IUserFailedWordRepository UserFailedWords { get; set; }
 
 
         public UnitOfWork(AppDbContext context)
@@ -61,6 +64,9 @@ namespace AuthServer.Uow
             SekaniWordAttributes = new SekaniWordAttributeRepository(this._context);
             SekaniRoots_EnglishWords = new SekaniRoot_EnglishWordRepository(this._context);
             SekaniRoots_Topics = new SekaniRoot_TopicRepository(this._context);
+            UserActivityStats = new UserActivityStatRepository(this._context);
+            UserLearntWords = new UserLearntWordRepository(this._context);
+            UserFailedWords = new UserFailedWordRepository(this._context);
         }
 
         public int Complete()

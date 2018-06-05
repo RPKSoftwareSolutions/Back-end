@@ -24,12 +24,15 @@ namespace API.Controllers
         [HttpGet("get/{pageSize}/{pageIndex}")]
         public ActionResult GetAll(int pageSize = 20, int pageIndex = 1)
         {
-            var items = this._unitOfWork.SekaniLevels.GetAll()
+            var items = this._unitOfWork.SekaniLevels.GetAll();
+            var count = items.Count();
+            var subset
+                = this._unitOfWork.SekaniLevels.GetAll()
                 .OrderBy(i => i.Id)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize);
 
-            var R = PageRecordsSelector.GetPageRecords(items, pageSize, pageIndex);
+            var R = PageRecordsSelector.GetPageRecords(subset, pageSize, pageIndex, count);
             return Ok(R);
         }
 

@@ -53,6 +53,13 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpGet("get/{sekaniWordId}")]
+        public ActionResult Get(int sekaniWordId)
+        {
+            var sound = this._unitOfWork.SekaniWordAudios.GetAll().Where(i => i.SekaniWordId == sekaniWordId).FirstOrDefault();
+            return Ok(sound);
+        }
+
         [HttpDelete("delete/{id}")]
         public ActionResult Delete(int id)
         {

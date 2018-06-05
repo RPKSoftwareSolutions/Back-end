@@ -4,6 +4,8 @@ using DomainModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace API.Controllers
@@ -21,12 +23,17 @@ namespace API.Controllers
         [HttpGet("get/{pageSize}/{pageIndex}")]
         public ActionResult GetAll(int pageSize = 20, int pageIndex = 1)
         {
-            var items = this._unitOfWork.Topics.GetAll()
+            IEnumerable<Topic> items = this._unitOfWork.Topics.GetAll();
+            var count = items.Count();
+
+            IEnumerable<Topic> subset;
+
+            subset = this._unitOfWork.Topics.GetAll()
                 .OrderBy(i => i.Id)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize);
 
-            var R = PageRecordsSelector.GetPageRecords(items, pageSize, pageIndex);
+            var R = PageRecordsSelector.GetPageRecords(subset, pageSize, pageIndex, count);
             return Ok(R);
         }
 
