@@ -12,7 +12,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
-    public class UserActivityStatsController: Controller
+    public class UserActivityStatsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         public UserActivityStatsController(IUnitOfWork unitOfWork)
@@ -27,7 +27,7 @@ namespace API.Controllers
                             .GetAll()
                             .Where(x => x.UserId == UserHelper.GetCurrentUserId(User))
                             .Where(x => String.Equals(variable, x.Variable));
-                    
+
             /*var count = items.Count();
             var subset = this._unitOfWork.UserActivityStats.GetAll().Where(x => x.UserId == UserHelper.GetCurrentUserId(User))
                 .OrderBy(i => i.Id);
@@ -70,7 +70,7 @@ namespace API.Controllers
         {
             int userId = UserHelper.GetCurrentUserId(User);
             var items = _unitOfWork.UserLearntWords.Find(x => x.UserId == userId);
-           
+
             var count = items.Count();
 
             var records = items
@@ -112,6 +112,103 @@ namespace API.Controllers
             var R = PageRecordsSelector.GetPageRecords(records, pageSize, pageIndex, count);
             return Ok(R);
         }
+
+        [HttpPost("learntWords/post/{sekaniWordId}")]
+        public ActionResult PostLearntWord(int sekaniWordId)
+        {
+            // if the word is marked as "failed" before, that has to be removed first.
+            var failedRecord = _unitOfWork.UserFailedWords
+                                .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
+            if (failedRecord != null)
+            {
+                _unitOfWork.UserFailedWords.Remove(failedRecord);
+            }
+
+            // if a learnt record for this word already exists, we don't need to do anything. 
+            var learntRecord = _unitOfWork.UserLearntWords
+                                .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
+
+            if (learntRecord != null)
+            {
+                var record = new UserLearntWord()
+                {
+                    SekaniWordId = sekaniWordId,
+                    UserId = UserHelper.GetCurrentUserId(User),
+                    UpdateTime = DateTime.Now
+                };
+                _unitOfWork.UserLearntWords.Add(record);
+                _unitOfWork.Complete();
+                return Ok(record.Id);
+            }
+            else
+            {
+                return Ok(learntRecord.Id);
+            }
+        }
+
+        [HttpPost("failedWords/post/{sekaniWordId}")]
+        public ActionResult PostFailedWord(int sekaniWordId)
+        {
+            // if the word is marked as "learnt" before, that has to be removed first.
+            var learntRecord = _unitOfWork.UserLearntWords
+                                .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
+            if (learntRecord != null)
+            {
+                _unitOfWork.UserLearntWords.Remove(learntRecord);
+            }
+
+            // if a failed record for this word already exists, we don't need to do anything. 
+            var failedRecord = _unitOfWork.UserFailedWords
+                                .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
+
+            if (failedRecord != null)
+            {
+                var record = new UserFailedWord()
+                {
+                    SekaniWordId = sekaniWordId,
+                    UserId = UserHelper.GetCurrentUserId(User),
+                    UpdateTime = DateTime.Now
+                };
+                _unitOfWork.UserFailedWords.Add(record);
+                _unitOfWork.Complete();
+                return Ok(record.Id);
+            }
+            else
+            {
+                _unitOfWork.Complete();
+                return Ok(failedRecord.Id);
+            }
+        }
+
+        [HttpDelete("learntWords/delete/{sekaniWordId}")]
+        public ActionResult DeleteLearntWord(int sekaniWordId)
+        {
+            var learntWord = _unitOfWork.UserLearntWords
+                                .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
+
+            if (learntWord == null)
+                return NotFound("Record was not found.");
+
+            _unitOfWork.UserLearntWords.Remove(learntWord);
+            _unitOfWork.Complete();
+            return Ok(learntWord.Id);
+        }
+
+        [HttpDelete("failedWords/delete/{sekaniWordId}")]
+        public ActionResult DeleteFailedWord(int sekaniWordId)
+        {
+            var failedWord = _unitOfWork.UserFailedWords
+                                .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
+
+            if (failedWord == null)
+                return NotFound("Record was not found.");
+
+            _unitOfWork.UserFailedWords.Remove(failedWord);
+            _unitOfWork.Complete();
+            return Ok(failedWord.Id);
+        }
+
+
     }
 
     
