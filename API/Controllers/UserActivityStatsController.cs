@@ -128,7 +128,7 @@ namespace API.Controllers
             var learntRecord = _unitOfWork.UserLearntWords
                                 .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
 
-            if (learntRecord != null)
+            if (learntRecord == null)
             {
                 var record = new UserLearntWord()
                 {
@@ -142,6 +142,7 @@ namespace API.Controllers
             }
             else
             {
+                _unitOfWork.Complete();
                 return Ok(learntRecord.Id);
             }
         }
@@ -161,7 +162,7 @@ namespace API.Controllers
             var failedRecord = _unitOfWork.UserFailedWords
                                 .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
 
-            if (failedRecord != null)
+            if (failedRecord == null)
             {
                 var record = new UserFailedWord()
                 {
