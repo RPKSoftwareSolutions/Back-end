@@ -7,3 +7,12 @@ C:\Projects\SekaniServer\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.Assembl
 C:\Projects\SekaniServer\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.AssemblyInfo.cs
 C:\Projects\SekaniServer\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.dll
 C:\Projects\SekaniServer\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.pdb
+C:\projects\Back-end\DomainModel\bin\Debug\netcoreapp2.0\DomainModel.deps.json
+C:\projects\Back-end\DomainModel\bin\Debug\netcoreapp2.0\DomainModel.dll
+C:\projects\Back-end\DomainModel\bin\Debug\netcoreapp2.0\DomainModel.pdb
+C:\projects\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.csprojAssemblyReference.cache
+C:\projects\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.csproj.CoreCompileInputs.cache
+C:\projects\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.AssemblyInfoInputs.cache
+C:\projects\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.AssemblyInfo.cs
+C:\projects\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.dll
+C:\projects\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.pdb
