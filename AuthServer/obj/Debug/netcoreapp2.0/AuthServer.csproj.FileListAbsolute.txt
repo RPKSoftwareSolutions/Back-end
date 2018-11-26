@@ -12,3 +12,17 @@ C:\Projects\SekaniServer\AuthServer\bin\Debug\netcoreapp2.0\DomainModel.pdb
 C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.dll
 C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.pdb
 C:\Projects\SekaniServer\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csproj.CopyComplete
+C:\projects\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.deps.json
+C:\projects\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.runtimeconfig.json
+C:\projects\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.runtimeconfig.dev.json
+C:\projects\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.dll
+C:\projects\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.pdb
+C:\projects\Back-end\AuthServer\bin\Debug\netcoreapp2.0\DomainModel.dll
+C:\projects\Back-end\AuthServer\bin\Debug\netcoreapp2.0\DomainModel.pdb
+C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csprojAssemblyReference.cache
+C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csproj.CoreCompileInputs.cache
+C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.AssemblyInfoInputs.cache
+C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.AssemblyInfo.cs
+C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csproj.CopyComplete
+C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.dll
+C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.pdb
