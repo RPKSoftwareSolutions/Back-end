@@ -1,5 +1,7 @@
 ﻿using AuthServer.Generic;
 using DomainModel;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,21 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class ImportXmlController: Controller
     {
+
         private readonly IUnitOfWork _unitOfWork;
-        public ImportXmlController(IUnitOfWork unitOfWork)
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public ImportXmlController(IUnitOfWork unitOfWork,
+                                   IHostingEnvironment hostingEnvironment)
         {
             this._unitOfWork = unitOfWork;
+            this._hostingEnvironment = hostingEnvironment;
+        }
+
+        [HttpGet("path")]
+        public async Task<ActionResult> path()
+        {
+            return Ok(_hostingEnvironment.ContentRootPath);
         }
 
         [HttpGet("test")]
@@ -43,6 +56,8 @@ namespace API.Controllers
 
         private int InsertRecords(_Root root)
         {
+            string fileLoc = _hostingEnvironment.ContentRootPath + @"\";
+
             int categoryId = InsertSekaniCategory(root.Category);
             int formId = InsertSekaniForm(root.Form);
             int levelId = InsertSekaniLevel(root.Level.ToString());
@@ -58,6 +73,15 @@ namespace API.Controllers
             };
 
             int sekaniRootId = InsertSekaniRoot(sr);
+
+            try
+            {
+                int SekaniRootImageId = InsertSekaniRootImage(fileLoc + @"Image\" + root.Image, sekaniRootId);
+            }
+            catch(NullReferenceException)
+            {
+                // no image
+            }
 
 
             // insert EnglishWord records
@@ -125,6 +149,15 @@ namespace API.Controllers
                 };
                 int sekaniWordId = InsertSekaniWord(sw);
 
+                try
+                {
+                    int SekaniWordAudioId = InsertSekaniWordAudio(fileLoc + @"Audio\" + elm.Element.Audio, sekaniWordId);
+                }
+                catch(NullReferenceException)
+                {
+                    // no audio
+                }
+
                 foreach(I_F_Example ex in elm.Element.Examples)
                 {
                     SekaniWordExample swe = new SekaniWordExample()
@@ -136,7 +169,14 @@ namespace API.Controllers
                     };
                     int sekaniWordExampleId = InsertSekaniWordExample(swe);
 
-                    // ***todo: audios? 
+                    try
+                    {
+                        int SekaniWordExampleAudioId = InsertSekaniWordExampleAudio(fileLoc + @"Audio\" + ex.Example.Audio, sekaniWordExampleId);
+                    }
+                    catch(NullReferenceException)
+                    {
+                        // no audio
+                    }
                 }
 
                 foreach (I_F_Attribute att in elm.Element.Attributes)
@@ -152,6 +192,61 @@ namespace API.Controllers
             }
 
             return 0;
+        }
+
+        // insert SekaniRootImage
+        private int InsertSekaniRootImage(string fileAddress, int SekaniRootId)
+        {
+            var theFile = System.IO.File.ReadAllBytes(fileAddress);
+            SekaniRootImage sri = new SekaniRootImage()
+            {
+                SekaniRootId = SekaniRootId,
+                Content = theFile,
+                Notes = "",
+                Format = "PNG",
+                UpdateTime = DateTime.Now
+            };
+            _unitOfWork.SekaniRootImages.Add(sri);
+            _unitOfWork.Complete();
+            return sri.Id;
+        }
+
+        // insert SekaniWordExampleAudio
+        private int InsertSekaniWordExampleAudio(string fileAddress, int SekaniWordExampleId)
+        {
+            var theFile = System.IO.File.ReadAllBytes(fileAddress);
+            SekaniWordExampleAudio swea = new SekaniWordExampleAudio()
+            {
+                SekaniWordExampleId = SekaniWordExampleId,
+                Format = "MP3",
+                Notes = "",
+                Content = theFile,
+                UpdateTime = DateTime.Now
+            };
+
+            _unitOfWork.SekaniWordExampleAudios.Add(swea);
+            _unitOfWork.Complete();
+            return swea.Id;
+        }
+
+        // insert sekaniWordAudio 
+        private int InsertSekaniWordAudio(string fileAddress, int SekaniWordId)
+        {
+            // assuming database is empty
+            // todo: what if it is not empty?
+            var theFile = System.IO.File.ReadAllBytes(fileAddress);
+            SekaniWordAudio swa = new SekaniWordAudio()
+            {
+                SekaniWordId = SekaniWordId,
+                Content = theFile,
+                Format = "MP3",
+                UpdateTime = DateTime.Now,
+                Notes = ""
+            };
+
+            _unitOfWork.SekaniWordAudios.Add(swa);
+            _unitOfWork.Complete();
+            return swa.Id;
         }
 
         // this method takes a SekaniWord and inserts it
