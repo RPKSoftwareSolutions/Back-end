@@ -13,7 +13,7 @@ using System.Xml.Serialization;
 namespace API.Controllers
 {
     [Route("api/[controller]")]
-    public class ImportXmlController: Controller
+    public class ImportXmlController : Controller
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -65,7 +65,7 @@ namespace API.Controllers
             SekaniRoot sr = new SekaniRoot()
             {
                 SekaniLevelId = levelId,
-                RootWord = root.RootWord,
+                RootWord = !String.IsNullOrEmpty(root.RootWord) ? root.RootWord : "",
                 SekaniFormId = formId,
                 SekaniCategoryId = categoryId,
                 IsNull = root.IsNull,
@@ -78,9 +78,13 @@ namespace API.Controllers
             {
                 int SekaniRootImageId = InsertSekaniRootImage(fileLoc + @"Image\" + root.Image, sekaniRootId);
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 // no image
+            }
+            catch (DirectoryNotFoundException)
+            {
+                //todo rivisit later.
             }
 
 
@@ -106,7 +110,7 @@ namespace API.Controllers
                     }
                 }
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 // no english words associated.
             }
@@ -133,12 +137,12 @@ namespace API.Controllers
                     }
                 }
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 // no topics associated
             }
 
-            foreach(I_F_Element elm in root.InflectedForms)
+            foreach (I_F_Element elm in root.InflectedForms)
             {
                 SekaniWord sw = new SekaniWord()
                 {
@@ -153,12 +157,12 @@ namespace API.Controllers
                 {
                     int SekaniWordAudioId = InsertSekaniWordAudio(fileLoc + @"Audio\" + elm.Element.Audio, sekaniWordId);
                 }
-                catch(NullReferenceException)
+                catch (NullReferenceException)
                 {
                     // no audio
                 }
 
-                foreach(I_F_Example ex in elm.Element.Examples)
+                foreach (I_F_Example ex in elm.Element.Examples)
                 {
                     SekaniWordExample swe = new SekaniWordExample()
                     {
@@ -173,7 +177,7 @@ namespace API.Controllers
                     {
                         int SekaniWordExampleAudioId = InsertSekaniWordExampleAudio(fileLoc + @"Audio\" + ex.Example.Audio, sekaniWordExampleId);
                     }
-                    catch(NullReferenceException)
+                    catch (NullReferenceException)
                     {
                         // no audio
                     }
@@ -183,6 +187,7 @@ namespace API.Controllers
                 {
                     SekaniWordAttribute swa = new SekaniWordAttribute()
                     {
+                        SekaniWordId = sekaniWordId,
                         Key = att.Attribute.Key,
                         Value = att.Attribute.Value,
                         UpdateTime = DateTime.Now
@@ -479,10 +484,12 @@ namespace API.Controllers
 
     }
 
+    [XmlType("element")]
     public class I_F_Element
     {
         [XmlElement("element")]
         public I_F_SubElement Element { get; set; }
+        
     }
 
     public class I_F_SubElement
@@ -553,6 +560,6 @@ namespace API.Controllers
 
     #endregion
 
-    
+
 
 }
