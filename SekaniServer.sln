@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel", "DomainModel\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedMachine", "SeedMachine\SeedMachine.csproj", "{BEE3B9DA-1D25-4726-A44A-5815F166619A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedMachine", "SeedMachine\SeedMachine.csproj", "{BEE3B9DA-1D25-4726-A44A-5815F166619A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

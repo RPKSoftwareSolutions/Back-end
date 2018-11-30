@@ -16,6 +16,8 @@ namespace API.Controllers
     public class ImportXmlController : Controller
     {
 
+        string temp = ""; // todo delete this line
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHostingEnvironment _hostingEnvironment;
 
@@ -33,9 +35,9 @@ namespace API.Controllers
         }
 
         [HttpGet("test")]
-        public async Task<ActionResult> Test()
+        public ActionResult Test()
         {
-            StreamReader rd = new StreamReader("C:\\Users\\Rahim\\Source\\Repos\\Back-end\\APIAppData.xml");
+            StreamReader rd = new StreamReader("C:\\projects\\AppData2.xml", System.Text.Encoding.UTF8);
             string fullText = rd.ReadToEnd();
             XmlSerializer ser = new XmlSerializer(typeof(_Dictionary));
 
@@ -45,6 +47,7 @@ namespace API.Controllers
 
                 foreach (_Root root in dic.Roots)
                 {
+                    temp = root.RootWord; // todo: delete this line
                     InsertRecords(root);
                 }
             }
@@ -85,6 +88,10 @@ namespace API.Controllers
             catch (DirectoryNotFoundException)
             {
                 //todo rivisit later.
+            }
+            catch (FileNotFoundException)
+            {
+                // file does not exist
             }
 
 
@@ -141,6 +148,10 @@ namespace API.Controllers
             {
                 // no topics associated
             }
+            catch(InvalidOperationException)
+            {
+                // when the topic tag exists but there's nothing inside it/.
+            }
 
             foreach (I_F_Element elm in root.InflectedForms)
             {
@@ -161,6 +172,10 @@ namespace API.Controllers
                 {
                     // no audio
                 }
+                catch(FileNotFoundException)
+                {
+                    // file does not exist
+                }
 
                 foreach (I_F_Example ex in elm.Element.Examples)
                 {
@@ -180,6 +195,10 @@ namespace API.Controllers
                     catch (NullReferenceException)
                     {
                         // no audio
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        // file does not exist
                     }
                 }
 
@@ -217,7 +236,7 @@ namespace API.Controllers
                 _unitOfWork.Complete();
                 return sri.Id;
             }
-            catch
+            catch(Exception)
             {
                 return -1;
             }
@@ -269,7 +288,7 @@ namespace API.Controllers
                 _unitOfWork.Complete();
                 return swa.Id;
             }
-            catch
+            catch(FileNotFoundException)
             {
                 return -1;
             }
@@ -312,6 +331,7 @@ namespace API.Controllers
         // this method takes a Topic and inserts it into the DB only if it does not already exist
         private int InsertTopic(string topic)
         {
+
             var T = _unitOfWork.Topics.Find(x => String.Equals(x.Title.ToLower(), topic.ToLower())).FirstOrDefault();
             if (T != null)
                 return T.Id;
@@ -411,8 +431,20 @@ namespace API.Controllers
             List<int> Ids = new List<int>();
             foreach (string w in words)
             {
-                int id = InsertEnglishWord(w);
-                Ids.Add(id);
+                try
+                {
+                    int id = InsertEnglishWord(w);
+                    Ids.Add(id);
+                }
+                catch(InvalidOperationException)
+                {
+                    
+                    var s = Ids;
+                    int x = 4;
+                }
+
+                // todo :  clean up
+                
             }
             return Ids;
         }
