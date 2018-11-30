@@ -26,3 +26,17 @@ C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.AssemblyInfo.
 C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csproj.CopyComplete
 C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.dll
 C:\projects\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.pdb
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.deps.json
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.runtimeconfig.json
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.runtimeconfig.dev.json
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.dll
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\bin\Debug\netcoreapp2.0\AuthServer.pdb
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\bin\Debug\netcoreapp2.0\DomainModel.dll
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\bin\Debug\netcoreapp2.0\DomainModel.pdb
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csprojAssemblyReference.cache
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csproj.CoreCompileInputs.cache
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.AssemblyInfoInputs.cache
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.AssemblyInfo.cs
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.csproj.CopyComplete
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.dll
+C:\Users\Rahim\Source\Repos\Back-end\AuthServer\obj\Debug\netcoreapp2.0\AuthServer.pdb

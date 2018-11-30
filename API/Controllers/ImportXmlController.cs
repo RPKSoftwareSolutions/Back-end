@@ -35,7 +35,7 @@ namespace API.Controllers
         [HttpGet("test")]
         public async Task<ActionResult> Test()
         {
-            StreamReader rd = new StreamReader("C:\\projects\\AppData3.xml");
+            StreamReader rd = new StreamReader("C:\\Users\\Rahim\\Source\\Repos\\Back-end\\APIAppData.xml");
             string fullText = rd.ReadToEnd();
             XmlSerializer ser = new XmlSerializer(typeof(_Dictionary));
 
@@ -49,7 +49,7 @@ namespace API.Controllers
                 }
             }
 
-            return Ok("kir");
+            return Ok("Sounds good!");
         }
 
 
@@ -202,56 +202,77 @@ namespace API.Controllers
         // insert SekaniRootImage
         private int InsertSekaniRootImage(string fileAddress, int SekaniRootId)
         {
-            var theFile = System.IO.File.ReadAllBytes(fileAddress);
-            SekaniRootImage sri = new SekaniRootImage()
+            try
             {
-                SekaniRootId = SekaniRootId,
-                Content = theFile,
-                Notes = "",
-                Format = "PNG",
-                UpdateTime = DateTime.Now
-            };
-            _unitOfWork.SekaniRootImages.Add(sri);
-            _unitOfWork.Complete();
-            return sri.Id;
+                var theFile = System.IO.File.ReadAllBytes(fileAddress);
+                SekaniRootImage sri = new SekaniRootImage()
+                {
+                    SekaniRootId = SekaniRootId,
+                    Content = theFile,
+                    Notes = "",
+                    Format = "PNG",
+                    UpdateTime = DateTime.Now
+                };
+                _unitOfWork.SekaniRootImages.Add(sri);
+                _unitOfWork.Complete();
+                return sri.Id;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         // insert SekaniWordExampleAudio
         private int InsertSekaniWordExampleAudio(string fileAddress, int SekaniWordExampleId)
         {
-            var theFile = System.IO.File.ReadAllBytes(fileAddress);
-            SekaniWordExampleAudio swea = new SekaniWordExampleAudio()
+            try
             {
-                SekaniWordExampleId = SekaniWordExampleId,
-                Format = "MP3",
-                Notes = "",
-                Content = theFile,
-                UpdateTime = DateTime.Now
-            };
+                var theFile = System.IO.File.ReadAllBytes(fileAddress);
+                SekaniWordExampleAudio swea = new SekaniWordExampleAudio()
+                {
+                    SekaniWordExampleId = SekaniWordExampleId,
+                    Format = "MP3",
+                    Notes = "",
+                    Content = theFile,
+                    UpdateTime = DateTime.Now
+                };
 
-            _unitOfWork.SekaniWordExampleAudios.Add(swea);
-            _unitOfWork.Complete();
-            return swea.Id;
+                _unitOfWork.SekaniWordExampleAudios.Add(swea);
+                _unitOfWork.Complete();
+                return swea.Id;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         // insert sekaniWordAudio 
         private int InsertSekaniWordAudio(string fileAddress, int SekaniWordId)
         {
             // assuming database is empty
-            // todo: what if it is not empty?
-            var theFile = System.IO.File.ReadAllBytes(fileAddress);
-            SekaniWordAudio swa = new SekaniWordAudio()
+            // todo: what if it is not empty? or the file does not exist.
+            try
             {
-                SekaniWordId = SekaniWordId,
-                Content = theFile,
-                Format = "MP3",
-                UpdateTime = DateTime.Now,
-                Notes = ""
-            };
+                var theFile = System.IO.File.ReadAllBytes(fileAddress);
+                SekaniWordAudio swa = new SekaniWordAudio()
+                {
+                    SekaniWordId = SekaniWordId,
+                    Content = theFile,
+                    Format = "MP3",
+                    UpdateTime = DateTime.Now,
+                    Notes = ""
+                };
 
-            _unitOfWork.SekaniWordAudios.Add(swa);
-            _unitOfWork.Complete();
-            return swa.Id;
+                _unitOfWork.SekaniWordAudios.Add(swa);
+                _unitOfWork.Complete();
+                return swa.Id;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         // this method takes a SekaniWord and inserts it
