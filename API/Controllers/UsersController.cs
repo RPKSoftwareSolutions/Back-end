@@ -102,6 +102,19 @@ namespace API.Controllers
         public ActionResult Post([FromBody] User item)
         {
             //item.UpdateTime = DateTime.Now;
+            if (String.IsNullOrEmpty(item.Email) || String.IsNullOrEmpty(item.Password))
+                return StatusCode(400, Json("Provide Email and Password"));
+
+            var exists = _unitOfWork.Users.Find(u => u.Email == item.Email).Count() > 0;
+            if (exists)
+                return StatusCode(400, Json("Email is already taken"));
+
+
+            item.Username = item.Email;
+            item.Active = true;
+            item.EmailVerified = true;
+            item.SekaniLevelId = _unitOfWork.SekaniLevels.Find(x => x.Id > 0).FirstOrDefault().Id;
+
             item.Password = Crypto.HashPassword(item.Password);
             _unitOfWork.Users.Add(item);
             _unitOfWork.Complete();
