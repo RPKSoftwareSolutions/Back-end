@@ -157,16 +157,16 @@ namespace API.Controllers
             {
                 SekaniWord sw = new SekaniWord()
                 {
-                    Phonetic = elm.Element.Phonetic,
+                    Phonetic = elm.Phonetic,
                     SekaniRootId = sekaniRootId,
                     UpdateTime = DateTime.Now,
-                    Word = elm.Element.InflectedForm
+                    Word = elm.InflectedForm
                 };
                 int sekaniWordId = InsertSekaniWord(sw);
 
                 try
                 {
-                    int SekaniWordAudioId = InsertSekaniWordAudio(fileLoc + @"Audio\" + elm.Element.Audio, sekaniWordId);
+                    int SekaniWordAudioId = InsertSekaniWordAudio(fileLoc + @"Audio\" + elm.Audio, sekaniWordId);
                 }
                 catch (NullReferenceException)
                 {
@@ -177,12 +177,12 @@ namespace API.Controllers
                     // file does not exist
                 }
 
-                foreach (I_F_Example ex in elm.Element.Examples)
+                foreach (I_F_Example ex in elm.Examples)
                 {
                     SekaniWordExample swe = new SekaniWordExample()
                     {
-                        English = ex.Example.English,
-                        Sekani = ex.Example.Sekani,
+                        English = ex.English,
+                        Sekani = ex.Sekani,
                         SekaniWordId = sekaniWordId,
                         UpdateTime = DateTime.Now
                     };
@@ -190,7 +190,7 @@ namespace API.Controllers
 
                     try
                     {
-                        int SekaniWordExampleAudioId = InsertSekaniWordExampleAudio(fileLoc + @"Audio\" + ex.Example.Audio, sekaniWordExampleId);
+                        int SekaniWordExampleAudioId = InsertSekaniWordExampleAudio(fileLoc + @"Audio\" + ex.Audio, sekaniWordExampleId);
                     }
                     catch (NullReferenceException)
                     {
@@ -202,13 +202,13 @@ namespace API.Controllers
                     }
                 }
 
-                foreach (I_F_Attribute att in elm.Element.Attributes)
+                foreach (I_F_Attribute att in elm.Attributes)
                 {
                     SekaniWordAttribute swa = new SekaniWordAttribute()
                     {
                         SekaniWordId = sekaniWordId,
-                        Key = att.Attribute.Key,
-                        Value = att.Attribute.Value,
+                        Key = att.Key,
+                        Value = att.Value,
                         UpdateTime = DateTime.Now
                     };
                     int SekaniWordAttributeId = InsertSekaniWordAttribute(swa);
@@ -531,8 +531,10 @@ namespace API.Controllers
         [XmlElement("topics")]
         public List<_Topic> Topics { get; set; }
 
-        [XmlElement("inflectedforms")]
-        public List<I_F_Element> InflectedForms { get; set; }
+        [XmlArray("inflectedforms"), XmlArrayItem("element")]
+        public I_F_Element[] InflectedForms;
+        //[XmlElement("inflectedforms")]
+       // public List<I_F_Element> InflectedForms { get; set; }
 
 
     }
@@ -540,16 +542,9 @@ namespace API.Controllers
     [XmlType("element")]
     public class I_F_Element
     {
-        [XmlElement("element")]
-        public I_F_SubElement Element { get; set; }
-        
-    }
 
-    public class I_F_SubElement
-    {
         [XmlElement("inflectedform")]
         public string InflectedForm { get; set; }
-
         [XmlElement("phonetic")]
         public string Phonetic { get; set; }
 
@@ -558,22 +553,45 @@ namespace API.Controllers
 
         [XmlElement("audio")]
         public string Audio { get; set; }
+        [XmlArray("examples"), XmlArrayItem("element")]
+        public I_F_Example[] Examples;
 
-        [XmlElement("examples")]
-        public List<I_F_Example> Examples { get; set; }
+        //[XmlElement("examples")]
+        //public List<I_F_Example> Examples { get; set; }
 
-        [XmlElement("attributes")]
-        public List<I_F_Attribute> Attributes { get; set; }
+        [XmlArray("attributes"), XmlArrayItem("element")]
+        public I_F_Attribute[] Attributes;
+
+        //[XmlElement("attributes")]
+        //public List<I_F_Attribute> Attributes { get; set; }
+
+
     }
+
+    //public class I_F_SubElement
+    //{
+    //    [XmlElement("inflectedform")]
+    //    public string InflectedForm { get; set; }
+
+    //    [XmlElement("phonetic")]
+    //    public string Phonetic { get; set; }
+
+    //    [XmlElement("inflectedformtranslation")]
+    //    public string InflectedFormTranslation { get; set; }
+
+    //    [XmlElement("audio")]
+    //    public string Audio { get; set; }
+
+    //    [XmlElement("examples")]
+    //    public List<I_F_Example> Examples { get; set; }
+
+    //    [XmlElement("attributes")]
+    //    public List<I_F_Attribute> Attributes { get; set; }
+    //}
 
     public class I_F_Example
     {
-        [XmlElement("element")]
-        public I_F_SubExample Example { get; set; }
-    }
 
-    public class I_F_SubExample
-    {
         [XmlElement("sekani")]
         public string Sekani { get; set; }
 
@@ -582,22 +600,41 @@ namespace API.Controllers
 
         [XmlElement("audio")]
         public string Audio { get; set; }
+        //[XmlElement("element")]
+        //public I_F_SubExample Example { get; set; }
     }
+
+    //public class I_F_SubExample
+    //{
+    //    [XmlElement("sekani")]
+    //    public string Sekani { get; set; }
+
+    //    [XmlElement("english")]
+    //    public string English { get; set; }
+
+    //    [XmlElement("audio")]
+    //    public string Audio { get; set; }
+    //}
 
     public class I_F_Attribute
     {
-        [XmlElement("element")]
-        public I_F_SubAttribute Attribute { get; set; }
-    }
-
-    public class I_F_SubAttribute
-    {
+        //[XmlElement("element")]
+        //public I_F_SubAttribute Attribute { get; set; }
         [XmlElement("key")]
         public string Key { get; set; }
 
         [XmlElement("value")]
         public string Value { get; set; }
     }
+
+    //public class I_F_SubAttribute
+    //{
+    //    [XmlElement("key")]
+    //    public string Key { get; set; }
+
+    //    [XmlElement("value")]
+    //    public string Value { get; set; }
+    //}
 
     public class _Topic
     {
