@@ -12712,11 +12712,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\AuthServer\\AuthServer.csproj",
+      "projectUniqueName": "D:\\TKD\\Back-end\\Back-end\\AuthServer\\AuthServer.csproj",
       "projectName": "AuthServer",
-      "projectPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\AuthServer\\AuthServer.csproj",
+      "projectPath": "D:\\TKD\\Back-end\\Back-end\\AuthServer\\AuthServer.csproj",
       "packagesPath": "C:\\Users\\Rahim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\AuthServer\\obj\\",
+      "outputPath": "D:\\TKD\\Back-end\\Back-end\\AuthServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12735,8 +12735,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\DomainModel\\DomainModel.csproj": {
-              "projectPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\DomainModel\\DomainModel.csproj"
+            "D:\\TKD\\Back-end\\Back-end\\DomainModel\\DomainModel.csproj": {
+              "projectPath": "D:\\TKD\\Back-end\\Back-end\\DomainModel\\DomainModel.csproj"
             }
           }
         }

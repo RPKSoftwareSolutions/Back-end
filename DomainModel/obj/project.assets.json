@@ -6540,11 +6540,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\DomainModel\\DomainModel.csproj",
+      "projectUniqueName": "D:\\TKD\\Back-end\\Back-end\\DomainModel\\DomainModel.csproj",
       "projectName": "DomainModel",
-      "projectPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\DomainModel\\DomainModel.csproj",
+      "projectPath": "D:\\TKD\\Back-end\\Back-end\\DomainModel\\DomainModel.csproj",
       "packagesPath": "C:\\Users\\Rahim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\DomainModel\\obj\\",
+      "outputPath": "D:\\TKD\\Back-end\\Back-end\\DomainModel\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -12733,11 +12733,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\SeedMachine\\SeedMachine.csproj",
+      "projectUniqueName": "D:\\TKD\\Back-end\\Back-end\\SeedMachine\\SeedMachine.csproj",
       "projectName": "SeedMachine",
-      "projectPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\SeedMachine\\SeedMachine.csproj",
+      "projectPath": "D:\\TKD\\Back-end\\Back-end\\SeedMachine\\SeedMachine.csproj",
       "packagesPath": "C:\\Users\\Rahim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\SeedMachine\\obj\\",
+      "outputPath": "D:\\TKD\\Back-end\\Back-end\\SeedMachine\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12756,11 +12756,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\AuthServer\\AuthServer.csproj": {
-              "projectPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\AuthServer\\AuthServer.csproj"
+            "D:\\TKD\\Back-end\\Back-end\\AuthServer\\AuthServer.csproj": {
+              "projectPath": "D:\\TKD\\Back-end\\Back-end\\AuthServer\\AuthServer.csproj"
             },
-            "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\DomainModel\\DomainModel.csproj": {
-              "projectPath": "C:\\Users\\Rahim\\Source\\Repos\\Back-end\\DomainModel\\DomainModel.csproj"
+            "D:\\TKD\\Back-end\\Back-end\\DomainModel\\DomainModel.csproj": {
+              "projectPath": "D:\\TKD\\Back-end\\Back-end\\DomainModel\\DomainModel.csproj"
             }
           }
         }
