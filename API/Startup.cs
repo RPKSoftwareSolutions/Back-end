@@ -13,6 +13,7 @@ using AuthServer.Uow;
 using Swashbuckle.AspNetCore.Swagger;
 using AuthServer.Auth;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace API
 {
@@ -29,8 +30,12 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-
+            
             services.AddMvc();
+            services.Configure<FormOptions>(x =>
+            {
+                x.MultipartBodyLengthLimit = 2147483648;
+            });
             services.AddCors();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddSwaggerGen(c =>
