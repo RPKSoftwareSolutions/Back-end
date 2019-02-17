@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel", "DomainModel\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedMachine", "SeedMachine\SeedMachine.csproj", "{BEE3B9DA-1D25-4726-A44A-5815F166619A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BEE3B9DA-1D25-4726-A44A-5815F166619A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEE3B9DA-1D25-4726-A44A-5815F166619A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEE3B9DA-1D25-4726-A44A-5815F166619A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEE3B9DA-1D25-4726-A44A-5815F166619A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

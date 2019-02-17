@@ -25,3 +25,12 @@ C:\Users\Rahim\Source\Repos\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainM
 C:\Users\Rahim\Source\Repos\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.AssemblyInfo.cs
 C:\Users\Rahim\Source\Repos\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.dll
 C:\Users\Rahim\Source\Repos\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.pdb
+D:\TKD\Back-end\Back-end\DomainModel\bin\Debug\netcoreapp2.0\DomainModel.deps.json
+D:\TKD\Back-end\Back-end\DomainModel\bin\Debug\netcoreapp2.0\DomainModel.dll
+D:\TKD\Back-end\Back-end\DomainModel\bin\Debug\netcoreapp2.0\DomainModel.pdb
+D:\TKD\Back-end\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.csprojAssemblyReference.cache
+D:\TKD\Back-end\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.csproj.CoreCompileInputs.cache
+D:\TKD\Back-end\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.AssemblyInfoInputs.cache
+D:\TKD\Back-end\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.AssemblyInfo.cs
+D:\TKD\Back-end\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.dll
+D:\TKD\Back-end\Back-end\DomainModel\obj\Debug\netcoreapp2.0\DomainModel.pdb
