@@ -26,3 +26,17 @@ C:\projects\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.AssemblyInf
 C:\projects\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.csproj.CopyComplete
 C:\projects\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.dll
 C:\projects\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.pdb
+D:\TKD\Back-end\Back-end\AuthServer\bin\Release\netcoreapp2.0\AuthServer.deps.json
+D:\TKD\Back-end\Back-end\AuthServer\bin\Release\netcoreapp2.0\AuthServer.runtimeconfig.json
+D:\TKD\Back-end\Back-end\AuthServer\bin\Release\netcoreapp2.0\AuthServer.runtimeconfig.dev.json
+D:\TKD\Back-end\Back-end\AuthServer\bin\Release\netcoreapp2.0\AuthServer.dll
+D:\TKD\Back-end\Back-end\AuthServer\bin\Release\netcoreapp2.0\AuthServer.pdb
+D:\TKD\Back-end\Back-end\AuthServer\bin\Release\netcoreapp2.0\DomainModel.dll
+D:\TKD\Back-end\Back-end\AuthServer\bin\Release\netcoreapp2.0\DomainModel.pdb
+D:\TKD\Back-end\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.csprojAssemblyReference.cache
+D:\TKD\Back-end\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.csproj.CoreCompileInputs.cache
+D:\TKD\Back-end\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.AssemblyInfoInputs.cache
+D:\TKD\Back-end\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.AssemblyInfo.cs
+D:\TKD\Back-end\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.csproj.CopyComplete
+D:\TKD\Back-end\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.dll
+D:\TKD\Back-end\Back-end\AuthServer\obj\Release\netcoreapp2.0\AuthServer.pdb
