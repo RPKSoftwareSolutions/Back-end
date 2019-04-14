@@ -1,5 +1,4 @@
 ﻿using API.Helpers;
-using AuthServer.Generic;
 using DomainModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CryptoHelper;
+using DomainModel.AuthenticateModels;
+using Infrastructure;
 
 namespace API.Controllers
 {
@@ -122,7 +123,7 @@ namespace API.Controllers
         }
 
         [HttpPut("put/{id}")]
-        public ActionResult Put(int id, [FromBody] User item)
+        public ActionResult GetTop20(int id, [FromBody] User item)
         {
             if (id != item.Id)
                 return StatusCode(400);
@@ -139,5 +140,19 @@ namespace API.Controllers
             _unitOfWork.Complete();
             return Ok();
         }
+
+        [HttpGet("GetTop20")]
+        public ActionResult GetTop20()
+        {
+            var item = this._unitOfWork.Users.GetTop20();
+            if (item == null) return new NotFoundResult();
+            foreach (var tmp in item)
+            {
+                tmp.Password = "******";
+            }
+          
+            return Ok(item);
+        }
+
     }
 }

@@ -12,6 +12,6 @@
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.server.iisintegration\2.2.1\build\netstandard2.0\Microsoft.AspNetCore.Server.IISIntegration.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.server.iisintegration\2.2.1\build\netstandard2.0\Microsoft.AspNetCore.Server.IISIntegration.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.server.iis\2.2.2\build\netstandard2.0\Microsoft.AspNetCore.Server.IIS.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.server.iis\2.2.2\build\netstandard2.0\Microsoft.AspNetCore.Server.IIS.targets')" />
     <Import Project="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.razor.viewcompilation\2.2.0\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.targets" Condition="Exists('C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.razor.viewcompilation\2.2.0\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.targets')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.all\2.2.3\build\netcoreapp2.2\Microsoft.AspNetCore.All.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.all\2.2.3\build\netcoreapp2.2\Microsoft.AspNetCore.All.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.all\2.2.4\build\netcoreapp2.2\Microsoft.AspNetCore.All.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.all\2.2.4\build\netcoreapp2.2\Microsoft.AspNetCore.All.targets')" />
   </ImportGroup>
 </Project>

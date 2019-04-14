@@ -1,6 +1,5 @@
 ﻿using API.Helpers;
 using API.ParamModels;
-using AuthServer.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Infrastructure;
 
 namespace API.Controllers
 {
@@ -310,8 +310,8 @@ namespace API.Controllers
         }
 
         [Authorize]
-        [HttpGet("userLearntWords/{timestamp}")]
-        public ActionResult GetUserLearntWords(string timestamp)
+        [HttpGet("UserLearnedWords/{timestamp}")]
+        public ActionResult GetUserLearnedWords(string timestamp)
         {
             if (String.IsNullOrEmpty(timestamp))
                 return StatusCode(400);
@@ -325,7 +325,7 @@ namespace API.Controllers
             {
                 return StatusCode(400);
             }
-            var items = _unitOfWork.UserLearntWords.Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && DateTime.Compare(x.UpdateTime, time) > 0);
+            var items = _unitOfWork.UserLearnedWords.Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && DateTime.Compare(x.UpdateTime, time) > 0);
             return Ok(items);
         }
 
@@ -579,13 +579,13 @@ namespace API.Controllers
             return Ok(obj);
         }
 
-        [HttpPost("userLearntWordsDeleted")]
-        public ActionResult GetUserLearntWordsDeleted([FromBody] IdArray ids)
+        [HttpPost("UserLearnedWordsDeleted")]
+        public ActionResult GetUserLearnedWordsDeleted([FromBody] IdArray ids)
         {
             if (ids.Ids.Length == 0)
                 return StatusCode(400);
 
-            var items = _unitOfWork.UserLearntWords.GetAll().Where(x => x.UserId == UserHelper.GetCurrentUserId(User)).Select(x => x.Id);
+            var items = _unitOfWork.UserLearnedWords.GetAll().Where(x => x.UserId == UserHelper.GetCurrentUserId(User)).Select(x => x.Id);
             var deletedIds = ids.Ids.Except(items);
             var obj = new
             {

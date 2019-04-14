@@ -15,12 +15,3 @@ C:\projects\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.AssemblyI
 C:\projects\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.AssemblyInfo.cs
 C:\projects\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.dll
 C:\projects\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.pdb
-D:\TKD\Back-end\Back-end\DomainModel\bin\Release\netcoreapp2.0\DomainModel.deps.json
-D:\TKD\Back-end\Back-end\DomainModel\bin\Release\netcoreapp2.0\DomainModel.dll
-D:\TKD\Back-end\Back-end\DomainModel\bin\Release\netcoreapp2.0\DomainModel.pdb
-D:\TKD\Back-end\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.csprojAssemblyReference.cache
-D:\TKD\Back-end\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.csproj.CoreCompileInputs.cache
-D:\TKD\Back-end\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.AssemblyInfoInputs.cache
-D:\TKD\Back-end\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.AssemblyInfo.cs
-D:\TKD\Back-end\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.dll
-D:\TKD\Back-end\Back-end\DomainModel\obj\Release\netcoreapp2.0\DomainModel.pdb

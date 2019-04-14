@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
-using AuthServer.Generic;
-using AuthServer.Uow;
 using DomainModel;
+using DomainModel.AuthenticateModels;
+using Infrastructure;
 
 namespace AuthServer.Auth
 {

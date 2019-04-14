@@ -1,16 +1,13 @@
 ﻿using API.Helpers;
-using AuthServer.Generic;
+using API.Requests;
 using CryptoHelper;
-using DomainModel;
+using DomainModel.AuthenticateModels;
+using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -47,21 +44,33 @@ namespace API.Controllers
         /// Registering new user by email and password
         /// POST: api/accounts/post
         /// </summary>
-        /// <param name="user">object of type USER (look at the class USER in the DomainModel project</param>
-        [HttpPost("post")]
-        public ActionResult Post([FromBody] User user)
+        /// <param name="signUpRequest"></param>
+        [HttpPost("SignUp")]
+        [AllowAnonymous]
+        public ActionResult SignUp([FromBody] SignUpRequest signUpRequest)
         {
-            var takenEmailCheck = _unitOfWork.Users.Find(u => u.Email == user.Email).FirstOrDefault();
+            var takenEmailCheck = _unitOfWork.Users.Find(u => u.Email == signUpRequest.Email).FirstOrDefault();
             if (takenEmailCheck != null)
+            {
                 //throw new ArgumentException("This email is already taken.");
                 return BadRequest("Email address is already taken.");
+            }
 
-            user.Password = Crypto.HashPassword(user.Password);
-            user.EmailVerified = false;
-            user.PhoneNumberVerified = false;
-            user.Username = user.Email;
-            user.Active = true;
-            
+            var user = new User
+            {
+                FirstName = signUpRequest.FirstName,
+                LastName = signUpRequest.LastName,
+                DateOfBirth = signUpRequest.DateOfBirth,
+                Password = Crypto.HashPassword(signUpRequest.Password),
+                PhoneNumber = signUpRequest.PhoneNumber,
+                Email = signUpRequest.Email,
+                EmailVerified = false,
+                PhoneNumberVerified = false,
+                Username = signUpRequest.Email,
+                Active = false,
+                SekaniLevelId = 1
+            };
+
             _unitOfWork.Users.Add(user);
             _unitOfWork.Complete();
 
@@ -72,7 +81,7 @@ namespace API.Controllers
                 {
                     this.InitiateEmailVerification(user.Id);
                 }
-                catch (System.Net.Mail.SmtpException ex)
+                catch (System.Net.Mail.SmtpException)
                 {
                     _unitOfWork.Users.Remove(user);
                     _unitOfWork.Complete();
@@ -100,7 +109,9 @@ namespace API.Controllers
 
             var user = _unitOfWork.Users.Get(id);
             if (user == null)
+            {
                 return NotFound();
+            }
 
             user.DateOfBirth = updatedUser.DateOfBirth;
             user.FirstName = updatedUser.FirstName;
@@ -121,7 +132,9 @@ namespace API.Controllers
         {
             var user = _unitOfWork.Users.Find(u => u.Email == emailAddress).FirstOrDefault();
             if (user == null)
+            {
                 return NotFound();
+            }
 
             // generate new password reset token in database
             var token = _unitOfWork.Users.RequestPasswordReset(user.Id);
@@ -133,13 +146,16 @@ namespace API.Controllers
             // send the email
             // TODO: the third argument is the token, you can replace it with a URL that ends with this token,
             // for example: www.yoursite.com/user/1/passwordReset/the_token_here
-         
+
             try
             {
                 EmailSender es = new EmailSender(this._unitOfWork);
-                es.SendEmail(targetEmail, "Password Reset", token.Token);
+                string baseAddress = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
+                string emailVerifyAddress = "/api/Accounts/ResetPasswordPage/";
+                var email = Resource.ResetPasswordTemplate.Replace("{{action_url}}", baseAddress + emailVerifyAddress + token.Token);
+                es.SendEmail(targetEmail, "Password Reset", email);
             }
-            catch (SmtpException ex)
+            catch (SmtpException)
             {
                 return StatusCode(512);
             }
@@ -153,20 +169,37 @@ namespace API.Controllers
         /// </summary>
         /// <param name="vm">an object of type ResetPasswordVM which is defined at the bottom of this page.</param>
         /// <returns>return true if password is successfully updated and false otherwise.</returns>
-        [HttpPut("resetPassword")]
-        public ActionResult ResetPassword([FromBody] ResetPasswordVM vm)
+        [HttpPost("resetPassword")]
+        public ActionResult ResetPassword([FromBody] ResetPasswordVm vm)
         {
-            var user = _unitOfWork.Users.FindByPasswordResetToken(vm.passwordResetToken);
+            var user = _unitOfWork.Users.FindByPasswordResetToken(vm.PasswordResetToken);
             if (user == null)
+            {
                 return NotFound();
-            bool wasPasswordUpdated = _unitOfWork.Users.ResetPassword(user.Id, vm.passwordResetToken, vm.newPassword);
+            }
+
+            bool wasPasswordUpdated = _unitOfWork.Users.ResetPassword(user.Id, vm.PasswordResetToken, vm.NewPassword);
             _unitOfWork.Complete();
             //return Ok(wasPasswordUpdated);
-            if (wasPasswordUpdated) return Ok();
-            else return BadRequest();
+            if (wasPasswordUpdated)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
+        [HttpGet("ResetPasswordPage/{resetPassToken}")]
+        public IActionResult ResetPasswordPage(string resetPassToken)
+        {
+            ViewBag.Token = resetPassToken;
+            ViewBag.baseAddress = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
 
+            return View();
+
+        }
         /// <summary>
         /// Updates user's password given the user provides the correct old (current) password.
         /// PUT: api/accounts/updatePassword
@@ -175,12 +208,18 @@ namespace API.Controllers
         /// <returns>return true if password is successfully updated and false otherwise.</returns>
         [HttpPut("updatePassword")]
         [Authorize]
-        public ActionResult UpdatePassword([FromBody] UpdatePasswordVM vm)
+        public ActionResult UpdatePassword([FromBody] UpdatePasswordVm vm)
         {
-            bool wasPasswordUpdated = _unitOfWork.Users.UpdatePassword(GetCurrentUserId(User), vm.oldPassword, vm.newPassword);
+            bool wasPasswordUpdated = _unitOfWork.Users.UpdatePassword(GetCurrentUserId(User), vm.OldPassword, vm.NewPassword);
             _unitOfWork.Complete();
-            if (wasPasswordUpdated) return Ok();
-            else return BadRequest();
+            if (wasPasswordUpdated)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -190,16 +229,24 @@ namespace API.Controllers
         /// </summary>
         /// <param name="emailVerificationToken">the email verification token</param>
         /// <returns>returns true if the email is verified properly and false otherwise</returns>
-        [HttpPut("verifyEmail/{emailVerificationToken}")]
+        [HttpGet("verifyEmail/{emailVerificationToken}")]
         public ActionResult VerifyEmail(string emailVerificationToken)
         {
             var user = _unitOfWork.Users.FindByEmailVerificationToken(emailVerificationToken);
             if (user == null)
+            {
                 return NotFound();
+            }
+
             bool emailVerified = _unitOfWork.Users.VerifyEmail(user.Id, emailVerificationToken);
             _unitOfWork.Complete();
-            if (emailVerified) return Ok();
-            else return BadRequest();
+
+            if (emailVerified)
+            {
+                return View(user);
+            }
+
+            return BadRequest();
         }
 
 
@@ -212,28 +259,30 @@ namespace API.Controllers
 
             // sending email containing token
             var targetEmail = _unitOfWork.Users.Get(token.UserId).Email;
+            string baseAddress = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
+            string emailVerifyAddress = "/api/Accounts/verifyEmail/";
             var es = new EmailSender(this._unitOfWork);
-            es.SendEmail(targetEmail, "Email Verification Token", token.Token);
+
+           var email= Resource.VerifyEmailTemplate.Replace("{{action_url}}", baseAddress + emailVerifyAddress + token.Token);
+            es.SendEmail(targetEmail, "Email Verification Token", email);
         }
 
-        private int GetCurrentUserId(ClaimsPrincipal User)
+        private int GetCurrentUserId(ClaimsPrincipal user)
         {
-            return int.Parse(User.Identities.FirstOrDefault().Claims.FirstOrDefault(c => c.Type == "sub").Value);
+            return int.Parse(user.Identities.FirstOrDefault()?.Claims.FirstOrDefault(c => c.Type == "sub")?.Value);
         }
 
     }
 
     // ViewModels
-    public class ResetPasswordVM
+    public class ResetPasswordVm
     {
-        public string passwordResetToken { get; set; }
-        public string newPassword { get; set; }
+        public string PasswordResetToken { get; set; }
+        public string NewPassword { get; set; }
     }
-
-
-    public class UpdatePasswordVM
+    public class UpdatePasswordVm
     {
-        public string oldPassword { get; set; }
-        public string newPassword { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }

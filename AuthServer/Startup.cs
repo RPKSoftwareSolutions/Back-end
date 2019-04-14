@@ -14,6 +14,7 @@ using AuthServer.Auth;
 using IdentityServer4.Validation;
 using IdentityServer4.Stores;
 using IdentityServer4.ResponseHandling;
+using Infrastructure;
 
 namespace AuthServer
 {
@@ -27,10 +28,16 @@ namespace AuthServer
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                                .SetBasePath(env.ContentRootPath)
-                                .AddJsonFile("appsettings.json", true, true)
-                                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            if (env.IsDevelopment())
+            {
+                builder.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+            }
+            else
+            {
+                builder.AddJsonFile("appsettings.Relase.json", optional: true, reloadOnChange: true);
+            }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -78,10 +85,10 @@ namespace AuthServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
+            //}
 
             app.UseIdentityServer();
             app.UseCors(options =>

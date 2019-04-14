@@ -1,5 +1,4 @@
 ﻿using API.Helpers;
-using AuthServer.Generic;
 using DomainModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure;
 
 namespace API.Controllers
 {
@@ -69,7 +69,7 @@ namespace API.Controllers
         public ActionResult GetLearntWords(int pageSize = 20, int pageIndex = 1)
         {
             int userId = UserHelper.GetCurrentUserId(User);
-            var items = _unitOfWork.UserLearntWords.Find(x => x.UserId == userId);
+            var items = _unitOfWork.UserLearnedWords.Find(x => x.UserId == userId);
 
             var count = items.Count();
 
@@ -125,18 +125,18 @@ namespace API.Controllers
             }
 
             // if a learnt record for this word already exists, we don't need to do anything. 
-            var learntRecord = _unitOfWork.UserLearntWords
+            var learntRecord = _unitOfWork.UserLearnedWords
                                 .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
 
             if (learntRecord == null)
             {
-                var record = new UserLearntWord()
+                var record = new UserLearnedWord()
                 {
                     SekaniWordId = sekaniWordId,
                     UserId = UserHelper.GetCurrentUserId(User),
                     UpdateTime = DateTime.Now
                 };
-                _unitOfWork.UserLearntWords.Add(record);
+                _unitOfWork.UserLearnedWords.Add(record);
                 _unitOfWork.Complete();
                 return Ok(record.Id);
             }
@@ -151,11 +151,11 @@ namespace API.Controllers
         public ActionResult PostFailedWord(int sekaniWordId)
         {
             // if the word is marked as "learnt" before, that has to be removed first.
-            var learntRecord = _unitOfWork.UserLearntWords
+            var learntRecord = _unitOfWork.UserLearnedWords
                                 .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
             if (learntRecord != null)
             {
-                _unitOfWork.UserLearntWords.Remove(learntRecord);
+                _unitOfWork.UserLearnedWords.Remove(learntRecord);
             }
 
             // if a failed record for this word already exists, we don't need to do anything. 
@@ -184,13 +184,13 @@ namespace API.Controllers
         [HttpDelete("learntWords/delete/{sekaniWordId}")]
         public ActionResult DeleteLearntWord(int sekaniWordId)
         {
-            var learntWord = _unitOfWork.UserLearntWords
+            var learntWord = _unitOfWork.UserLearnedWords
                                 .Find(x => x.UserId == UserHelper.GetCurrentUserId(User) && x.SekaniWordId == sekaniWordId).FirstOrDefault();
 
             if (learntWord == null)
                 return NotFound("Record was not found.");
 
-            _unitOfWork.UserLearntWords.Remove(learntWord);
+            _unitOfWork.UserLearnedWords.Remove(learntWord);
             _unitOfWork.Complete();
             return Ok(learntWord.Id);
         }
