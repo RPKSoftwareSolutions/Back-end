@@ -5467,7 +5467,7 @@
       },
       "DomainModel/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
+        "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "IdentityServer4": "2.4.0"
         },
