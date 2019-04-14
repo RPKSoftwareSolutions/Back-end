@@ -1,5 +1,4 @@
-﻿using AuthServer.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using DomainModel;
+using DomainModel.TKDModels;
+using Infrastructure;
 
 namespace API.Controllers
 {
@@ -64,7 +65,7 @@ namespace API.Controllers
                         var rec = _unitOfWork.SekaniRoots_EnglishWords.Find(x => x.SekaniRootId == SekaniRootId && x.EnglishWordId == engwId).Count();
                         if (rec == 0)
                         {
-                            SekaniRoot_EnglishWord srew = new SekaniRoot_EnglishWord()
+                            SekaniRootEnglishWord srew = new SekaniRootEnglishWord()
                             {
                                 SekaniRootId = SekaniRootId,
                                 EnglishWordId = engwId,
@@ -92,7 +93,7 @@ namespace API.Controllers
                         var rec = _unitOfWork.SekaniRoots_Topics.Find(x => x.SekaniRootId == SekaniRootId && x.TopicId == tId).Count();
                         if (rec == 0)
                         {
-                            SekaniRoot_Topic srt = new SekaniRoot_Topic()
+                            SekaniRootTopic srt = new SekaniRootTopic()
                             {
                                 SekaniRootId = SekaniRootId,
                                 TopicId = tId,

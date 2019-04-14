@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
-using AuthServer.Uow;
+using Infrastructure;
+using PersistedGrant = DomainModel.AuthenticateModels.PersistedGrant;
 
 namespace AuthServer.Auth
 {
@@ -76,7 +77,7 @@ namespace AuthServer.Auth
 
             
 
-            uow.PersistedGrants.Add(new DomainModel.PersistedGrant()
+            uow.PersistedGrants.Add(new PersistedGrant()
             {
                 ClientId = grant.ClientId,
                 CreationTime = grant.CreationTime,

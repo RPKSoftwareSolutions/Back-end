@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace API.Helpers
 {
     public static class UserHelper
     {
-        public static int GetCurrentUserId(ClaimsPrincipal User)
+        public static int GetCurrentUserId(ClaimsPrincipal user)
         {
-            return int.Parse(User.Identities.FirstOrDefault().Claims.FirstOrDefault(c => c.Type == "sub").Value);
+            return int.Parse(user.Identities.First().Claims.First(c => c.Type == "sub").Value);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using AuthServer.Generic;
-using DomainModel;
+﻿using DomainModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
+using Infrastructure;
 using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers

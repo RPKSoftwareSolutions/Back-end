@@ -1,5 +1,4 @@
 ﻿using API.Helpers;
-using AuthServer.Generic;
 using DomainModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 using System.Threading.Tasks;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
@@ -123,7 +123,7 @@ namespace API.Controllers
             int counter = 0;
             foreach(int eid in model.EnglishWordIds)
             {
-                var item = new SekaniRoot_EnglishWord()
+                var item = new SekaniRootEnglishWord()
                 {
                     SekaniRootId = model.SekaniRootId,
                     EnglishWordId = eid,
@@ -175,7 +175,7 @@ namespace API.Controllers
             int counter = 0;
             foreach(int eid in model.TopicIds)
             {
-                var item = new SekaniRoot_Topic()
+                var item = new SekaniRootTopic()
                 {
                     SekaniRootId = model.SekaniRootId,
                     TopicId = eid,

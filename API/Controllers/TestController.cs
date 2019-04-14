@@ -1,5 +1,4 @@
-﻿using AuthServer.Generic;
-using IdentityServer4.Models;
+﻿using IdentityServer4.Models;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CryptoHelper;
+using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers

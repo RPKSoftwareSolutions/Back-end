@@ -1,5 +1,5 @@
-D:\TKD\Back-end\Back-end\API
+C:\Projects\SekaniServer\API
 --output-path=obj\Release\netcoreapp2.0\
 --application-name=API
---content-root=D:\TKD\Back-end\Back-end\API
+--content-root=C:\Projects\SekaniServer\API
 --file=

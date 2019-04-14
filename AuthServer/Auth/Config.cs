@@ -23,8 +23,6 @@ namespace AuthServer.Auth
             {
                 new Client
                 {
-                    // This client will be used for authenticating by username & password
-
                     ClientId = "resourceOwner",
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets =
@@ -35,8 +33,7 @@ namespace AuthServer.Auth
                         "offline_access",
                         "api1"
                     },
-                    AllowOfflineAccess = true,
-                    
+                    AllowOfflineAccess = true,                   
                     AccessTokenLifetime = 3600,
                     AllowedCorsOrigins = new List<string>
                     {
@@ -46,59 +43,6 @@ namespace AuthServer.Auth
                     RefreshTokenExpiration = TokenExpiration.Sliding,
                     UpdateAccessTokenClaimsOnRefresh = true,
                     SlidingRefreshTokenLifetime = 1296000,
-                    Enabled = true
-                },
-                new Client
-                {
-                    // This client will be used for authenticating by social logins (Google and Facebook)
-
-                    ClientId = "social",
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedGrantTypes = { "googleAuth", "facebookAuth" },
-
-                    AllowedScopes =
-                    {
-                       "offline_access",
-                        "api1"
-                    },
-                    AllowOfflineAccess = true,
-                    AccessTokenLifetime = 3600,
-                    AllowedCorsOrigins = new List<string>
-                    {
-                        // add the origin URLs of your requesting apps here (only if you're developing web app)
-                        "http://localhost:4200/"
-                    },
-                    RefreshTokenExpiration = TokenExpiration.Sliding,
-                    UpdateAccessTokenClaimsOnRefresh = true,
-                    SlidingRefreshTokenLifetime = 1296000,
-                    Enabled = true
-                },
-                
-                new Client
-                {
-                    ClientId = "x",
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes =
-                    {
-                        "offline_access",
-                        "api1"
-                    },
-                    AllowOfflineAccess = true,
-                    AccessTokenLifetime = 3600,
-                    AllowedCorsOrigins = new List<string>
-                    {
-                        "http://localhost:4200/"
-                    },
-                    RefreshTokenExpiration = TokenExpiration.Sliding,
-                    UpdateAccessTokenClaimsOnRefresh = true,
-                    SlidingRefreshTokenLifetime = 129600,
                     Enabled = true
                 }
             };

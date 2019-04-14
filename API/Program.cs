@@ -20,9 +20,7 @@ namespace API
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel(option => {
-                    option.Limits.MaxRequestBodySize = 2147483648;
-                })
+                .UseKestrel()
                 .UseUrls("http://localhost:5001")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()

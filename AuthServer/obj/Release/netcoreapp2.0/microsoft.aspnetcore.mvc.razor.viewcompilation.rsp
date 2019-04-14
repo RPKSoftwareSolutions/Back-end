@@ -1,5 +1,5 @@
-D:\TKD\Back-end\Back-end\AuthServer
+C:\Projects\SekaniServer\AuthServer
 --output-path=obj\Release\netcoreapp2.0\
 --application-name=AuthServer
---content-root=D:\TKD\Back-end\Back-end\AuthServer
+--content-root=C:\Projects\SekaniServer\AuthServer
 --file=
