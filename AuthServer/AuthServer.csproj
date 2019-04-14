@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20180404185823_final_revision_1.cs" />
     <Compile Remove="Migrations\20180404185823_final_revision_1.Designer.cs" />
     <Compile Remove="Migrations\20180404202732_startover.cs" />
@@ -15,10 +22,6 @@
     <Compile Remove="Migrations\20180404210519_startover.Designer.cs" />
     <Compile Remove="Migrations\20180404211746_startover.cs" />
     <Compile Remove="Migrations\20180404211746_startover.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
