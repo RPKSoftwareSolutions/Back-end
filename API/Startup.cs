@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
 using AutoMapper;
 using TKD.Framework.ExceptionHandler;
+using TKD.Framework.Swagger;
 using TKD.Infrastructure;
 
 namespace API
@@ -24,10 +25,6 @@ namespace API
             {
                 builder.AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
             }
-            else
-            {
-                builder.AddJsonFile("appsettings.Relase.json", optional: true, reloadOnChange: true);
-            }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -37,15 +34,13 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-           
 
             services.AddMvc();
             services.AddAutoMapper();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddAuthentication("Bearer")
@@ -79,11 +74,15 @@ namespace API
                 });
 
                 c.AddSecurityRequirement(security);
+
+                c.OperationFilter<FormFileSwaggerFilter>();
             });
 
 
-
-            var dbContext = (AppDbContext)services.BuildServiceProvider().GetService(typeof(AppDbContext));
+            //InitDatabase
+            var dbContext = (AppDbContext)services
+                .BuildServiceProvider()
+                .GetService(typeof(AppDbContext));
             dbContext.Database.Migrate();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

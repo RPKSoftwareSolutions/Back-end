@@ -5819,17 +5819,17 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "TKD.DomainModel/1.0.0": {
+      "TKD.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "IdentityServer4": "2.4.0"
         },
         "compile": {
-          "bin/placeholder/TKD.DomainModel.dll": {}
+          "bin/placeholder/TKD.Domain.dll": {}
         },
         "runtime": {
-          "bin/placeholder/TKD.DomainModel.dll": {}
+          "bin/placeholder/TKD.Domain.dll": {}
         }
       },
       "TKD.Framework.Core/1.0.0": {
@@ -5858,6 +5858,19 @@
           "bin/placeholder/TKD.Framework.ExceptionHandler.dll": {}
         }
       },
+      "TKD.Framework.Swagger/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0"
+        },
+        "compile": {
+          "bin/placeholder/TKD.Framework.Swagger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TKD.Framework.Swagger.dll": {}
+        }
+      },
       "TKD.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -5868,7 +5881,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "2.2.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.4",
           "Microsoft.Extensions.Configuration.Json": "2.2.0",
-          "TKD.DomainModel": "1.0.0",
+          "TKD.Domain": "1.0.0",
           "TKD.Framework.Core": "1.0.0"
         },
         "compile": {
@@ -15500,10 +15513,10 @@
         "windowsazure.storage.nuspec"
       ]
     },
-    "TKD.DomainModel/1.0.0": {
+    "TKD.Domain/1.0.0": {
       "type": "project",
-      "path": "../DomainModel/TKD.DomainModel.csproj",
-      "msbuildProject": "../DomainModel/TKD.DomainModel.csproj"
+      "path": "../DomainModel/TKD.Domain.csproj",
+      "msbuildProject": "../DomainModel/TKD.Domain.csproj"
     },
     "TKD.Framework.Core/1.0.0": {
       "type": "project",
@@ -15514,6 +15527,11 @@
       "type": "project",
       "path": "../TKD.Framework.ExceptionHandler/TKD.Framework.ExceptionHandler.csproj",
       "msbuildProject": "../TKD.Framework.ExceptionHandler/TKD.Framework.ExceptionHandler.csproj"
+    },
+    "TKD.Framework.Swagger/1.0.0": {
+      "type": "project",
+      "path": "../TKD.Freamework.Swagger/TKD.Framework.Swagger.csproj",
+      "msbuildProject": "../TKD.Freamework.Swagger/TKD.Framework.Swagger.csproj"
     },
     "TKD.Infrastructure/1.0.0": {
       "type": "project",
@@ -15537,8 +15555,9 @@
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
       "Swashbuckle.AspNetCore >= 4.0.1",
-      "TKD.DomainModel >= 1.0.0",
+      "TKD.Domain >= 1.0.0",
       "TKD.Framework.ExceptionHandler >= 1.0.0",
+      "TKD.Framework.Swagger >= 1.0.0",
       "TKD.Infrastructure >= 1.0.0",
       "TKD.ReadModel.Contract >= 1.0.0"
     ]
@@ -15573,14 +15592,17 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.DomainModel.csproj": {
-              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.DomainModel.csproj"
+            "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.Domain.csproj": {
+              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.Domain.csproj"
             },
             "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\TKD.Infrastructure.csproj": {
               "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\TKD.Infrastructure.csproj"
             },
             "D:\\Projects\\SekaniDic\\Back-end\\TKD.Framework.ExceptionHandler\\TKD.Framework.ExceptionHandler.csproj": {
               "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\TKD.Framework.ExceptionHandler\\TKD.Framework.ExceptionHandler.csproj"
+            },
+            "D:\\Projects\\SekaniDic\\Back-end\\TKD.Freamework.Swagger\\TKD.Framework.Swagger.csproj": {
+              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\TKD.Freamework.Swagger\\TKD.Framework.Swagger.csproj"
             },
             "D:\\Projects\\SekaniDic\\Back-end\\TKD.ReadModel.Contract\\TKD.ReadModel.Contract.csproj": {
               "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\TKD.ReadModel.Contract\\TKD.ReadModel.Contract.csproj"

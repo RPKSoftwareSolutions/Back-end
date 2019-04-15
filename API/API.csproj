@@ -20,9 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DomainModel\TKD.DomainModel.csproj" />
+    <ProjectReference Include="..\DomainModel\TKD.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure\TKD.Infrastructure.csproj" />
     <ProjectReference Include="..\TKD.Framework.ExceptionHandler\TKD.Framework.ExceptionHandler.csproj" />
+    <ProjectReference Include="..\TKD.Freamework.Swagger\TKD.Framework.Swagger.csproj" />
     <ProjectReference Include="..\TKD.ReadModel.Contract\TKD.ReadModel.Contract.csproj" />
   </ItemGroup>
 

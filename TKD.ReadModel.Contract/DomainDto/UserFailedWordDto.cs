@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TKD.ReadModel.Contract
+namespace TKD.ReadModel.Contract.DomainDto
 {
     public class UserFailedWordDto
     {

@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 
-namespace TKD.ReadModel.Contract
+namespace TKD.ReadModel.Contract.DomainDto
 {
-    
-    public class TopicDto
+    public class SekaniFormDto
     {
-
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -16,8 +11,6 @@ namespace TKD.ReadModel.Contract
         public string Notes { get; set; }
 
         public DateTime UpdateTime { get; set; }
-
-        
 
     }
 }

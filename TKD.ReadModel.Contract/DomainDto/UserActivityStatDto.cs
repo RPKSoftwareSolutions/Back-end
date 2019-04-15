@@ -1,8 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TKD.ReadModel.Contract
+namespace TKD.ReadModel.Contract.DomainDto
 {
     public class UserActivityStatDto
     {

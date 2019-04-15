@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 
-namespace TKD.ReadModel.Contract
+namespace TKD.ReadModel.Contract.DomainDto
 {
     public class EnglishWordDto
     {
