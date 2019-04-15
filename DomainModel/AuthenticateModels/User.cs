@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TKD.DomainModel.TKDModels;
 
-namespace DomainModel.AuthenticateModels
+namespace TKD.DomainModel.AuthenticateModels
 {
     public class User
     {

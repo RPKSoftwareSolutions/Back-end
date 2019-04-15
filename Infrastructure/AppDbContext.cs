@@ -1,9 +1,8 @@
-﻿using DomainModel;
-using DomainModel.AuthenticateModels;
-using DomainModel.TKDModels;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.DomainModel.TKDModels;
 
-namespace Infrastructure
+namespace TKD.Infrastructure
 {
     public class AppDbContext: DbContext
     {
@@ -57,8 +56,8 @@ namespace Infrastructure
         public DbSet<SekaniWordExample> SekaniWordExamples { get; set; }
         public DbSet<SekaniWordAttribute> SekaniWordAttributes { get; set; }
         public DbSet<SekaniWordExampleAudio> SekaniWordExampleAudios { get; set; }
-        public DbSet<SekaniRootEnglishWord> SekaniRoots_EnglishWords { get; set; }
-        public DbSet<SekaniRootTopic> SekaniRoots_Topics { get; set; }
+        public DbSet<SekaniRootEnglishWord> SekaniRootsEnglishWords { get; set; }
+        public DbSet<SekaniRootTopic> SekaniRootsTopics { get; set; }
         public DbSet<UserActivityStat> UserActivityStats { get; set; }
         public DbSet<UserLearnedWord> UserLearnedWords { get; set; }
         public DbSet<UserFailedWord> UserFailedWords { get; set; }

@@ -1,5 +1,4 @@
 ﻿using API.Helpers;
-using DomainModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DomainModel.TKDModels;
 using Infrastructure;
+using TKD.DomainModel.TKDModels;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {
@@ -63,7 +63,7 @@ namespace API.Controllers
         [HttpGet("getSekaniRoots/{id}")]
         public ActionResult GetSekaniRoots(int id)
         {
-            var ids = this._unitOfWork.SekaniRoots_EnglishWords.Find(i => i.EnglishWordId == id).Select(i => i.SekaniRootId).ToList();
+            var ids = this._unitOfWork.SekaniRootsEnglishWords.Find(i => i.EnglishWordId == id).Select(i => i.SekaniRootId).ToList();
             var items = this._unitOfWork.SekaniRoots.Find(i => ids.Contains(i.Id))
                         .OrderBy(i => i.Id)
                         .Select(i => new
@@ -85,9 +85,9 @@ namespace API.Controllers
         [HttpPost("removeSekaniRoots")]
         public ActionResult RemoveSekaniRoots([FromBody] AddRemoveSekaniRootsModel model)
         {
-            var r = this._unitOfWork.SekaniRoots_EnglishWords.Find(i => i.EnglishWordId == model.EnglishWordId
+            var r = this._unitOfWork.SekaniRootsEnglishWords.Find(i => i.EnglishWordId == model.EnglishWordId
                                         && model.SekaniRootIds.Contains(i.SekaniRootId));
-            this._unitOfWork.SekaniRoots_EnglishWords.RemoveRange(r);
+            this._unitOfWork.SekaniRootsEnglishWords.RemoveRange(r);
             this._unitOfWork.Complete();
             return Ok(r.Count());
         }
@@ -104,7 +104,7 @@ namespace API.Controllers
                     EnglishWordId = model.EnglishWordId,
                     UpdateTime = DateTime.Now
                 };
-                this._unitOfWork.SekaniRoots_EnglishWords.Add(item);
+                this._unitOfWork.SekaniRootsEnglishWords.Add(item);
                 try
                 {
                     this._unitOfWork.Complete();

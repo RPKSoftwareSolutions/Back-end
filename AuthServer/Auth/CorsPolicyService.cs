@@ -1,11 +1,12 @@
-﻿using DomainModel;
+﻿
 using IdentityServer4.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DomainModel.AuthenticateModels;
 using Infrastructure;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.Infrastructure;
 
 namespace AuthServer.Auth
 {

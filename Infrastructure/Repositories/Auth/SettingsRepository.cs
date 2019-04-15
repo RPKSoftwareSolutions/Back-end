@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using DomainModel.AuthenticateModels;
-using DomainModel.OfflineModels;
-using Infrastructure.RepoInterfaces.Auth;
+﻿using TKD.DomainModel.AuthenticateModels;
+using TKD.DomainModel.OfflineModels;
+using TKD.Infrastructure.RepoInterfaces.Auth;
 
-namespace Infrastructure.Repositories.Auth
+namespace TKD.Infrastructure.Repositories.Auth
 {
     public class SettingsRepository : Repository<Setting>, ISettingsRepository
     {

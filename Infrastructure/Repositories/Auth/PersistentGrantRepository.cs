@@ -1,8 +1,8 @@
-﻿using DomainModel.AuthenticateModels;
-using Infrastructure.RepoInterfaces.Auth;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.Infrastructure.RepoInterfaces.Auth;
 
-namespace Infrastructure.Repositories.Auth
+namespace TKD.Infrastructure.Repositories.Auth
 {
     public class PersistentGrantRepository : Repository<PersistedGrant>, IPersistedGrantRepository
     {

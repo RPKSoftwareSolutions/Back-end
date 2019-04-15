@@ -1,4 +1,4 @@
-﻿using Infrastructure;
+﻿using API.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
+using AutoMapper;
+using TKD.Framework.ExceptionHandler;
+using TKD.Infrastructure;
 
 namespace API
 {
@@ -34,9 +37,16 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
+
             services.AddMvc();
-            services.AddCors();
+            services.AddAutoMapper();
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
 
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
@@ -46,30 +56,32 @@ namespace API
                     options.ApiName = "api1";
                 });
 
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(connectionString)
-            );
+
+
+
+            //swagger
 
             services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new Info { Title = "TKD API", Version = "v1" });
-
-            var security = new Dictionary<string, IEnumerable<string>>
             {
-                    {"Bearer", new string[] { }}
-            };
+                c.SwaggerDoc("v1", new Info { Title = "TKD API", Version = "v1" });
 
-            c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-            {
-                Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                Name = "Authorization",
-                In = "header",
-                Type = "apiKey"
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                       {"Bearer", new string[] { }}
+                };
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+
+                c.AddSecurityRequirement(security);
             });
 
-            c.AddSecurityRequirement(security);
-        });
+
 
             var dbContext = (AppDbContext)services.BuildServiceProvider().GetService(typeof(AppDbContext));
             dbContext.Database.Migrate();
@@ -78,10 +90,14 @@ namespace API
         {
 
 
-            //if (env.IsDevelopment())
-            //{
-            app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseCustomUseExceptionHandler();
+            }
             app.UseAuthentication();
             app.UseCors(options =>
             {

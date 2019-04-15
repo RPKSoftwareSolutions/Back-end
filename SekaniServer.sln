@@ -5,13 +5,25 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer\AuthServer.csproj", "{BE9F8237-C98E-42E0-A81C-4C482BC2745D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModel", "DomainModel\DomainModel.csproj", "{1B72BEDA-2716-4218-93E5-12E9B72963A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.DomainModel", "DomainModel\TKD.DomainModel.csproj", "{1B72BEDA-2716-4218-93E5-12E9B72963A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Core", "Freamework.Core\Framework.Core.csproj", "{49E8C7F6-9A4F-4752-BB56-5913DFBC88FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.Framework.Core", "Freamework.Core\TKD.Framework.Core.csproj", "{49E8C7F6-9A4F-4752-BB56-5913DFBC88FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{F152035B-3AED-4D86-BC96-535B5D670F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.Infrastructure", "Infrastructure\TKD.Infrastructure.csproj", "{F152035B-3AED-4D86-BC96-535B5D670F9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{9C3D66A5-BE99-42F0-91FE-4D048F117687}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.ApplicationService.Contract", "TKD.ApplicationService.Contract\TKD.ApplicationService.Contract.csproj", "{21FCC291-87B2-4B39-B077-504FDC888B2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.ApplicationService", "TKD.ApplicationService\TKD.ApplicationService.csproj", "{47A2EB1D-3C48-4FF1-A755-010630EB9978}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{26BFB1FF-F3CB-4BF5-8402-DA7E602A0126}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.Framework.ExceptionHandler", "TKD.Framework.ExceptionHandler\TKD.Framework.ExceptionHandler.csproj", "{E449867B-F80E-45F1-9418-EEAF905523CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.ReadModel.Contract", "TKD.ReadModel.Contract\TKD.ReadModel.Contract.csproj", "{49A829BF-D6F1-4FCC-B97C-E9A95D226920}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +51,31 @@ Global
 		{F152035B-3AED-4D86-BC96-535B5D670F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F152035B-3AED-4D86-BC96-535B5D670F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F152035B-3AED-4D86-BC96-535B5D670F9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21FCC291-87B2-4B39-B077-504FDC888B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21FCC291-87B2-4B39-B077-504FDC888B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21FCC291-87B2-4B39-B077-504FDC888B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21FCC291-87B2-4B39-B077-504FDC888B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A2EB1D-3C48-4FF1-A755-010630EB9978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A2EB1D-3C48-4FF1-A755-010630EB9978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A2EB1D-3C48-4FF1-A755-010630EB9978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A2EB1D-3C48-4FF1-A755-010630EB9978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E449867B-F80E-45F1-9418-EEAF905523CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E449867B-F80E-45F1-9418-EEAF905523CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E449867B-F80E-45F1-9418-EEAF905523CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E449867B-F80E-45F1-9418-EEAF905523CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A829BF-D6F1-4FCC-B97C-E9A95D226920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A829BF-D6F1-4FCC-B97C-E9A95D226920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A829BF-D6F1-4FCC-B97C-E9A95D226920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A829BF-D6F1-4FCC-B97C-E9A95D226920}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE9F8237-C98E-42E0-A81C-4C482BC2745D} = {9C3D66A5-BE99-42F0-91FE-4D048F117687}
+		{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5} = {9C3D66A5-BE99-42F0-91FE-4D048F117687}
+		{49E8C7F6-9A4F-4752-BB56-5913DFBC88FF} = {26BFB1FF-F3CB-4BF5-8402-DA7E602A0126}
+		{E449867B-F80E-45F1-9418-EEAF905523CF} = {26BFB1FF-F3CB-4BF5-8402-DA7E602A0126}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49CA4813-9A82-4C28-BFF2-FD8EDEDC24AF}

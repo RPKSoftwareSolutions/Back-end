@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DomainModel.AuthenticateModels;
-using Infrastructure.RepoInterfaces.Auth;
-using Client = DomainModel.AuthenticateModels.Client;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.Infrastructure.RepoInterfaces.Auth;
+using Client = TKD.DomainModel.AuthenticateModels.Client;
 
-namespace Infrastructure.Repositories.Auth
+namespace TKD.Infrastructure.Repositories.Auth
 {
     public class ClientRepository : Repository<Client>, IClientRepository
     {

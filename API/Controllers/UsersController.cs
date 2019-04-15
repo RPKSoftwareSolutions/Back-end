@@ -1,13 +1,14 @@
 ﻿using API.Helpers;
-using DomainModel;
+
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CryptoHelper;
-using DomainModel.AuthenticateModels;
 using Infrastructure;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace DomainModel
+namespace TKD.DomainModel.TKDModels
 {
     
     public class Topic

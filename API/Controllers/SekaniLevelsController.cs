@@ -1,4 +1,4 @@
-﻿using DomainModel;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using API.Helpers;
 using Infrastructure;
 using Microsoft.AspNetCore.Http;
+using TKD.DomainModel.TKDModels;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {

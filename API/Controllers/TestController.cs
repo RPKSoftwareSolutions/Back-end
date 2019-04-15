@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CryptoHelper;
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {

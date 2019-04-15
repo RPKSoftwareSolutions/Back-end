@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using DomainModel.AuthenticateModels;
 using Framework.Core;
-using Client = DomainModel.AuthenticateModels.Client;
+using TKD.DomainModel.AuthenticateModels;
+using Client = TKD.DomainModel.AuthenticateModels.Client;
 
-namespace Infrastructure.RepoInterfaces.Auth
+namespace TKD.Infrastructure.RepoInterfaces.Auth
 {
     public interface IClientRepository: IRepository<Client>
     {

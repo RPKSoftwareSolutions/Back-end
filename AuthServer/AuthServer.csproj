@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Infrastructure\TKD.Infrastructure.csproj" />
   </ItemGroup>
 
   <!--<ItemGroup>

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace DomainModel.AuthenticateModels
+namespace TKD.DomainModel.AuthenticateModels
 {
     public class UserSession
     {

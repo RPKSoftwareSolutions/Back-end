@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IdentityServer4.Models;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+using IdentityServer4.Models;
 
-namespace DomainModel.AuthenticateModels
+namespace TKD.DomainModel.AuthenticateModels
 {
     public class ClientSecret: Secret
     {
