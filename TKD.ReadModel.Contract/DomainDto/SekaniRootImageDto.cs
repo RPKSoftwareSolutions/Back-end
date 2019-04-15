@@ -1,15 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TKD.ReadModel.Contract
+namespace TKD.ReadModel.Contract.DomainDto
 {
-    public class SekaniWordAudioDto
+    public class SekaniRootImageDto
     {
-
         public int Id { get; set; }
 
-        public int SekaniWordId { get; set; }
+        public int SekaniRootId { get; set; }
 
         public byte[] Content { get; set; }
 
@@ -19,6 +16,6 @@ namespace TKD.ReadModel.Contract
 
         public DateTime UpdateTime { get; set; }
 
-       
+
     }
 }

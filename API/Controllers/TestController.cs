@@ -12,7 +12,7 @@ using TKD.Infrastructure;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class TestController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

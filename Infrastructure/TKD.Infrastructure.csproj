@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DomainModel\TKD.DomainModel.csproj" />
+    <ProjectReference Include="..\DomainModel\TKD.Domain.csproj" />
     <ProjectReference Include="..\Freamework.Core\TKD.Framework.Core.csproj" />
   </ItemGroup>
 

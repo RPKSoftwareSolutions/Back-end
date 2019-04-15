@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using TKD.DomainModel.TKDModels;
-using TKD.ReadModel.Contract;
+using TKD.ReadModel.Contract.DomainDto;
 
 namespace API.Config
 {
@@ -21,7 +21,7 @@ namespace API.Config
             CreateMap<SekaniRootEnglishWord, SekaniRootEnglishWordDto>().ReverseMap();
 
             CreateMap<SekaniRootImage, SekaniRootImageDto>().ReverseMap();
-        
+
             CreateMap<SekaniRootTopic, SekaniRootTopicDto>().ReverseMap();
 
             CreateMap<SekaniWordAttribute, SekaniWordAttributeDto>().ReverseMap();

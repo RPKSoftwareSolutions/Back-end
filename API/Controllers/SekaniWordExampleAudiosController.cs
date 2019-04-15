@@ -14,7 +14,7 @@ using TKD.Infrastructure;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [Authorize]
     public class SekaniWordExampleAudiosController: Controller
     {

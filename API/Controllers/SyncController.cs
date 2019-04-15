@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using TKD.Infrastructure;
 using TKD.ReadModel.Contract;
+using TKD.ReadModel.Contract.DomainDto;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class SyncController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

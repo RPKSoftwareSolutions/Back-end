@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer\AuthServer.csproj", "{BE9F8237-C98E-42E0-A81C-4C482BC2745D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.DomainModel", "DomainModel\TKD.DomainModel.csproj", "{1B72BEDA-2716-4218-93E5-12E9B72963A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.Domain", "DomainModel\TKD.Domain.csproj", "{1B72BEDA-2716-4218-93E5-12E9B72963A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.Framework.ExceptionHandler", "TKD.Framework.ExceptionHandler\TKD.Framework.ExceptionHandler.csproj", "{E449867B-F80E-45F1-9418-EEAF905523CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.ReadModel.Contract", "TKD.ReadModel.Contract\TKD.ReadModel.Contract.csproj", "{49A829BF-D6F1-4FCC-B97C-E9A95D226920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TKD.Framework.Swagger", "TKD.Freamework.Swagger\TKD.Framework.Swagger.csproj", "{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{49A829BF-D6F1-4FCC-B97C-E9A95D226920}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49A829BF-D6F1-4FCC-B97C-E9A95D226920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49A829BF-D6F1-4FCC-B97C-E9A95D226920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{4ED1C316-699C-4F6F-93CD-E22CCFFFC2C5} = {9C3D66A5-BE99-42F0-91FE-4D048F117687}
 		{49E8C7F6-9A4F-4752-BB56-5913DFBC88FF} = {26BFB1FF-F3CB-4BF5-8402-DA7E602A0126}
 		{E449867B-F80E-45F1-9418-EEAF905523CF} = {26BFB1FF-F3CB-4BF5-8402-DA7E602A0126}
+		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF} = {26BFB1FF-F3CB-4BF5-8402-DA7E602A0126}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49CA4813-9A82-4C28-BFF2-FD8EDEDC24AF}
