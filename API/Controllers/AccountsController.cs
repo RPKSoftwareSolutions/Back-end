@@ -1,13 +1,14 @@
 ﻿using API.Helpers;
 using API.Requests;
 using CryptoHelper;
-using DomainModel.AuthenticateModels;
 using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Claims;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {

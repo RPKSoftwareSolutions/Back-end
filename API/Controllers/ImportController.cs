@@ -5,9 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json.Linq;
-using DomainModel;
-using DomainModel.TKDModels;
+
 using Infrastructure;
+using TKD.DomainModel.TKDModels;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {
@@ -62,7 +63,7 @@ namespace API.Controllers
                     // insert SekaniRoot_EnglishWords records.
                     foreach (int engwId in EnglishWordIds)
                     {
-                        var rec = _unitOfWork.SekaniRoots_EnglishWords.Find(x => x.SekaniRootId == SekaniRootId && x.EnglishWordId == engwId).Count();
+                        var rec = _unitOfWork.SekaniRootsEnglishWords.Find(x => x.SekaniRootId == SekaniRootId && x.EnglishWordId == engwId).Count();
                         if (rec == 0)
                         {
                             SekaniRootEnglishWord srew = new SekaniRootEnglishWord()
@@ -71,7 +72,7 @@ namespace API.Controllers
                                 EnglishWordId = engwId,
                                 UpdateTime = DateTime.Now,
                             };
-                            _unitOfWork.SekaniRoots_EnglishWords.Add(srew);
+                            _unitOfWork.SekaniRootsEnglishWords.Add(srew);
                             _unitOfWork.Complete();
                         }
                     }
@@ -90,7 +91,7 @@ namespace API.Controllers
                     // insert SekaniRoot_Topics records
                     foreach (int tId in TopicIds)
                     {
-                        var rec = _unitOfWork.SekaniRoots_Topics.Find(x => x.SekaniRootId == SekaniRootId && x.TopicId == tId).Count();
+                        var rec = _unitOfWork.SekaniRootsTopics.Find(x => x.SekaniRootId == SekaniRootId && x.TopicId == tId).Count();
                         if (rec == 0)
                         {
                             SekaniRootTopic srt = new SekaniRootTopic()
@@ -99,7 +100,7 @@ namespace API.Controllers
                                 TopicId = tId,
                                 UpdateTime = DateTime.Now
                             };
-                            _unitOfWork.SekaniRoots_Topics.Add(srt);
+                            _unitOfWork.SekaniRootsTopics.Add(srt);
                             _unitOfWork.Complete();
                         }
                     }

@@ -1,9 +1,10 @@
-﻿using DomainModel;
-using Infrastructure.RepoInterfaces;
+﻿
+using TKD.DomainModel.TKDModels;
+using TKD.Infrastructure.RepoInterfaces;
 
-namespace Infrastructure.Repositories
+namespace TKD.Infrastructure.Repositories
 {
-    public class SekaniRootEnglishWordRepository: Repository<SekaniRootEnglishWord>, ISekaniRoot_EnglishWordRepository
+    public class SekaniRootEnglishWordRepository: Repository<SekaniRootEnglishWord>, ISekaniRootEnglishWordRepository
     {
         public SekaniRootEnglishWordRepository(AppDbContext context) : base(context) { }
 

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using DomainModel.AuthenticateModels;
 using Framework.Core;
+using TKD.DomainModel.AuthenticateModels;
 
-namespace Infrastructure.RepoInterfaces.Auth
+namespace TKD.Infrastructure.RepoInterfaces.Auth
 {
     public interface IAccountRepository: IRepository<User>
     {

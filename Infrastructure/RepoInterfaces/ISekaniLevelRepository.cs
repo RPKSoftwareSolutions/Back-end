@@ -1,7 +1,7 @@
-﻿using DomainModel;
-using Framework.Core;
+﻿using Framework.Core;
+using TKD.DomainModel.TKDModels;
 
-namespace Infrastructure.RepoInterfaces
+namespace TKD.Infrastructure.RepoInterfaces
 {
     public interface ISekaniLevelRepository: IRepository<SekaniLevel>
     {

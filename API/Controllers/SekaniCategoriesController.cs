@@ -1,5 +1,5 @@
 ﻿using API.Helpers;
-using DomainModel;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Infrastructure;
+using TKD.DomainModel.TKDModels;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {

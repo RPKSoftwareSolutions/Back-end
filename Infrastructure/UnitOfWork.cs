@@ -1,9 +1,10 @@
-﻿using Infrastructure.RepoInterfaces;
-using Infrastructure.RepoInterfaces.Auth;
-using Infrastructure.Repositories;
-using Infrastructure.Repositories.Auth;
+﻿
+using TKD.Infrastructure.RepoInterfaces;
+using TKD.Infrastructure.RepoInterfaces.Auth;
+using TKD.Infrastructure.Repositories;
+using TKD.Infrastructure.Repositories.Auth;
 
-namespace Infrastructure
+namespace TKD.Infrastructure
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -29,8 +30,8 @@ namespace Infrastructure
         public ISekaniWordExampleRepository SekaniWordExamples { get; set; }
         public ISekaniWordExampleAudioRepository SekaniWordExampleAudios { get; set; }
         public ISekaniWordAttributeRepository SekaniWordAttributes { get; set; }
-        public ISekaniRoot_EnglishWordRepository SekaniRoots_EnglishWords { get; set; }
-        public ISekaniRoot_TopicRepository SekaniRoots_Topics { get; set; }
+        public ISekaniRootEnglishWordRepository SekaniRootsEnglishWords { get; set; }
+        public ISekaniRootTopicRepository SekaniRootsTopics { get; set; }
         public IUserActivityStatRepository UserActivityStats { get; set; }
         public IUserLearnedWordRepository UserLearnedWords { get; set; }
         public IUserFailedWordRepository UserFailedWords { get; set; }
@@ -49,7 +50,7 @@ namespace Infrastructure
             SekaniLevels = new SekaniLevelRepository(this.context);
             SekaniWords = new SekaniWordRepository(this.context);
             SekaniCategories = new SekaniCategoryRepository(this.context);
-            Topics  = new TopicRepository(this.context);
+            Topics = new TopicRepository(this.context);
             EnglishWords = new EnglishWordRepository(this.context);
             SekaniWordAudios = new SekaniWordAudioRepository(this.context);
             SekaniRoots = new SekaniRootRepository(this.context);
@@ -58,8 +59,8 @@ namespace Infrastructure
             SekaniWordExamples = new SekaniWordExampleRepository(this.context);
             SekaniWordExampleAudios = new SekaniWordExampleAudioRepository(this.context);
             SekaniWordAttributes = new SekaniWordAttributeRepository(this.context);
-            SekaniRoots_EnglishWords = new SekaniRootEnglishWordRepository(this.context);
-            SekaniRoots_Topics = new SekaniRootTopicRepository(this.context);
+            SekaniRootsEnglishWords = new SekaniRootEnglishWordRepository(this.context);
+            SekaniRootsTopics = new SekaniRootTopicRepository(this.context);
             UserActivityStats = new UserActivityStatRepository(this.context);
             UserLearnedWords = new UserLearnedWordRepository(this.context);
             UserFailedWords = new UserFailedWordRepository(this.context);

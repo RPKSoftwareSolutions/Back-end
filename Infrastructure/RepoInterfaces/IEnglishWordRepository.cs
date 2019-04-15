@@ -1,8 +1,7 @@
-﻿using DomainModel;
-using DomainModel.TKDModels;
-using Framework.Core;
+﻿using Framework.Core;
+using TKD.DomainModel.TKDModels;
 
-namespace Infrastructure.RepoInterfaces
+namespace TKD.Infrastructure.RepoInterfaces
 {
     public interface IEnglishWordRepository: IRepository<EnglishWord>
     {

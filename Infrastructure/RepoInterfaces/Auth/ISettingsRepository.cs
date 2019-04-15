@@ -1,8 +1,8 @@
-﻿using DomainModel.AuthenticateModels;
-using DomainModel.OfflineModels;
-using Framework.Core;
+﻿using Framework.Core;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.DomainModel.OfflineModels;
 
-namespace Infrastructure.RepoInterfaces.Auth
+namespace TKD.Infrastructure.RepoInterfaces.Auth
 {
     public interface ISettingsRepository: IRepository<Setting>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Framework.Core;
 
-namespace Infrastructure
+namespace TKD.Infrastructure
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {

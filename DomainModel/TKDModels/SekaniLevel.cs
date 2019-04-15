@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using DomainModel.AuthenticateModels;
 
-namespace DomainModel
+using TKD.DomainModel.AuthenticateModels;
+
+namespace TKD.DomainModel.TKDModels
 {
     public class SekaniLevel
     {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace DomainModel.TKDModels
+
+namespace TKD.DomainModel.TKDModels
 {
     public class EnglishWord
     {

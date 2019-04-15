@@ -1,7 +1,7 @@
-﻿using DomainModel.AuthenticateModels;
-using Infrastructure.RepoInterfaces.Auth;
+﻿using TKD.DomainModel.AuthenticateModels;
+using TKD.Infrastructure.RepoInterfaces.Auth;
 
-namespace Infrastructure.Repositories.Auth
+namespace TKD.Infrastructure.Repositories.Auth
 {
     public class UserSessionRepository: Repository<UserSession>, IUserSessionRepository
     {

@@ -6995,9 +6995,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\DomainModel.csproj",
-      "projectName": "DomainModel",
-      "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\DomainModel.csproj",
+      "projectUniqueName": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.DomainModel.csproj",
+      "projectName": "TKD.DomainModel",
+      "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.DomainModel.csproj",
       "packagesPath": "C:\\Users\\Shahrooz\\.nuget\\packages\\",
       "outputPath": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\obj\\",
       "projectStyle": "PackageReference",

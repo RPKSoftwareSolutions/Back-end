@@ -1,5 +1,5 @@
 ﻿using API.Helpers;
-using DomainModel;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using TKD.DomainModel.TKDModels;
+using TKD.Infrastructure;
 
 namespace API.Controllers
 {
@@ -94,7 +96,7 @@ namespace API.Controllers
         [HttpGet("getEnglishWords/{id}")]
         public ActionResult GetEnglishWords(int id)
         {
-            var ids = this._unitOfWork.SekaniRoots_EnglishWords.Find(i => i.SekaniRootId == id).Select(i => i.EnglishWordId).ToList();
+            var ids = this._unitOfWork.SekaniRootsEnglishWords.Find(i => i.SekaniRootId == id).Select(i => i.EnglishWordId).ToList();
             var items = this._unitOfWork.EnglishWords.Find(i => ids.Contains(i.Id))
                         .OrderBy(i => i.Id)
                         .Select(i => new
@@ -110,9 +112,9 @@ namespace API.Controllers
         [HttpPost("removeEnglishWords")]
         public ActionResult RemoveEnglishWords([FromBody] AddRemoveEnglishWordsModel model)
         {
-            var r = this._unitOfWork.SekaniRoots_EnglishWords.Find(i => i.SekaniRootId == model.SekaniRootId &&
+            var r = this._unitOfWork.SekaniRootsEnglishWords.Find(i => i.SekaniRootId == model.SekaniRootId &&
                                                                         model.EnglishWordIds.Contains(i.EnglishWordId)).ToList();
-            this._unitOfWork.SekaniRoots_EnglishWords.RemoveRange(r);
+            this._unitOfWork.SekaniRootsEnglishWords.RemoveRange(r);
             this._unitOfWork.Complete();
             return Ok(r.Count());
         }
@@ -129,7 +131,7 @@ namespace API.Controllers
                     EnglishWordId = eid,
                     UpdateTime = DateTime.Now
                 };
-                this._unitOfWork.SekaniRoots_EnglishWords.Add(item);
+                this._unitOfWork.SekaniRootsEnglishWords.Add(item);
                 try
                 {
                     this._unitOfWork.Complete();
@@ -146,7 +148,7 @@ namespace API.Controllers
         [HttpGet("getTopics/{id}")]
         public ActionResult GetTopics(int id)
         {
-            var ids = this._unitOfWork.SekaniRoots_Topics.Find(i => i.SekaniRootId == id).Select(i => i.SekaniRootId).ToList();
+            var ids = this._unitOfWork.SekaniRootsTopics.Find(i => i.SekaniRootId == id).Select(i => i.SekaniRootId).ToList();
             var items = this._unitOfWork.Topics.Find(i => ids.Contains(i.Id))
                             .OrderBy(i => i.Id)
                             .Select(i => new
@@ -162,9 +164,9 @@ namespace API.Controllers
         [HttpPost("removeTopics")]
         public ActionResult RemoveTopics([FromBody] AddRemoveTopicsModel model)
         {
-            var r = this._unitOfWork.SekaniRoots_Topics.Find(i => i.SekaniRootId == model.SekaniRootId &&
+            var r = this._unitOfWork.SekaniRootsTopics.Find(i => i.SekaniRootId == model.SekaniRootId &&
                                                                   model.TopicIds.Contains(i.TopicId)).ToList();
-            this._unitOfWork.SekaniRoots_Topics.RemoveRange(r);
+            this._unitOfWork.SekaniRootsTopics.RemoveRange(r);
             this._unitOfWork.Complete();
             return Ok(r.Count());
         }
@@ -181,7 +183,7 @@ namespace API.Controllers
                     TopicId = eid,
                     UpdateTime = DateTime.Now
                 };
-                this._unitOfWork.SekaniRoots_Topics.Add(item);
+                this._unitOfWork.SekaniRootsTopics.Add(item);
                 try
                 {
                     this._unitOfWork.Complete();

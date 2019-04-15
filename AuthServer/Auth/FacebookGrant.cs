@@ -1,4 +1,4 @@
-﻿using DomainModel;
+﻿
 using IdentityServer4.Validation;
 using Newtonsoft.Json.Linq;
 using System;
@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using DomainModel.AuthenticateModels;
 using Infrastructure;
+using TKD.DomainModel.AuthenticateModels;
+using TKD.Infrastructure;
 using static IdentityModel.OidcConstants;
 
 namespace AuthServer.Auth

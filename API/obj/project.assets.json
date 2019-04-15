@@ -2,6 +2,32 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "AutoMapper/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "CryptoHelper/3.0.2": {
         "type": "package",
         "dependencies": {
@@ -5793,55 +5819,108 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "DomainModel/1.0.0": {
+      "TKD.DomainModel/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "IdentityServer4": "2.4.0"
         },
         "compile": {
-          "bin/placeholder/DomainModel.dll": {}
+          "bin/placeholder/TKD.DomainModel.dll": {}
         },
         "runtime": {
-          "bin/placeholder/DomainModel.dll": {}
+          "bin/placeholder/TKD.DomainModel.dll": {}
         }
       },
-      "Framework.Core/1.0.0": {
+      "TKD.Framework.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "2.2.0"
         },
         "compile": {
-          "bin/placeholder/Framework.Core.dll": {}
+          "bin/placeholder/TKD.Framework.Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Framework.Core.dll": {}
+          "bin/placeholder/TKD.Framework.Core.dll": {}
         }
       },
-      "Infrastructure/1.0.0": {
+      "TKD.Framework.ExceptionHandler/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "dependencies": {
+          "TKD.Framework.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TKD.Framework.ExceptionHandler.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TKD.Framework.ExceptionHandler.dll": {}
+        }
+      },
+      "TKD.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
         "dependencies": {
           "CryptoHelper": "3.0.2",
-          "DomainModel": "1.0.0",
-          "Framework.Core": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.2.4",
           "Microsoft.EntityFrameworkCore.Design": "2.2.4",
           "Microsoft.EntityFrameworkCore.Relational": "2.2.4",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.2.4",
-          "Microsoft.Extensions.Configuration.Json": "2.2.0"
+          "Microsoft.Extensions.Configuration.Json": "2.2.0",
+          "TKD.DomainModel": "1.0.0",
+          "TKD.Framework.Core": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/TKD.Infrastructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Infrastructure.dll": {}
+          "bin/placeholder/TKD.Infrastructure.dll": {}
+        }
+      },
+      "TKD.ReadModel.Contract/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/TKD.ReadModel.Contract.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TKD.ReadModel.Contract.dll": {}
         }
       }
     }
   },
   "libraries": {
+    "AutoMapper/8.0.0": {
+      "sha512": "px8ZMtIq84dxciB29V+ZYOtsRLZP4JlflDDMW13LyeRdwsnIInzlcSHSxpWmVD6U3bbOl2FeLlgomnVtm0jvXw==",
+      "type": "package",
+      "path": "automapper/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.8.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "lib/net461/AutoMapper.dll",
+        "lib/net461/AutoMapper.pdb",
+        "lib/net461/AutoMapper.xml",
+        "lib/netstandard2.0/AutoMapper.dll",
+        "lib/netstandard2.0/AutoMapper.pdb",
+        "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+      "sha512": "njWYKGM3FokOlo9nj8kVLYyvJrGbLItmNA2A00lDXJnxybfP7TuZEYjQRt8ne+Cp0OF4W0ZzgdgxMioHfDEpdA==",
+      "type": "package",
+      "path": "automapper.extensions.microsoft.dependencyinjection/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.pdb"
+      ]
+    },
     "CryptoHelper/3.0.2": {
       "sha512": "6xFZdEnhuOmX58TgZAeb20MbddsL8/nR/4CnWhmjMXv9gfpOxD+1bBU7IDtYq2Q8rZJUT6xYWdhW16bKriU2Mw==",
       "type": "package",
@@ -15421,33 +15500,47 @@
         "windowsazure.storage.nuspec"
       ]
     },
-    "DomainModel/1.0.0": {
+    "TKD.DomainModel/1.0.0": {
       "type": "project",
-      "path": "../DomainModel/DomainModel.csproj",
-      "msbuildProject": "../DomainModel/DomainModel.csproj"
+      "path": "../DomainModel/TKD.DomainModel.csproj",
+      "msbuildProject": "../DomainModel/TKD.DomainModel.csproj"
     },
-    "Framework.Core/1.0.0": {
+    "TKD.Framework.Core/1.0.0": {
       "type": "project",
-      "path": "../Freamework.Core/Framework.Core.csproj",
-      "msbuildProject": "../Freamework.Core/Framework.Core.csproj"
+      "path": "../Freamework.Core/TKD.Framework.Core.csproj",
+      "msbuildProject": "../Freamework.Core/TKD.Framework.Core.csproj"
     },
-    "Infrastructure/1.0.0": {
+    "TKD.Framework.ExceptionHandler/1.0.0": {
       "type": "project",
-      "path": "../Infrastructure/Infrastructure.csproj",
-      "msbuildProject": "../Infrastructure/Infrastructure.csproj"
+      "path": "../TKD.Framework.ExceptionHandler/TKD.Framework.ExceptionHandler.csproj",
+      "msbuildProject": "../TKD.Framework.ExceptionHandler/TKD.Framework.ExceptionHandler.csproj"
+    },
+    "TKD.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Infrastructure/TKD.Infrastructure.csproj",
+      "msbuildProject": "../Infrastructure/TKD.Infrastructure.csproj"
+    },
+    "TKD.ReadModel.Contract/1.0.0": {
+      "type": "project",
+      "path": "../TKD.ReadModel.Contract/TKD.ReadModel.Contract.csproj",
+      "msbuildProject": "../TKD.ReadModel.Contract/TKD.ReadModel.Contract.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "AutoMapper >= 8.0.0",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.0.0",
       "CryptoHelper >= 3.0.2",
-      "DomainModel >= 1.0.0",
       "IdentityServer4.AccessTokenValidation >= 2.7.0",
-      "Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.2.4",
       "Microsoft.EntityFrameworkCore >= 2.2.4",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
-      "Swashbuckle.AspNetCore >= 4.0.1"
+      "Swashbuckle.AspNetCore >= 4.0.1",
+      "TKD.DomainModel >= 1.0.0",
+      "TKD.Framework.ExceptionHandler >= 1.0.0",
+      "TKD.Infrastructure >= 1.0.0",
+      "TKD.ReadModel.Contract >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -15480,11 +15573,17 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\DomainModel.csproj": {
-              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\DomainModel.csproj"
+            "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.DomainModel.csproj": {
+              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\DomainModel\\TKD.DomainModel.csproj"
             },
-            "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\Infrastructure.csproj"
+            "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\TKD.Infrastructure.csproj": {
+              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\TKD.Infrastructure.csproj"
+            },
+            "D:\\Projects\\SekaniDic\\Back-end\\TKD.Framework.ExceptionHandler\\TKD.Framework.ExceptionHandler.csproj": {
+              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\TKD.Framework.ExceptionHandler\\TKD.Framework.ExceptionHandler.csproj"
+            },
+            "D:\\Projects\\SekaniDic\\Back-end\\TKD.ReadModel.Contract\\TKD.ReadModel.Contract.csproj": {
+              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\TKD.ReadModel.Contract\\TKD.ReadModel.Contract.csproj"
             }
           }
         }
@@ -15498,6 +15597,14 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
           "CryptoHelper": {
             "target": "Package",
             "version": "[3.0.2, )"

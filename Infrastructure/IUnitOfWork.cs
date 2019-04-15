@@ -1,8 +1,9 @@
 ﻿using System;
-using Infrastructure.RepoInterfaces;
-using Infrastructure.RepoInterfaces.Auth;
 
-namespace Infrastructure
+using TKD.Infrastructure.RepoInterfaces;
+using TKD.Infrastructure.RepoInterfaces.Auth;
+
+namespace TKD.Infrastructure
 {
     public interface IUnitOfWork : IDisposable
     {
@@ -25,8 +26,8 @@ namespace Infrastructure
         ISekaniWordExampleRepository SekaniWordExamples { get; set; }
         ISekaniWordAttributeRepository SekaniWordAttributes { get; set; }
         ISekaniWordExampleAudioRepository SekaniWordExampleAudios { get; set; }
-        ISekaniRoot_EnglishWordRepository SekaniRoots_EnglishWords { get; set; }
-        ISekaniRoot_TopicRepository SekaniRoots_Topics { get; set; }
+        ISekaniRootEnglishWordRepository SekaniRootsEnglishWords { get; set; }
+        ISekaniRootTopicRepository SekaniRootsTopics { get; set; }
         IUserActivityStatRepository UserActivityStats { get; set; }
         IUserLearnedWordRepository UserLearnedWords { get; set; }
         IUserFailedWordRepository UserFailedWords { get; set; }
