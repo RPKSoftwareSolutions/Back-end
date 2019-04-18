@@ -44,7 +44,7 @@ namespace API.Controllers
                 throw new Exception("Xml file not found! please Upload xml file and try again!");
             }
 
-            XmlSerializer serializer = new XmlSerializer(typeof(Dictionary<,>));
+            XmlSerializer serializer = new XmlSerializer(typeof(Dictionary));
             using (FileStream fileStream = new FileStream(xmlFile, FileMode.Open))
             {
                 var result = (Dictionary)serializer.Deserialize(fileStream);
