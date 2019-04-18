@@ -1,6 +1,4 @@
 ﻿using API.ParamModels;
-
-using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using TKD.DomainModel.TKDModels;
 using TKD.Infrastructure;
@@ -32,7 +31,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("ImportData")]
-        public JsonResult ImportData()
+        public void ImportData()
         {
             var path = hostingEnvironment.WebRootPath + "\\files\\";
             var createdFiles = Directory.GetFiles(path);
@@ -48,165 +47,193 @@ namespace API.Controllers
             using (FileStream fileStream = new FileStream(xmlFile, FileMode.Open))
             {
                 var result = (Dictionary)serializer.Deserialize(fileStream);
-                result.Roots.ForEach(root =>
+
+                AddCategories(result);
+                var sekaniRootList = unitOfWork.SekaniRoots.GetAll().ToList().Select(a => a.RootWord);
+                var persistRoots = result.Roots.Where(a => !sekaniRootList.Contains(a.Rootword));
+                var categoryList = unitOfWork.SekaniCategories.GetAll().ToList();
+                AddForms(result);
+                var sekaniFormList = unitOfWork.SekaniForms.GetAll().ToList();
+                var sekaniLevelList = unitOfWork.SekaniLevels.GetAll().ToList();
+                AddTopics(result);
+                var sekaniTopicsList = unitOfWork.Topics.GetAll().ToList();
+                AddEnglishWords(result);
+                var englishWordList = unitOfWork.EnglishWords.GetAll().ToList();
+
+                List<SekaniRoot> sekaniRoots = new List<SekaniRoot>();
+                Parallel.ForEach(persistRoots, root =>
                 {
-                    try
-                    {
 
-                  
 
-                    var rt = unitOfWork.SekaniRoots.Find(x => x.RootWord == root.Rootword).FirstOrDefault();
-                    if (rt == null)
+                    var sekaniRoot = new SekaniRoot
                     {
-                        var sekaniRoot = new SekaniRoot
+                        //Id = root.Id,
+                        IsNull = root.IsNull,
+                        RootWord = root.Rootword,
+                        UpdateTime = DateTime.Now
+                    };
+
+                    sekaniRoot.SekaniCategoryId = categoryList.Find(x => x.Title == root.Category).Id;
+
+                    sekaniRoot.SekaniFormId = sekaniFormList.Find(x => x.Title == root.Form).Id;
+
+                    sekaniRoot.SekaniLevelId = sekaniLevelList.Find(x => x.Title == root.Level).Id;
+
+                    if (!string.IsNullOrEmpty(root.Image))
+                    {
+                        var img = Directory.GetFiles(path + "\\content", root.Image, SearchOption.AllDirectories).SingleOrDefault();
+                        if (img != null)
                         {
-                            //Id = root.Id,
-                            IsNull = root.IsNull,
-                            RootWord = root.Rootword,
+                            var theFile = System.IO.File.ReadAllBytes(img);
+                            sekaniRoot.SekaniRootImages.Add(new SekaniRootImage() { Notes = root.Image, Format = root.Image.Split(".")[1], UpdateTime = DateTime.Now, Content = theFile });
+                        }
+
+                    }
+
+                    root.EnglishWords.EnglishWord.ForEach(ew =>
+                    {
+                        var word = englishWordList.Find(x => x.Word == ew);
+                        if (word != null)
+                        {
+                            sekaniRoot.SekaniRoots_EnglishWords.Add(new SekaniRootEnglishWord { EnglishWordId = word.Id, UpdateTime = DateTime.Now });
+                        }
+                    });
+
+                    root.Topics.Title.ForEach(t =>
+                    {
+                        var topic = sekaniTopicsList.Find(x => x.Title == t);
+
+                        sekaniRoot.SekaniRoots_Topics.Add(new SekaniRootTopic { TopicId = topic.Id, UpdateTime = DateTime.Now });
+
+                    });
+
+                    root.Inflectedforms.Elements.ForEach(sekani =>
+                    {
+
+                        var sw = new SekaniWord
+                        {
+                                //SekaniRootId = root.Id,
+                                Word = sekani.Inflectedform,
                             UpdateTime = DateTime.Now
                         };
-
-                        var category = unitOfWork.SekaniCategories.Find(x => x.Title == root.Category).FirstOrDefault();
-                        if (category == null)
+                        sekani.Attributes?.ForEach(attr =>
                         {
-                            sekaniRoot.SekaniCategory = new SekaniCategory { Title = root.Category, UpdateTime = DateTime.Now };
-                        }
-                        else
-                        {
-                            sekaniRoot.SekaniCategoryId = category.Id;
-                        }
-
-                        var form = unitOfWork.SekaniForms.Find(x => x.Title == root.Form).FirstOrDefault();
-                        if (form == null)
-                        {
-                            sekaniRoot.SekaniForm = new SekaniForm { Title = root.Form, UpdateTime = DateTime.Now };
-                        }
-                        else
-                        {
-                            sekaniRoot.SekaniFormId = form.Id;
-                        }
-
-                        var level = unitOfWork.SekaniLevels.Find(x => x.Title == root.Level).FirstOrDefault();
-                        if (level == null)
-                        {
-                            sekaniRoot.SekaniLevelId = unitOfWork.SekaniLevels.Find(x => x.Title == "Unknown").FirstOrDefault().Id; ;
-                        }
-                        else
-                        {
-                            sekaniRoot.SekaniLevelId = level.Id;
-                        }
-
-                        if (!string.IsNullOrEmpty(root.Image))
-                        {
-                            var img = Directory.GetFiles(path + "\\content", root.Image, SearchOption.AllDirectories).SingleOrDefault();
-                            if (img != null)
-                            {
-                                var theFile = System.IO.File.ReadAllBytes(img);
-                                sekaniRoot.SekaniRootImages.Add(new SekaniRootImage() { Notes = root.Image, Format = root.Image.Split(".")[1], UpdateTime = DateTime.Now, Content = theFile });
-                            }
-
-                        }
-
-                        root.EnglishWords.EnglishWord.ForEach(ew =>
-                        {
-                            var word = unitOfWork.EnglishWords.Find(x => x.Word == ew).FirstOrDefault();
-                            if (word == null)
-                            {
-                                //todo: what we do when we dont have english word?
-                                sekaniRoot.SekaniRoots_EnglishWords.Add(new SekaniRootEnglishWord { EnglishWord = new EnglishWord { Word = ew, Standard = true, UpdateTime = DateTime.Now }, UpdateTime = DateTime.Now });
-                            }
-                            else
-                            {
-                                sekaniRoot.SekaniRoots_EnglishWords.Add(new SekaniRootEnglishWord { EnglishWordId = word.Id, UpdateTime = DateTime.Now });
-                            }
+                            sw.SekaniWordAttributes.Add(new SekaniWordAttribute { Key = attr.AttributeElement.Key, Value = attr.AttributeElement.Value, UpdateTime = DateTime.Now });
                         });
-
-                        root.Topics.Title.ForEach(t =>
+                        sekani.Examples?.ForEach(ex =>
                         {
-                            var topic = unitOfWork.Topics.Find(x => x.Title == t).FirstOrDefault();
-                            if (topic == null)
+                            var example = new SekaniWordExample
                             {
-                                sekaniRoot.SekaniRoots_Topics.Add(new SekaniRootTopic { Topic = new Topic { Title = t, UpdateTime = DateTime.Now }, UpdateTime = DateTime.Now });
-                            }
-                            else
+                                English = ex.ExampleElement.English,
+                                Sekani = ex.ExampleElement.Sekani,
+                                UpdateTime = DateTime.Now
+                            };
+
+                            if (!string.IsNullOrEmpty(ex.ExampleElement.Audio))
                             {
-                                sekaniRoot.SekaniRoots_Topics.Add(new SekaniRootTopic { TopicId = topic.Id, UpdateTime = DateTime.Now });
+                                var aud = Directory.GetFiles(path + "\\content", ex.ExampleElement.Audio, SearchOption.AllDirectories).SingleOrDefault();
+                                if (aud != null)
+                                {
+                                    var theFile = System.IO.File.ReadAllBytes(aud);
+                                    example.SekaniWordExampleAudios.Add(new SekaniWordExampleAudio { Format = aud.Split(".")[1], Notes = ex.ExampleElement.Audio, Content = theFile, UpdateTime = DateTime.Now });
+                                }
                             }
+                            sw.SekaniWordExamples.Add(example);
                         });
-                        //here
-                        root.Inflectedforms.Elements.ForEach(sekani =>
+                        sekani.Audios?.ForEach(au =>
                         {
-                            var sekaniWord = unitOfWork.SekaniWords.Find(x => x.Word == sekani.Inflectedform).FirstOrDefault();
-                            if (sekaniWord == null)
+                            if (!string.IsNullOrEmpty(au))
                             {
-                                var sw = new SekaniWord
+                                if (Directory.Exists(path + "content\\" + au))
                                 {
-                                    //SekaniRootId = root.Id,
-                                    Word = sekani.Inflectedform,
-                                    UpdateTime = DateTime.Now
-                                };
-                                sekani.Attributes?.ForEach(attr =>
-                                {
-                                    sw.SekaniWordAttributes.Add(new SekaniWordAttribute { Key = attr.AttributeElement.Key, Value = attr.AttributeElement.Value, UpdateTime = DateTime.Now });
-                                });
-                                sekani.Examples?.ForEach(ex =>
-                                {
-                                    var example = new SekaniWordExample
+                                    var aud = Directory
+                                        .GetFiles(path + "content", au, SearchOption.AllDirectories)
+                                        .SingleOrDefault();
+                                    if (aud != null)
                                     {
-                                        English = ex.ExampleElement.English,
-                                        Sekani = ex.ExampleElement.Sekani,
-                                        UpdateTime = DateTime.Now
-                                    };
-
-                                    if (!string.IsNullOrEmpty(ex.ExampleElement.Audio))
-                                    {
-                                        var aud = Directory.GetFiles(path + "\\content", ex.ExampleElement.Audio, SearchOption.AllDirectories).SingleOrDefault();
-                                        if (aud != null)
+                                        var theFile = System.IO.File.ReadAllBytes(aud);
+                                        var audio = new SekaniWordAudio
                                         {
-                                            var theFile = System.IO.File.ReadAllBytes(aud);
-                                            example.SekaniWordExampleAudios.Add(new SekaniWordExampleAudio { Format = aud.Split(".")[1], Notes = ex.ExampleElement.Audio, Content = theFile, UpdateTime = DateTime.Now });
-                                        }
+                                            Format = au.Split(".")[1],
+                                            Content = theFile,
+                                            UpdateTime = DateTime.Now,
+                                            Notes = au
+                                        };
+                                        sw.SekaniWordAudios.Add(audio);
                                     }
-                                    sw.SekaniWordExamples.Add(example);
-                                });
-                                sekani.Audios?.ForEach(au =>
-                                {
-                                    if (!string.IsNullOrEmpty(au))
-                                    {
-                                        var aud = Directory.GetFiles(path + "\\content", au, SearchOption.AllDirectories).SingleOrDefault();
-                                        if (aud != null)
-                                        {
-                                            var theFile = System.IO.File.ReadAllBytes(aud);
-                                            var audio = new SekaniWordAudio { Format = au.Split(".")[1], Content = theFile, UpdateTime = DateTime.Now, Notes = au };
-                                            sw.SekaniWordAudios.Add(audio);
-                                        }
-                                    }
-                                });
-                                sekaniRoot.SekaniWords.Add(sw);
-                            }
-                            else
-                            {
-                                sekaniRoot.SekaniWords.Add(sekaniWord);
+                                }
                             }
                         });
-                        unitOfWork.SekaniRoots.Add(sekaniRoot);
-                        unitOfWork.Complete();
-                    }
-                    }
-                    catch (Exception e)
+                        sekaniRoot.SekaniWords.Add(sw);
+
+                    });
+                    lock (sekaniRoot)
                     {
-                        Console.WriteLine(e);
-                      
+                        sekaniRoots.Add(sekaniRoot);
                     }
+
                 });
+
+                unitOfWork.SekaniRoots.AddRange(sekaniRoots);
+                unitOfWork.Complete();
             }
 
-            return Json(new { Success = true, Message = "Data insertion Succeeded !" });
+
         }
+
+        private void AddCategories(Dictionary dictionary)
+        {
+            var dbCategory = unitOfWork.SekaniCategories.GetAll().Select(a => a.Title).ToList();
+
+            var categoryList = dictionary.Roots
+                .Where(a => !dbCategory.Contains(a.Category))
+                .Select(a => a.Category)
+                .Distinct()
+                .Select(a => new SekaniCategory { Title = a, UpdateTime = DateTime.Now }).ToList();
+            unitOfWork.SekaniCategories.AddRange(categoryList);
+            unitOfWork.Complete();
+        }
+        private void AddForms(Dictionary dictionary)
+        {
+            var dbSekaniForms = unitOfWork.SekaniForms.GetAll().Select(a => a.Title).ToList();
+
+            var sekaniFormList = dictionary.Roots
+                .Where(a => !dbSekaniForms.Contains(a.Form))
+                .Select(a => a.Form)
+                .Distinct()
+                .Select(a => new SekaniForm() { Title = a, UpdateTime = DateTime.Now }).ToList();
+            unitOfWork.SekaniForms.AddRange(sekaniFormList);
+            unitOfWork.Complete();
+        }
+
+        private void AddTopics(Dictionary dictionary)
+        {
+            var dbTopics = unitOfWork.Topics.GetAll().Select(a => a.Title).ToList();
+
+            var sekaniTopicList = dictionary.Roots.SelectMany(a => a.Topics.Title)
+                .Where(a => !dbTopics.Contains(a))
+                .Distinct()
+                .Select(a => new Topic() { Title = a, UpdateTime = DateTime.Now }).ToList();
+            unitOfWork.Topics.AddRange(sekaniTopicList);
+            unitOfWork.Complete();
+        }
+
+        private void AddEnglishWords(Dictionary dictionary)
+        {
+            var dbEnglishWords = unitOfWork.EnglishWords.GetAll().Select(a => a.Word).ToList();
+
+            var englishWordsList = dictionary.Roots.SelectMany(a => a.EnglishWords.EnglishWord)
+                .Where(a => !dbEnglishWords.Contains(a))
+                .Distinct()
+                .Select(a => new EnglishWord() { Word = a, UpdateTime = DateTime.Now }).ToList();
+            unitOfWork.EnglishWords.AddRange(englishWordsList);
+            unitOfWork.Complete();
+        }
+
         [HttpPost]
         [DisableRequestSizeLimit]
         [Route("XmlFileUpload")]
-        public JsonResult XmlFileUpload([FromForm]IFormFile xmlFile)
+        public void XmlFileUpload([FromForm]IFormFile xmlFile)
         {
             if (!Directory.Exists($"{hostingEnvironment.WebRootPath}\\files\\"))
             {
@@ -226,14 +253,12 @@ namespace API.Controllers
                 xmlFile.CopyTo(fs);
                 fs.Flush();
             };
-
-            return Json(new { state = 0 });
         }
 
         [HttpPost]
         [DisableRequestSizeLimit]
         [Route("ZipFileUpload")]
-        public JsonResult ZipFileUpload([FromForm]IFormFile zipFile)
+        public void ZipFileUpload([FromForm]IFormFile zipFile)
         {
 
             if (!Directory.Exists($"{hostingEnvironment.WebRootPath}\\files\\"))
@@ -270,7 +295,6 @@ namespace API.Controllers
             //}
             //ZipFile.ExtractToDirectory(contentFile, $"{hostingEnvironment.WebRootPath}\\files\\content", true);
 
-            return Json(new { state = 0 });
         }
     }
 }
