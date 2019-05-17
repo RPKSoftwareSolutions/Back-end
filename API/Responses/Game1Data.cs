@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace API.Responses
 {
-    public class Game1
+    public class Game1Data
     {
-        public int sekaniWordId { get; set; }
+        public int SekaniWordId { get; set; }
         public List<int> Words { get; set; }
         public int CurrentWordAddress { get; set; }
     }

@@ -9,7 +9,6 @@ namespace TKD.ReadModel.Contract.DomainDto
 
         public int SekaniWordId { get; set; }
 
-        public byte[] Content { get; set; }
 
         public string Format { get; set; }
 

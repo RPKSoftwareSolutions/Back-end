@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using TKD.DomainModel.TKDModels;
@@ -20,23 +23,27 @@ namespace API.Controllers
 
     public class DataImportController : Controller
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly string _path;
 
-        public DataImportController(IUnitOfWork unitOfWork, IHostingEnvironment hostingEnvironment)
+        public DataImportController(IUnitOfWork unitOfWork,
+            IHostingEnvironment hostingEnvironment,
+            IConfiguration configuration)
         {
-            this.unitOfWork = unitOfWork;
-            this.hostingEnvironment = hostingEnvironment;
+            _unitOfWork = unitOfWork;
+            _hostingEnvironment = hostingEnvironment;
+            _path = configuration.GetSection("BasePath").Value;
         }
 
         [HttpPost]
         [Route("ImportData")]
         public void ImportData()
         {
-            var path = hostingEnvironment.WebRootPath + "\\files\\";
-            var createdFiles = Directory.GetFiles(path);
 
-            var xmlFile = createdFiles.SingleOrDefault(x => x.Contains(".xml"));
+            var createdFiles = Directory.GetFiles(_path, "*.*", SearchOption.AllDirectories);
+
+            var xmlFile = createdFiles.SingleOrDefault(x => x.Contains(@"\AppData.xml"));
 
             if (xmlFile == null)
             {
@@ -48,17 +55,19 @@ namespace API.Controllers
             {
                 var result = (Dictionary)serializer.Deserialize(fileStream);
 
+                var allFiles = Directory.GetFiles(_path, "*.*", SearchOption.AllDirectories);
+
                 AddCategories(result);
-                var sekaniRootList = unitOfWork.SekaniRoots.GetAll().ToList().Select(a => a.RootWord);
-                var persistRoots = result.Roots.Where(a => !sekaniRootList.Contains(a.Rootword));
-                var categoryList = unitOfWork.SekaniCategories.GetAll().ToList();
+                var sekaniRootList = _unitOfWork.SekaniRoots.GetAll().ToList().Select(a => a.Id);
+                var persistRoots = result.Roots.Where(a => !sekaniRootList.Contains(a.Id));
+                var categoryList = _unitOfWork.SekaniCategories.GetAll().ToList();
                 AddForms(result);
-                var sekaniFormList = unitOfWork.SekaniForms.GetAll().ToList();
-                var sekaniLevelList = unitOfWork.SekaniLevels.GetAll().ToList();
+                var sekaniFormList = _unitOfWork.SekaniForms.GetAll().ToList();
+                var sekaniLevelList = _unitOfWork.SekaniLevels.GetAll().ToList();
                 AddTopics(result);
-                var sekaniTopicsList = unitOfWork.Topics.GetAll().ToList();
+                var sekaniTopicsList = _unitOfWork.Topics.GetAll().ToList();
                 AddEnglishWords(result);
-                var englishWordList = unitOfWork.EnglishWords.GetAll().ToList();
+                var englishWordList = _unitOfWork.EnglishWords.GetAll().ToList();
 
                 List<SekaniRoot> sekaniRoots = new List<SekaniRoot>();
                 Parallel.ForEach(persistRoots, root =>
@@ -67,30 +76,41 @@ namespace API.Controllers
 
                     var sekaniRoot = new SekaniRoot
                     {
-                        //Id = root.Id,
+                        Id = root.Id,
                         IsNull = root.IsNull,
                         RootWord = root.Rootword,
-                        UpdateTime = DateTime.Now
+                        UpdateTime = DateTime.Now,
+                        SekaniCategoryId = categoryList.Find(x => x.Title == root.Category).Id,
+                        SekaniFormId = sekaniFormList.Find(x => x.Title == root.Form).Id,
+                        SekaniLevelId = sekaniLevelList.Find(x => x.Title == root.Level).Id
                     };
 
-                    sekaniRoot.SekaniCategoryId = categoryList.Find(x => x.Title == root.Category).Id;
 
-                    sekaniRoot.SekaniFormId = sekaniFormList.Find(x => x.Title == root.Form).Id;
 
-                    sekaniRoot.SekaniLevelId = sekaniLevelList.Find(x => x.Title == root.Level).Id;
 
                     if (!string.IsNullOrEmpty(root.Image))
                     {
-                        var img = Directory.GetFiles(path + "\\content", root.Image, SearchOption.AllDirectories).SingleOrDefault();
-                        if (img != null)
+                        Regex regex = new Regex(@"^[\w,\s-]+\.[\w]{3}$");
+                        Match match = regex.Match(root.Image);
+                        if (match.Success)
                         {
-                            var theFile = System.IO.File.ReadAllBytes(img);
-                            sekaniRoot.SekaniRootImages.Add(new SekaniRootImage() { Notes = root.Image, Format = root.Image.Split(".")[1], UpdateTime = DateTime.Now, Content = theFile });
+                            var img = allFiles.SingleOrDefault(a => a.Contains("\\" + root.Image));
+                            if (img != null)
+                            {
+                                var theFile = System.IO.File.ReadAllBytes(img);
+                                sekaniRoot.SekaniRootImages.Add(new SekaniRootImage()
+                                {
+                                    Notes = root.Image,
+                                    Format = root.Image.Split(".")[1],
+                                    UpdateTime = DateTime.Now,
+                                    Content = theFile
+                                });
+                            }
                         }
 
                     }
 
-                    root.EnglishWords.EnglishWord.ForEach(ew =>
+                    root.EnglishWords.EnglishWord.Distinct().ToList().ForEach(ew =>
                     {
                         var word = englishWordList.Find(x => x.Word == ew);
                         if (word != null)
@@ -112,15 +132,15 @@ namespace API.Controllers
 
                         var sw = new SekaniWord
                         {
-                                //SekaniRootId = root.Id,
-                                Word = sekani.Inflectedform,
+                            SekaniRootId = root.Id,
+                            Word = sekani.Inflectedform,
                             UpdateTime = DateTime.Now
                         };
-                        sekani.Attributes?.ForEach(attr =>
+                        sekani.Attributes?.AttributeElement.ForEach(attr =>
                         {
-                            sw.SekaniWordAttributes.Add(new SekaniWordAttribute { Key = attr.AttributeElement.Key, Value = attr.AttributeElement.Value, UpdateTime = DateTime.Now });
+                            sw.SekaniWordAttributes.Add(new SekaniWordAttribute { Key = attr.Key, Value = attr.Value, UpdateTime = DateTime.Now });
                         });
-                        sekani.Examples?.ForEach(ex =>
+                        sekani.Examples.ForEach(ex =>
                         {
                             var example = new SekaniWordExample
                             {
@@ -131,12 +151,24 @@ namespace API.Controllers
 
                             if (!string.IsNullOrEmpty(ex.ExampleElement.Audio))
                             {
-                                var aud = Directory.GetFiles(path + "\\content", ex.ExampleElement.Audio, SearchOption.AllDirectories).SingleOrDefault();
-                                if (aud != null)
+                                Regex regex = new Regex(@"^[\w,\s-]+\.[\w]{3}$");
+                                Match match = regex.Match(ex.ExampleElement.Audio);
+                                if (match.Success)
                                 {
-                                    var theFile = System.IO.File.ReadAllBytes(aud);
-                                    example.SekaniWordExampleAudios.Add(new SekaniWordExampleAudio { Format = aud.Split(".")[1], Notes = ex.ExampleElement.Audio, Content = theFile, UpdateTime = DateTime.Now });
+                                    var aud = allFiles.SingleOrDefault(a => a.Contains("\\" + ex.ExampleElement.Audio));
+                                    if (aud != null)
+                                    {
+                                        var theFile = System.IO.File.ReadAllBytes(aud);
+                                        example.SekaniWordExampleAudios.Add(new SekaniWordExampleAudio
+                                        {
+                                            Format = aud.Split(".")[1],
+                                            Notes = ex.ExampleElement.Audio,
+                                            Content = theFile,
+                                            UpdateTime = DateTime.Now
+                                        });
+                                    }
                                 }
+
                             }
                             sw.SekaniWordExamples.Add(example);
                         });
@@ -144,11 +176,11 @@ namespace API.Controllers
                         {
                             if (!string.IsNullOrEmpty(au))
                             {
-                                if (Directory.Exists(path + "content\\" + au))
+                                Regex regex = new Regex(@"^[\w,\s-]+\.[\w]{3}$");
+                                Match match = regex.Match(au);
+                                if (match.Success)
                                 {
-                                    var aud = Directory
-                                        .GetFiles(path + "content", au, SearchOption.AllDirectories)
-                                        .SingleOrDefault();
+                                    var aud = allFiles.SingleOrDefault(a => a.Contains("\\" + au));
                                     if (aud != null)
                                     {
                                         var theFile = System.IO.File.ReadAllBytes(aud);
@@ -163,6 +195,7 @@ namespace API.Controllers
                                     }
                                 }
                             }
+
                         });
                         sekaniRoot.SekaniWords.Add(sw);
 
@@ -174,8 +207,8 @@ namespace API.Controllers
 
                 });
 
-                unitOfWork.SekaniRoots.AddRange(sekaniRoots);
-                unitOfWork.Complete();
+                _unitOfWork.SekaniRoots.AddRange(sekaniRoots);
+                _unitOfWork.Complete();
             }
 
 
@@ -183,51 +216,51 @@ namespace API.Controllers
 
         private void AddCategories(Dictionary dictionary)
         {
-            var dbCategory = unitOfWork.SekaniCategories.GetAll().Select(a => a.Title).ToList();
+            var dbCategory = _unitOfWork.SekaniCategories.GetAll().Select(a => a.Title).ToList();
 
             var categoryList = dictionary.Roots
                 .Where(a => !dbCategory.Contains(a.Category))
                 .Select(a => a.Category)
                 .Distinct()
                 .Select(a => new SekaniCategory { Title = a, UpdateTime = DateTime.Now }).ToList();
-            unitOfWork.SekaniCategories.AddRange(categoryList);
-            unitOfWork.Complete();
+            _unitOfWork.SekaniCategories.AddRange(categoryList);
+            _unitOfWork.Complete();
         }
         private void AddForms(Dictionary dictionary)
         {
-            var dbSekaniForms = unitOfWork.SekaniForms.GetAll().Select(a => a.Title).ToList();
+            var dbSekaniForms = _unitOfWork.SekaniForms.GetAll().Select(a => a.Title).ToList();
 
             var sekaniFormList = dictionary.Roots
                 .Where(a => !dbSekaniForms.Contains(a.Form))
                 .Select(a => a.Form)
                 .Distinct()
                 .Select(a => new SekaniForm() { Title = a, UpdateTime = DateTime.Now }).ToList();
-            unitOfWork.SekaniForms.AddRange(sekaniFormList);
-            unitOfWork.Complete();
+            _unitOfWork.SekaniForms.AddRange(sekaniFormList);
+            _unitOfWork.Complete();
         }
 
         private void AddTopics(Dictionary dictionary)
         {
-            var dbTopics = unitOfWork.Topics.GetAll().Select(a => a.Title).ToList();
+            var dbTopics = _unitOfWork.Topics.GetAll().Select(a => a.Title).ToList();
 
             var sekaniTopicList = dictionary.Roots.SelectMany(a => a.Topics.Title)
                 .Where(a => !dbTopics.Contains(a))
                 .Distinct()
                 .Select(a => new Topic() { Title = a, UpdateTime = DateTime.Now }).ToList();
-            unitOfWork.Topics.AddRange(sekaniTopicList);
-            unitOfWork.Complete();
+            _unitOfWork.Topics.AddRange(sekaniTopicList);
+            _unitOfWork.Complete();
         }
 
         private void AddEnglishWords(Dictionary dictionary)
         {
-            var dbEnglishWords = unitOfWork.EnglishWords.GetAll().Select(a => a.Word).ToList();
+            var dbEnglishWords = _unitOfWork.EnglishWords.GetAll().Select(a => a.Word).ToList();
 
             var englishWordsList = dictionary.Roots.SelectMany(a => a.EnglishWords.EnglishWord)
                 .Where(a => !dbEnglishWords.Contains(a))
                 .Distinct()
                 .Select(a => new EnglishWord() { Word = a, UpdateTime = DateTime.Now }).ToList();
-            unitOfWork.EnglishWords.AddRange(englishWordsList);
-            unitOfWork.Complete();
+            _unitOfWork.EnglishWords.AddRange(englishWordsList);
+            _unitOfWork.Complete();
         }
 
         [HttpPost]
@@ -235,24 +268,24 @@ namespace API.Controllers
         [Route("XmlFileUpload")]
         public void XmlFileUpload([FromForm]IFormFile xmlFile)
         {
-            if (!Directory.Exists($"{hostingEnvironment.WebRootPath}\\files\\"))
+
+            if (!Directory.Exists(_path))
             {
-                Directory.CreateDirectory($"{hostingEnvironment.WebRootPath}\\files\\");
-                Directory.CreateDirectory($"{hostingEnvironment.WebRootPath}\\files\\content");
+                Directory.CreateDirectory(_path);
+                Directory.CreateDirectory(_path + @"\content");
             }
 
-            var di = new DirectoryInfo($"{hostingEnvironment.WebRootPath}\\files\\");
-            var existingXmlFile = di.GetFiles().Where(x => x.Extension == ".xml").SingleOrDefault();
-            if (existingXmlFile != null)
-            {
-                existingXmlFile.Delete();
-            }
-            string fileName = $"{hostingEnvironment.WebRootPath}\\files\\{xmlFile.FileName}";
+            var di = new DirectoryInfo(_path);
+            var existingXmlFile = di.GetFiles().SingleOrDefault(x => x.Extension == ".xml");
+
+            existingXmlFile?.Delete();
+
+            string fileName = _path + "\\AppData.xml";
             using (FileStream fs = System.IO.File.Create(fileName))
             {
                 xmlFile.CopyTo(fs);
                 fs.Flush();
-            };
+            }
         }
 
         [HttpPost]
@@ -260,20 +293,18 @@ namespace API.Controllers
         [Route("ZipFileUpload")]
         public void ZipFileUpload([FromForm]IFormFile zipFile)
         {
-
-            if (!Directory.Exists($"{hostingEnvironment.WebRootPath}\\files\\"))
+            if (!Directory.Exists(_path))
             {
-                Directory.CreateDirectory($"{hostingEnvironment.WebRootPath}\\files\\");
-                Directory.CreateDirectory($"{hostingEnvironment.WebRootPath}\\files\\content");
+                Directory.CreateDirectory(_path);
+                Directory.CreateDirectory(_path + @"\content");
             }
 
-            var di = new DirectoryInfo($"{hostingEnvironment.WebRootPath}\\files\\");
-            var existingZipFile = di.GetFiles().Where(x => x.Extension == ".zip").SingleOrDefault();
-            if (existingZipFile != null)
-            {
-                existingZipFile.Delete();
-            }
-            di = new DirectoryInfo($"{hostingEnvironment.WebRootPath}\\files\\content");
+            var di = new DirectoryInfo(_path);
+            var existingZipFile = di.GetFiles().SingleOrDefault(x => x.Extension == ".zip");
+
+            existingZipFile?.Delete();
+
+            di = new DirectoryInfo(_path + @"\content");
 
             foreach (FileInfo file in di.EnumerateFiles())
             {
@@ -283,17 +314,14 @@ namespace API.Controllers
             {
                 dir.Delete(true);
             }
-            string fileName = $"{hostingEnvironment.WebRootPath}\\files\\{zipFile.FileName}";
+            string fileName = _path + $"\\{ zipFile.FileName}";
             using (FileStream fs = System.IO.File.Create(fileName))
             {
                 zipFile.CopyTo(fs);
                 fs.Flush();
-            };
-            //if (contentFile == null)
-            //{
-            //    throw new Exception("Zip file not found! please Upload xml file and try again!");
-            //}
-            //ZipFile.ExtractToDirectory(contentFile, $"{hostingEnvironment.WebRootPath}\\files\\content", true);
+            }
+
+            ZipFile.ExtractToDirectory(fileName, _path + @"\content", true);
 
         }
     }

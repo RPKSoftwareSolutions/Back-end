@@ -359,9 +359,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("TKD.DomainModel.TKDModels.SekaniRoot", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("Id");
 
                     b.Property<bool>("IsNull");
 

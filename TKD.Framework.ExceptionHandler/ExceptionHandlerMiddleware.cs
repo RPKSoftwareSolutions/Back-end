@@ -46,7 +46,7 @@ namespace TKD.Framework.ExceptionHandler
             }
             else
             {
-                customException.Message = "Unexpected error";
+                customException.Message = exception.Message;
             }
 
             response.ContentType = "application/json";

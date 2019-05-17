@@ -255,8 +255,7 @@ namespace Infrastructure.Migrations
                 name: "SekaniRoots",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Id = table.Column<int>(nullable: false),
                     IsNull = table.Column<bool>(nullable: false),
                     RootWord = table.Column<string>(nullable: true),
                     SekaniCategoryId = table.Column<int>(nullable: false),
