@@ -97,7 +97,7 @@ namespace API.ParamModels
         [XmlElement(ElementName = "examples")]
         public List<Example> Examples { get; set; }
         [XmlElement(ElementName = "attributes")]
-        public List<Attribute> Attributes { get; set; }
+        public Attribute Attributes { get; set; }
     }
 
 
@@ -127,10 +127,10 @@ namespace API.ParamModels
     public class Attribute
     {
         [XmlElement(ElementName = "element")]
-        public AttributeElement AttributeElement { get; set; }
+        public List<AttributeElement> AttributeElement { get; set; }
     }
 
-
+    [XmlRoot(ElementName = "element")]
     public class AttributeElement
     {
         [XmlElement(ElementName = "key")]

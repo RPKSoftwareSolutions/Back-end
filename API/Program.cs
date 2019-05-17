@@ -20,7 +20,11 @@ namespace API
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
+                .UseKestrel(o =>
+                {
+                    o.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(30);
+                    o.ListenAnyIP(5001);
+                })
                 .UseUrls("http://localhost:5001")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()

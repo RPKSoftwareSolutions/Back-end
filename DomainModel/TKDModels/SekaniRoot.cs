@@ -10,6 +10,7 @@ namespace TKD.DomainModel.TKDModels
     public class SekaniRoot
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]

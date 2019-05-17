@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Framework.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace TKD.Infrastructure
 {
@@ -27,7 +28,7 @@ namespace TKD.Infrastructure
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            return Context.Set<T>().Where(predicate);
+            return Context.Set<T>().AsNoTracking().Where(predicate);
         }
 
         public T Get(int id)
@@ -37,7 +38,7 @@ namespace TKD.Infrastructure
 
         public IEnumerable<T> GetAll()
         {
-            return Context.Set<T>().ToList();
+            return Context.Set<T>().AsNoTracking();
         }
 
         public void Remove(T entity)

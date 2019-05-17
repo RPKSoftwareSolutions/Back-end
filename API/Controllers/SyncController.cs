@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TKD.Infrastructure;
-using TKD.ReadModel.Contract;
 using TKD.ReadModel.Contract.DomainDto;
 
 namespace API.Controllers
@@ -38,7 +37,6 @@ namespace API.Controllers
         [HttpGet("sekaniCategories/{timestamp}")]
         public IList<SekaniCategoryDto> GetSekaniCategories(DateTime timestamp)
         {
-
             var items = _unitOfWork.SekaniCategories.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
             return _mapper.Map<IList<SekaniCategoryDto>>(items);
         }
@@ -46,15 +44,14 @@ namespace API.Controllers
         [HttpGet("sekaniForms/{timestamp}")]
         public IList<SekaniFormDto> GetSekaniForms(DateTime timestamp)
         {
-
             var items = _unitOfWork.SekaniForms.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
             return _mapper.Map<IList<SekaniFormDto>>(items);
         }
 
         [HttpGet("englishWords/{timestamp}")]
+
         public IList<EnglishWordDto> GetEnglishWords(DateTime timestamp)
         {
-
             var items = _unitOfWork.EnglishWords.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
             return _mapper.Map<IList<EnglishWordDto>>(items);
         }
@@ -62,15 +59,20 @@ namespace API.Controllers
         [HttpGet("sekaniRootImages/{timestamp}")]
         public IList<SekaniRootImageDto> GetSekaniRootImages(DateTime timestamp)
         {
-
-            var items = _unitOfWork.SekaniRootImages.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
-            return _mapper.Map<IList<SekaniRootImageDto>>(items);
+            var items = _unitOfWork.SekaniRootImages.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0).Select(a => new SekaniRootImageDto
+            {
+                Id = a.Id,
+                Format = a.Format,
+                Notes = a.Notes,
+                SekaniRootId = a.SekaniRootId,
+                UpdateTime = a.UpdateTime
+            }).ToList();
+            return items;
         }
 
         [HttpGet("sekaniRoots/{timestamp}")]
         public IList<SekaniRootDto> GetSekaniRoots(DateTime timestamp)
         {
-
             var items = _unitOfWork.SekaniRoots.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
             return _mapper.Map<IList<SekaniRootDto>>(items);
         }
@@ -103,16 +105,35 @@ namespace API.Controllers
         public IList<SekaniWordAudioDto> GetSekaniWordAudios(DateTime timestamp)
         {
 
-            var items = _unitOfWork.SekaniWordAudios.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
-            return _mapper.Map<IList<SekaniWordAudioDto>>(items);
+            var items = _unitOfWork.SekaniWordAudios.
+                Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0)
+                .Select(a => new SekaniWordAudioDto()
+                {
+                    Id = a.Id,
+                    Format = a.Format,
+                    UpdateTime = a.UpdateTime,
+                    Notes = a.Notes,
+                    SekaniWordId = a.SekaniWordId
+
+                }).ToList();
+
+            return items;
         }
 
         [HttpGet("sekaniWordExampleAudios/{timestamp}")]
         public IList<SekaniWordExampleAudioDto> GetSekaniWordExampleAudios(DateTime timestamp)
         {
 
-            var items = _unitOfWork.SekaniWordExampleAudios.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
-            return _mapper.Map<IList<SekaniWordExampleAudioDto>>(items);
+            var items = _unitOfWork.SekaniWordExampleAudios.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0)
+                .Select(a => new SekaniWordExampleAudioDto()
+                {
+                    UpdateTime = a.UpdateTime,
+                    Format = a.Format,
+                    Notes = a.Notes,
+                    Id = a.Id,
+                    SekaniWordExampleId = a.SekaniWordExampleId
+                }).ToList();
+            return items;
         }
 
         [HttpGet("sekaniWordExamples/{timestamp}")]

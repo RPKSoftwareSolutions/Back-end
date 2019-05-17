@@ -1,14 +1,10 @@
-﻿using API.Helpers;
-
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure;
 using TKD.DomainModel.TKDModels;
 using TKD.Infrastructure;
 
@@ -16,7 +12,7 @@ namespace API.Controllers
 {
     [Route("[controller]")]
     [Authorize]
-    public class SekaniRootImagesController: Controller
+    public class SekaniRootImagesController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         public SekaniRootImagesController(IUnitOfWork unitOfWork)
@@ -28,7 +24,9 @@ namespace API.Controllers
         public ActionResult PostImage([FromForm] IFormFile imageFile, [FromForm] int sekaniRootId, [FromForm] string notes)
         {
             if (imageFile.Length > 505000)
+            {
                 return BadRequest("The file exceeds maximum allowed size.");
+            }
 
             byte[] imageBytes = new byte[0];
             if (imageFile.Length > 0)
@@ -59,6 +57,12 @@ namespace API.Controllers
         {
             var image = this._unitOfWork.SekaniRootImages.GetAll().Where(i => i.SekaniRootId == sekaniRootId).FirstOrDefault();
             return Ok(image);
+        }
+        [HttpGet("GetById/{sekaniImageId}")]
+        public SekaniRootImage GetById(int sekaniImageId)
+        {
+            var image = _unitOfWork.SekaniRootImages.Get(sekaniImageId);
+            return image;
         }
 
         [HttpDelete("delete/{id}")]

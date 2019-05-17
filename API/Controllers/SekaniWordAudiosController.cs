@@ -1,14 +1,10 @@
-﻿using API.Helpers;
-
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure;
 using TKD.DomainModel.TKDModels;
 using TKD.Infrastructure;
 
@@ -17,7 +13,7 @@ namespace API.Controllers
 {
     [Route("[controller]")]
     [Authorize]
-    public class SekaniWordAudiosController: Controller
+    public class SekaniWordAudiosController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         public SekaniWordAudiosController(IUnitOfWork unitOfWork)
@@ -29,7 +25,9 @@ namespace API.Controllers
         public ActionResult PostAudio([FromForm] IFormFile soundFile, [FromForm] int sekaniWordId, [FromForm] string notes)
         {
             if (soundFile.Length > 505000)
+            {
                 return BadRequest("The file exceeds maximum allowed size.");
+            }
 
             byte[] soundBytes = new byte[0];
             if (soundFile.Length > 0)
@@ -56,10 +54,16 @@ namespace API.Controllers
         }
 
         [HttpGet("get/{sekaniWordId}")]
-        public ActionResult Get(int sekaniWordId)
+        public SekaniWordAudio Get(int sekaniWordId)
         {
-            var sound = this._unitOfWork.SekaniWordAudios.GetAll().Where(i => i.SekaniWordId == sekaniWordId).FirstOrDefault();
-            return Ok(sound);
+            var sound = this._unitOfWork.SekaniWordAudios.GetAll().FirstOrDefault(i => i.SekaniWordId == sekaniWordId);
+            return sound;
+        }
+        [HttpGet("GetById/{sekaniWordAudioId}")]
+        public SekaniWordAudio GetById(int sekaniWordAudioId)
+        {
+            var sound = this._unitOfWork.SekaniWordAudios.GetAll().FirstOrDefault(i => i.Id == sekaniWordAudioId);
+            return sound;
         }
 
         [HttpDelete("delete/{id}")]

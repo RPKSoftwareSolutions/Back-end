@@ -1,13 +1,14 @@
-﻿using API.Config;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
-using AutoMapper;
 using TKD.Framework.ExceptionHandler;
 using TKD.Framework.Swagger;
 using TKD.Infrastructure;
@@ -35,7 +36,16 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(
+                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                         ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.Configure<FormOptions>(x =>
+            {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue;
+            });
+
             services.AddAutoMapper();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
