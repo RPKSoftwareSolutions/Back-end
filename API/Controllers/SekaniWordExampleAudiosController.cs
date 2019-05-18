@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
 using TKD.Infrastructure;
 
 namespace API.Controllers

@@ -31,6 +31,7 @@ namespace TKD.Infrastructure
         IUserActivityStatRepository UserActivityStats { get; set; }
         IUserLearnedWordRepository UserLearnedWords { get; set; }
         IUserFailedWordRepository UserFailedWords { get; set; }
+        IGameRepository GameRepository { get; set; }
 
         int Complete();
     }

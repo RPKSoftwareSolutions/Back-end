@@ -28,7 +28,7 @@ namespace TKD.Infrastructure
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            return Context.Set<T>().AsNoTracking().Where(predicate);
+            return Context.Set<T>().Where(predicate);
         }
 
         public T Get(int id)

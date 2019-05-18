@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TKD.Domain.AuthenticateModels;
 using TKD.DomainModel.AuthenticateModels;
 using TKD.Infrastructure.RepoInterfaces.Auth;
 using Client = TKD.DomainModel.AuthenticateModels.Client;

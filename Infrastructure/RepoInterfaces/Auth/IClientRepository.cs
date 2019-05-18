@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework.Core;
+using TKD.Domain.AuthenticateModels;
 using TKD.DomainModel.AuthenticateModels;
 using Client = TKD.DomainModel.AuthenticateModels.Client;
 

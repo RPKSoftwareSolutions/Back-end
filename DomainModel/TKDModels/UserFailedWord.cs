@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TKD.Domain.AuthenticateModels;
 using TKD.DomainModel.AuthenticateModels;
 
-namespace TKD.DomainModel.TKDModels
+namespace TKD.Domain.TKDModels
 {
     public class UserFailedWord
     {
@@ -24,9 +25,6 @@ namespace TKD.DomainModel.TKDModels
         [ForeignKey("SekaniWordId")]
         public virtual SekaniWord SekaniWord { get; set; }
 
-        public UserFailedWord()
-        {
-
-        }
+      
     }
 }

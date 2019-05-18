@@ -4,8 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-namespace TKD.DomainModel.TKDModels
+namespace TKD.Domain.TKDModels
 {
     public class SekaniRoot
     {
@@ -37,17 +36,17 @@ namespace TKD.DomainModel.TKDModels
         [ForeignKey("SekaniFormId")]
         public virtual SekaniForm SekaniForm { get; set; }
 
-        public virtual ICollection<SekaniRootEnglishWord> SekaniRoots_EnglishWords { get; set; }
+        public virtual ICollection<SekaniRootEnglishWord> SekaniRootsEnglishWords { get; set; }
         public virtual ICollection<SekaniRootImage> SekaniRootImages { get; set; }
         public virtual ICollection<SekaniWord> SekaniWords { get; set; }
-        public virtual ICollection<SekaniRootTopic> SekaniRoots_Topics { get; set; }
+        public virtual ICollection<SekaniRootTopic> SekaniRootsTopics { get; set; }
 
         public SekaniRoot()
         {
-            SekaniRoots_EnglishWords = new Collection<SekaniRootEnglishWord>();
+            SekaniRootsEnglishWords = new Collection<SekaniRootEnglishWord>();
             this.SekaniWords = new Collection<SekaniWord>();
             this.SekaniRootImages = new Collection<SekaniRootImage>();
-            this.SekaniRoots_Topics = new Collection<SekaniRootTopic>();
+            this.SekaniRootsTopics = new Collection<SekaniRootTopic>();
         }
     }
 }

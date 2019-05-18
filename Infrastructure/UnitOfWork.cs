@@ -36,7 +36,7 @@ namespace TKD.Infrastructure
         public IUserLearnedWordRepository UserLearnedWords { get; set; }
         public IUserFailedWordRepository UserFailedWords { get; set; }
 
-
+        public IGameRepository GameRepository { get; set; }
         public UnitOfWork(AppDbContext context)
         {
             this.context = context;
@@ -64,6 +64,7 @@ namespace TKD.Infrastructure
             UserActivityStats = new UserActivityStatRepository(this.context);
             UserLearnedWords = new UserLearnedWordRepository(this.context);
             UserFailedWords = new UserFailedWordRepository(this.context);
+             GameRepository =new GameRepository(this.context);
         }
         public int Complete()
         {

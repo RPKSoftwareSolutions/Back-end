@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
-using Infrastructure;
+
 using TKD.Infrastructure;
-using PersistedGrant = TKD.DomainModel.AuthenticateModels.PersistedGrant;
+using PersistedGrant = TKD.Domain.AuthenticateModels.PersistedGrant;
 
 namespace AuthServer.Auth
 {

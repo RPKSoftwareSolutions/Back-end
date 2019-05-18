@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CryptoHelper;
-using Infrastructure;
+using TKD.Domain.AuthenticateModels;
 using TKD.DomainModel.AuthenticateModels;
 using TKD.Infrastructure;
 
@@ -114,8 +114,7 @@ namespace API.Controllers
 
             item.Username = item.Email;
             item.Active = true;
-            item.EmailVerified = true;
-            item.SekaniLevelId = _unitOfWork.SekaniLevels.Find(x => x.Id > 0).FirstOrDefault().Id;
+            item.EmailVerified = true;           
 
             item.Password = Crypto.HashPassword(item.Password);
             _unitOfWork.Users.Add(item);

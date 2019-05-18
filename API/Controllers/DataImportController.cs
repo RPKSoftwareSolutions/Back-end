@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
 using TKD.Infrastructure;
 
 
@@ -115,7 +115,7 @@ namespace API.Controllers
                         var word = englishWordList.Find(x => x.Word == ew);
                         if (word != null)
                         {
-                            sekaniRoot.SekaniRoots_EnglishWords.Add(new SekaniRootEnglishWord { EnglishWordId = word.Id, UpdateTime = DateTime.Now });
+                            sekaniRoot.SekaniRootsEnglishWords.Add(new SekaniRootEnglishWord { EnglishWordId = word.Id, UpdateTime = DateTime.Now });
                         }
                     });
 
@@ -123,7 +123,7 @@ namespace API.Controllers
                     {
                         var topic = sekaniTopicsList.Find(x => x.Title == t);
 
-                        sekaniRoot.SekaniRoots_Topics.Add(new SekaniRootTopic { TopicId = topic.Id, UpdateTime = DateTime.Now });
+                        sekaniRoot.SekaniRootsTopics.Add(new SekaniRootTopic { TopicId = topic.Id, UpdateTime = DateTime.Now });
 
                     });
 

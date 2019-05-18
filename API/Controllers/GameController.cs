@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using API.Helpers;
+﻿using API.Helpers;
 using API.Responses;
-using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
+using TKD.Contracts;
+using TKD.Framework.Core;
 using TKD.Infrastructure;
 
 namespace API.Controllers
@@ -15,20 +15,57 @@ namespace API.Controllers
     [Authorize]
     public class GameController : Controller
     {
-        private readonly IUnitOfWork _unitofwork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GameController(IUnitOfWork unitofwork)
+        public GameController(IUnitOfWork unitOfWork)
         {
-            _unitofwork = unitofwork;
+            _unitOfWork = unitOfWork;
         }
         [HttpGet]
         public GameInitialDataDto GetGameInit()
         {
-            GameInitialDataDto resault=new GameInitialDataDto();
-               var uyser = _unitofwork.UserActivityStats.Find(
-                 a => a.UserId == UserHelper.GetCurrentUserId(User));
+            var userId = UserHelper.GetCurrentUserId(User);
+            GameInitialDataDto result = new GameInitialDataDto();
+            var user = _unitOfWork.UserActivityStats
+                .Find(a => a.UserId == userId)
+                .ToList();
+            int userLevel = int.Parse(user.Single(a => a.Variable == UserActivity.Level).Value);
+            result.Life = int.Parse(user.Single(a => a.Variable == UserActivity.Life).Value);
+            result.Score = int.Parse(user.Single(a => a.Variable == UserActivity.Score).Value);
+            result.TotalRoundCount = int.Parse(user.Single(a => a.Variable == UserActivity.TotalRoundCount).Value);
+            result.CorrectAnswersCount = int.Parse(user.Single(a => a.Variable == UserActivity.CorrectAnswersCount).Value);
+            result.FailedRoundCount = int.Parse(user.Single(a => a.Variable == UserActivity.FailAnswersCount).Value);
 
-            return resault;
+            if(result.TotalRoundCount == (result.CorrectAnswersCount+ result.FailedRoundCount))
+                throw new DomainException(502,"User Finished Rounds");
+            if (result.Life == 0)
+                throw new DomainException(502, "User Life IS Finished");
+
+            result.GameData = JsonConvert.SerializeObject(GetGame1Data(userId, userLevel));
+
+            return result;
+        }
+        [HttpPost]
+        public void CorrectAnswer(int sekaniWordId)
+        {
+
+        }
+        [HttpPost]
+        public void FailAnswer(int sekaniWordId)
+        {
+
+        }
+        private Game1Data GetGame1Data(int userId, int userLevel)
+        {
+            Game1Data data = new Game1Data();
+            var sekaniWord = _unitOfWork.GameRepository.GetRandomSekaniWord(userId, userLevel);
+            data.SekaniWordId = sekaniWord.Id;
+            data.CurrentEnglishWord = sekaniWord.SekaniRoot.SekaniRootsEnglishWords.First().EnglishWord.Id;
+            data.EnglishWords.Add(data.CurrentEnglishWord);
+            var otherEnglishWords = _unitOfWork.GameRepository.GetDifferentEnglishWords(sekaniWord.SekaniRootId)
+                .Select(a => a.Id).ToList();
+            data.EnglishWords.AddRange(otherEnglishWords);
+            return data;
         }
     }
 }

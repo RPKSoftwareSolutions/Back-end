@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
 using TKD.ReadModel.Contract.DomainDto;
 
 namespace API.Config

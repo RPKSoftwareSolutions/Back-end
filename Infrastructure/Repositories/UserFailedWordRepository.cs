@@ -1,5 +1,4 @@
-﻿
-using TKD.DomainModel.TKDModels;
+﻿using TKD.Domain.TKDModels;
 using TKD.Infrastructure.RepoInterfaces;
 
 namespace TKD.Infrastructure.Repositories

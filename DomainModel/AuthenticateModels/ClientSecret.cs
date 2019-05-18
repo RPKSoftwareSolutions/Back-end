@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using IdentityServer4.Models;
+using Client = TKD.DomainModel.AuthenticateModels.Client;
 
-namespace TKD.DomainModel.AuthenticateModels
+namespace TKD.Domain.AuthenticateModels
 {
     public class ClientSecret: Secret
     {

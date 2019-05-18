@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TKD.DomainModel.AuthenticateModels
+namespace TKD.Domain.AuthenticateModels
 {
     public class UserClaim
     {

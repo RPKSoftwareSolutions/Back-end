@@ -7,9 +7,9 @@ using System.Linq;
 using System.Collections.Generic;
 
 using System.Threading.Tasks;
-using Infrastructure;
+
 using Microsoft.EntityFrameworkCore;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
 using TKD.Infrastructure;
 
 namespace API.Controllers

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TKD.Domain.AuthenticateModels;
 
 namespace TKD.DomainModel.AuthenticateModels
 {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TKD.Domain.AuthenticateModels;
+using TKD.Domain.TKDModels;
 using TKD.DomainModel.AuthenticateModels;
-using TKD.DomainModel.TKDModels;
 
 namespace TKD.Infrastructure
 {

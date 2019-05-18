@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace TKD.DomainModel.TKDModels
+namespace TKD.Domain.TKDModels
 {
     
     public class Topic
@@ -17,11 +17,11 @@ namespace TKD.DomainModel.TKDModels
 
         public DateTime UpdateTime { get; set; }
 
-        public virtual ICollection<SekaniRootTopic> SekaniRoots_Topics { get; set; }
+        public virtual ICollection<SekaniRootTopic> SekaniRootsTopics { get; set; }
 
         public Topic()
         {
-            this.SekaniRoots_Topics = new Collection<SekaniRootTopic>();
+            this.SekaniRootsTopics = new Collection<SekaniRootTopic>();
         }
 
     }

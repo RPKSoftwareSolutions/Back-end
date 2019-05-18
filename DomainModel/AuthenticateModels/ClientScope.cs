@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TKD.DomainModel.AuthenticateModels;
 
-namespace TKD.DomainModel.AuthenticateModels
+namespace TKD.Domain.AuthenticateModels
 {
     public class ClientScope
     {

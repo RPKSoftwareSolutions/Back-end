@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-
-namespace TKD.DomainModel.TKDModels
+namespace TKD.Domain.TKDModels
 {
     public class EnglishWord
     {
@@ -18,11 +17,11 @@ namespace TKD.DomainModel.TKDModels
 
         public DateTime UpdateTime { get; set; }
 
-        public virtual ICollection<SekaniRootEnglishWord> SekaniRoots_EnglishWords { get; set; }
+        public virtual ICollection<SekaniRootEnglishWord> SekaniRootsEnglishWords { get; set; }
 
         public EnglishWord()
         {
-            this.SekaniRoots_EnglishWords = new Collection<SekaniRootEnglishWord>();
+            this.SekaniRootsEnglishWords = new Collection<SekaniRootEnglishWord>();
         }
     }
 }
