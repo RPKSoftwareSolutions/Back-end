@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using TKD.Contracts;
 using TKD.Framework.Core;
 using TKD.Infrastructure;
@@ -21,7 +20,7 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        [HttpGet]
+        [HttpGet("GetGameInit")]
         public GameInitialDataDto GetGameInit()
         {
             var userId = UserHelper.GetCurrentUserId(User);
@@ -36,25 +35,33 @@ namespace API.Controllers
             result.CorrectAnswersCount = int.Parse(user.Single(a => a.Variable == UserActivity.CorrectAnswersCount).Value);
             result.FailedRoundCount = int.Parse(user.Single(a => a.Variable == UserActivity.FailAnswersCount).Value);
 
-            if(result.TotalRoundCount == (result.CorrectAnswersCount+ result.FailedRoundCount))
-                throw new DomainException(502,"User Finished Rounds");
-            if (result.Life == 0)
-                throw new DomainException(502, "User Life IS Finished");
+            if (result.TotalRoundCount == (result.CorrectAnswersCount + result.FailedRoundCount))
+            {
+                throw new DomainException(502, "User Finished Rounds");
+            }
 
+            if (result.Life == 0)
+            {
+                throw new DomainException(502, "User Life IS Finished");
+            }
+
+            result.GameType = 1;
             result.GameData = JsonConvert.SerializeObject(GetGame1Data(userId, userLevel));
 
             return result;
         }
-        [HttpPost]
+
+        [HttpPost("CorrectAnswer")]
         public void CorrectAnswer(int sekaniWordId)
         {
-
+            Ok();
         }
-        [HttpPost]
+        [HttpPost("FailAnswer")]
         public void FailAnswer(int sekaniWordId)
         {
-
+            Ok();
         }
+
         private Game1Data GetGame1Data(int userId, int userLevel)
         {
             Game1Data data = new Game1Data();
