@@ -77,7 +77,7 @@ namespace API.Controllers
             return _mapper.Map<IList<SekaniRootDto>>(items);
         }
 
-        [HttpGet("sekaniRoots_EnglishWords/{timestamp}")]
+        [HttpGet("SekaniRootsEnglishWords/{timestamp}")]
         public IList<SekaniRootEnglishWordDto> GetSekaniRootEnglishWords(DateTime timestamp)
         {
 
@@ -85,7 +85,7 @@ namespace API.Controllers
             return _mapper.Map<IList<SekaniRootEnglishWordDto>>(items);
         }
 
-        [HttpGet("sekaniRoots_Topics/{timestamp}")]
+        [HttpGet("SekaniRootsTopics/{timestamp}")]
         public IList<SekaniRootTopicDto> GetSekaniRootsTopics(DateTime timestamp)
         {
 
@@ -294,8 +294,8 @@ namespace API.Controllers
             return Ok(obj);
         }
 
-        [HttpPost("sekaniRoots_EnglishWordsDeleted")]
-        public ActionResult GetSekaniRoots_EnglishWordsDeleted([FromBody] IdArray ids)
+        [HttpPost("SekaniRootsEnglishWordsDeleted")]
+        public ActionResult GetSekaniRootsEnglishWordsDeleted([FromBody] IdArray ids)
         {
             if (ids.Ids.Length == 0)
             {
@@ -311,8 +311,8 @@ namespace API.Controllers
             return Ok(obj);
         }
 
-        [HttpPost("sekaniRoots_TopicsDeleted")]
-        public ActionResult GetSekaniRoots_TopicsDeleted([FromBody] IdArray ids)
+        [HttpPost("SekaniRootsTopicsDeleted")]
+        public ActionResult GetSekaniRootsTopicsDeleted([FromBody] IdArray ids)
         {
             if (ids.Ids.Length == 0)
             {

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Helpers;
-using Infrastructure;
+
 using Microsoft.AspNetCore.Http;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
 using TKD.Infrastructure;
 
 namespace API.Controllers

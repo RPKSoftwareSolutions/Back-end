@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Infrastructure;
+using TKD.Domain.AuthenticateModels;
 using TKD.DomainModel.AuthenticateModels;
 using TKD.Infrastructure;
 

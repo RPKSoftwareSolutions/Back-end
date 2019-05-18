@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TKD.DomainModel.TKDModels
+namespace TKD.Domain.TKDModels
 {
     public class SekaniWordAudio
     {

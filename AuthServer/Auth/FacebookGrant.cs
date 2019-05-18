@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Infrastructure;
+using TKD.Domain.AuthenticateModels;
 using TKD.DomainModel.AuthenticateModels;
 using TKD.Infrastructure;
 using static IdentityModel.OidcConstants;

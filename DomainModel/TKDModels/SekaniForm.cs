@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-
-namespace TKD.DomainModel.TKDModels
+namespace TKD.Domain.TKDModels
 {
     public class SekaniForm
     {

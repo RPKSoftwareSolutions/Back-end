@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.Framework.ExceptionHand
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.ReadModel.Contract", "TKD.ReadModel.Contract\TKD.ReadModel.Contract.csproj", "{49A829BF-D6F1-4FCC-B97C-E9A95D226920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TKD.Framework.Swagger", "TKD.Freamework.Swagger\TKD.Framework.Swagger.csproj", "{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TKD.Framework.Swagger", "TKD.Freamework.Swagger\TKD.Framework.Swagger.csproj", "{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TKD.Contracts", "TKD.Contracts\TKD.Contracts.csproj", "{B1026484-822B-4038-8750-9E7B6CCD0492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BFD04B8-6E37-4CDC-B4CE-35C2F25599FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1026484-822B-4038-8750-9E7B6CCD0492}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1026484-822B-4038-8750-9E7B6CCD0492}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1026484-822B-4038-8750-9E7B6CCD0492}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1026484-822B-4038-8750-9E7B6CCD0492}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

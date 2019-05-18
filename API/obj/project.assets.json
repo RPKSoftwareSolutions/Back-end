@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "AutoMapper/8.0.0": {
+      "AutoMapper/8.1.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
@@ -15,10 +15,10 @@
           "lib/netstandard2.0/AutoMapper.dll": {}
         }
       },
-      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.1.0": {
         "type": "package",
         "dependencies": {
-          "AutoMapper": "8.0.0",
+          "AutoMapper": "8.1.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
         },
         "compile": {
@@ -5819,6 +5819,16 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "TKD.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.2",
+        "compile": {
+          "bin/placeholder/TKD.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TKD.Contracts.dll": {}
+        }
+      },
       "TKD.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.2",
@@ -5904,14 +5914,14 @@
     }
   },
   "libraries": {
-    "AutoMapper/8.0.0": {
-      "sha512": "px8ZMtIq84dxciB29V+ZYOtsRLZP4JlflDDMW13LyeRdwsnIInzlcSHSxpWmVD6U3bbOl2FeLlgomnVtm0jvXw==",
+    "AutoMapper/8.1.0": {
+      "sha512": "Go75WXHE7p/8CtRaxZnvVEfcSh7xpE6zx9wkgN4I1BxvlzP0hoiTLHSXDYXgv9CoxaRj4ahwzCA/iwdpvyQyOA==",
       "type": "package",
-      "path": "automapper/8.0.0",
+      "path": "automapper/8.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "automapper.8.0.0.nupkg.sha512",
+        "automapper.8.1.0.nupkg.sha512",
         "automapper.nuspec",
         "lib/net461/AutoMapper.dll",
         "lib/net461/AutoMapper.pdb",
@@ -5921,14 +5931,14 @@
         "lib/netstandard2.0/AutoMapper.xml"
       ]
     },
-    "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
-      "sha512": "njWYKGM3FokOlo9nj8kVLYyvJrGbLItmNA2A00lDXJnxybfP7TuZEYjQRt8ne+Cp0OF4W0ZzgdgxMioHfDEpdA==",
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/6.1.0": {
+      "sha512": "vqbyqXknln1NFn80fbyJVPqJ3LMZhhhq8wMAl4BGTIH6GmK3gtGofuvo8bnWXXuD07y1lnMEuCmiNacvdtxPkw==",
       "type": "package",
-      "path": "automapper.extensions.microsoft.dependencyinjection/6.0.0",
+      "path": "automapper.extensions.microsoft.dependencyinjection/6.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.6.1.0.nupkg.sha512",
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.pdb"
@@ -15513,6 +15523,11 @@
         "windowsazure.storage.nuspec"
       ]
     },
+    "TKD.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../TKD.Contracts/TKD.Contracts.csproj",
+      "msbuildProject": "../TKD.Contracts/TKD.Contracts.csproj"
+    },
     "TKD.Domain/1.0.0": {
       "type": "project",
       "path": "../DomainModel/TKD.Domain.csproj",
@@ -15546,8 +15561,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
-      "AutoMapper >= 8.0.0",
-      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.0.0",
+      "AutoMapper >= 8.1.0",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.1.0",
       "CryptoHelper >= 3.0.2",
       "IdentityServer4.AccessTokenValidation >= 2.7.0",
       "Microsoft.AspNetCore.All >= 2.2.4",
@@ -15555,6 +15570,7 @@
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
       "Swashbuckle.AspNetCore >= 4.0.1",
+      "TKD.Contracts >= 1.0.0",
       "TKD.Domain >= 1.0.0",
       "TKD.Framework.ExceptionHandler >= 1.0.0",
       "TKD.Framework.Swagger >= 1.0.0",
@@ -15598,6 +15614,9 @@
             "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\TKD.Infrastructure.csproj": {
               "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\Infrastructure\\TKD.Infrastructure.csproj"
             },
+            "D:\\Projects\\SekaniDic\\Back-end\\TKD.Contracts\\TKD.Contracts.csproj": {
+              "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\TKD.Contracts\\TKD.Contracts.csproj"
+            },
             "D:\\Projects\\SekaniDic\\Back-end\\TKD.Framework.ExceptionHandler\\TKD.Framework.ExceptionHandler.csproj": {
               "projectPath": "D:\\Projects\\SekaniDic\\Back-end\\TKD.Framework.ExceptionHandler\\TKD.Framework.ExceptionHandler.csproj"
             },
@@ -15621,11 +15640,11 @@
         "dependencies": {
           "AutoMapper": {
             "target": "Package",
-            "version": "[8.0.0, )"
+            "version": "[8.1.0, )"
           },
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
-            "version": "[6.0.0, )"
+            "version": "[6.1.0, )"
           },
           "CryptoHelper": {
             "target": "Package",

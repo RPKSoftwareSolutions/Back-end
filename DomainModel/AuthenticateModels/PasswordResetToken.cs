@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using TKD.Domain.AuthenticateModels;
 
 namespace TKD.DomainModel.AuthenticateModels
 {

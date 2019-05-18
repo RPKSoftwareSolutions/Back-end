@@ -4,9 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
+using TKD.DomainModel.AuthenticateModels;
 
-namespace TKD.DomainModel.AuthenticateModels
+namespace TKD.Domain.AuthenticateModels
 {
     public class User
     {
@@ -39,10 +40,7 @@ namespace TKD.DomainModel.AuthenticateModels
         public bool PhoneNumberVerified { get; set; }
 
         
-        public int SekaniLevelId { get; set; }
-
-        [ForeignKey("SekaniLevelId")]
-        public virtual SekaniLevel SekaniLevel { get; set; }
+       
 
         // user's claims...
         public virtual ICollection<UserClaim> Claims { get; set; }
@@ -55,9 +53,9 @@ namespace TKD.DomainModel.AuthenticateModels
 
         public virtual ICollection<UserActivityStat> ActivityStats { get; set; }
 
-        public virtual ICollection<UserLearnedWord> LearntWords { get; set; }
-
-        public virtual ICollection<UserFailedWord> FailedWords { get; set; }
+        public virtual ICollection<UserLearnedWord> UserLearnedWords { get; set; }
+        
+        public virtual ICollection<UserFailedWord> UserFailedWords { get; set; }
 
         public User()
         {
@@ -65,8 +63,8 @@ namespace TKD.DomainModel.AuthenticateModels
             PasswordResetTokens = new Collection<PasswordResetToken>();
             EmailVerificationTokens = new Collection<EmailVerificationToken>();
             ActivityStats = new Collection<UserActivityStat>();
-            LearntWords = new Collection<UserLearnedWord>();
-            FailedWords = new Collection<UserFailedWord>();
+            UserLearnedWords = new Collection<UserLearnedWord>();
+            UserFailedWords = new Collection<UserFailedWord>();
         }
 
     }

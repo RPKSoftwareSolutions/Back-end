@@ -1,5 +1,5 @@
 ﻿using Framework.Core;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
 
 namespace TKD.Infrastructure.RepoInterfaces
 {

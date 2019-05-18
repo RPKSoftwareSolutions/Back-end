@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using Infrastructure;
-using TKD.DomainModel.TKDModels;
+using TKD.Domain.TKDModels;
 using TKD.Infrastructure;
 
 namespace API.Controllers

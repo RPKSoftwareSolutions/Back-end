@@ -1,12 +1,13 @@
 ﻿using API.Helpers;
 using API.Requests;
 using CryptoHelper;
-using Infrastructure;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net.Mail;
 using System.Security.Claims;
+using TKD.Domain.AuthenticateModels;
 using TKD.DomainModel.AuthenticateModels;
 using TKD.Infrastructure;
 
@@ -68,8 +69,7 @@ namespace API.Controllers
                 EmailVerified = false,
                 PhoneNumberVerified = false,
                 Username = signUpRequest.Email,
-                Active = false,
-                SekaniLevelId = 1
+                Active = false
             };
 
             _unitOfWork.Users.Add(user);
