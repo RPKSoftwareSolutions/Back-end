@@ -33,6 +33,48 @@ namespace TKD.Infrastructure.Migrations
             (N'', N'8', N'2018-07-18T03:01:53.37' ), 
             (N'', N'9', N'2018-07-18T03:01:53.37' ), 
             (N'', N'10', N'2018-07-18T03:01:53.37' )");
+
+
+            migrationBuilder.Sql(@"INSERT INTO dbo.UserActivityStats
+            (
+                UpdateTime,
+                UserId,
+                Value,
+                Variable
+            )
+            VALUES
+            (SYSDATETIME(),
+                1,
+                N'1',
+            N'Level'
+                ),
+            (SYSDATETIME(),
+                1,
+                N'5',           
+            N'Life'
+                ),
+            (SYSDATETIME(),
+                1,
+                N'0',           
+            N'Score'
+                ),
+            (SYSDATETIME(),
+                1,
+                N'20',           
+            N'TotalRoundCount'
+                ),
+            (SYSDATETIME(),
+                1,
+                N'20',           
+            N'CorrectAnswersCount'
+                ),
+            (SYSDATETIME(),
+                1,
+                N'20',           
+            N'FailedRoundCount'
+                )");
+
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
