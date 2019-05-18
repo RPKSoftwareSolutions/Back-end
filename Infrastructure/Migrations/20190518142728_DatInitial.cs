@@ -71,7 +71,7 @@ namespace TKD.Infrastructure.Migrations
             (SYSDATETIME(),
                 1,
                 N'20',           
-            N'FailedRoundCount'
+            N'FailAnswersCount'
                 )");
 
 

@@ -117,22 +117,13 @@ namespace API
             });
             app.UseStaticFiles();
             app.UseSwagger();
-            if (env.IsDevelopment())
+
+            app.UseSwaggerUI(options =>
             {
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts API V1");
-                    options.DocExpansion(DocExpansion.None);
-                });
-            }
-            else
-            {
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/api/swagger/v1/swagger.json", "Contacts API V1");
-                    options.DocExpansion(DocExpansion.None);
-                });
-            }
+                options.SwaggerEndpoint("../swagger/v1/swagger.json", "Contacts API V1");
+                options.DocExpansion(DocExpansion.None);
+            });
+
 
             app.UseMvc();
 
