@@ -89,8 +89,15 @@ namespace API.Controllers
         public IList<SekaniRootTopicDto> GetSekaniRootsTopics(DateTime timestamp)
         {
 
-            var items = _unitOfWork.SekaniRootsTopics.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0);
-            return _mapper.Map<IList<SekaniRootTopicDto>>(items);
+            return _unitOfWork.SekaniRootsTopics.Find(x => DateTime.Compare(x.UpdateTime, timestamp) > 0).Select(a => new SekaniRootTopicDto()
+            {
+                Id = a.Id,
+                SekaniRootId = a.SekaniRootId,
+                TopicId = a.TopicId,
+                UpdateTime = a.UpdateTime
+
+            }).ToList();
+
         }
 
         [HttpGet("sekaniWordAttributes/{timestamp}")]

@@ -47,6 +47,15 @@ namespace TKD.Framework.ExceptionHandler
             else
             {
                 customException.Message = exception.Message;
+                if (exception.InnerException !=null)
+                {
+                    customException.Message = exception.InnerException.Message;
+                    if (exception.InnerException?.InnerException != null)
+                    {
+                        customException.Message = exception.InnerException.InnerException.Message;
+                    }
+                }
+               
             }
 
             response.ContentType = "application/json";
