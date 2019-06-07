@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TKD.Domain.TKDModels
 {
-    
+
     public class Topic
     {
         [Key]
@@ -16,6 +16,8 @@ namespace TKD.Domain.TKDModels
         public string Notes { get; set; }
 
         public DateTime UpdateTime { get; set; }
+        public byte[] UnlockImage { get; set; }
+        public byte[] LockImage { get; set; }
 
         public virtual ICollection<SekaniRootTopic> SekaniRootsTopics { get; set; }
 

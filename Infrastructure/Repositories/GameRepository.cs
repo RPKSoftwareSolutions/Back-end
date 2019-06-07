@@ -15,28 +15,29 @@ namespace TKD.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public SekaniWord GetRandomSekaniWord(int userId, int userLevel)
+        public IList<SekaniWord> GetRandomSekaniWord(int userId, int userLevel,int takeWords, int topicId)
         {
             var sekaniWord = _dbContext.SekaniWords
                 .Include(a => a.SekaniRoot)
                  .ThenInclude(a => a.SekaniRootsEnglishWords)
                   .ThenInclude(a => a.EnglishWord)
                 .Where(a => !_dbContext.UserLearnedWords.Any(b => b.SekaniWordId == a.Id && b.UserId == userId)
-                && a.SekaniRoot.SekaniRootsEnglishWords.Count > 0
-                && a.SekaniRoot.SekaniRootImages.Count > 0).ToList()              
+                 && a.SekaniRoot.SekaniRootsEnglishWords.Count > 0
+                 && a.SekaniRoot.SekaniRootImages.Count > 0).ToList()              
                 .OrderBy(r => Guid.NewGuid())
-                .Take(1)
-                .Single();
+                .Take(takeWords)
+                .ToList();
             return sekaniWord;
         }
         public IList<EnglishWord> GetDifferentEnglishWords(int sekaniRootId)
         {
-            var englishWords = _dbContext.SekaniRootsEnglishWords.Where(a => a.SekaniRootId != sekaniRootId)
+            var englishWords = _dbContext.SekaniRootsEnglishWords.Where(a => a.SekaniRootId != sekaniRootId && a.SekaniRoot.SekaniRootImages.Count > 0)
                .Select(a => a.EnglishWord)
                 .OrderBy(r => Guid.NewGuid())
                 .Take(3)
                 .ToList();
             return englishWords;
         }
+
     }
 }

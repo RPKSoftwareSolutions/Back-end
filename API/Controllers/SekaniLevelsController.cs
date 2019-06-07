@@ -1,13 +1,9 @@
 ﻿
+using API.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using API.Helpers;
-
-using Microsoft.AspNetCore.Http;
 using TKD.Domain.TKDModels;
 using TKD.Infrastructure;
 
@@ -15,7 +11,7 @@ namespace API.Controllers
 {
     [Route("[controller]")]
     [Authorize]
-    public class SekaniLevelsController: Controller
+    public class SekaniLevelsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         public SekaniLevelsController(IUnitOfWork unitOfWork)
@@ -42,10 +38,19 @@ namespace API.Controllers
         public ActionResult Get(int id)
         {
             var item = this._unitOfWork.SekaniLevels.Get(id);
-            if (item == null) return new NotFoundResult();
+            if (item == null)
+            {
+                return new NotFoundResult();
+            }
+
             return Ok(item);
         }
-
+        [HttpGet("getLevelImage/{id}")]
+        public byte[] getLevelImage(int id)
+        {
+            var item = this._unitOfWork.SekaniLevels.Get(id);
+            return item.Image;
+        }
         [HttpPost("post")]
         public ActionResult Post([FromBody] SekaniLevel level)
         {
@@ -59,7 +64,9 @@ namespace API.Controllers
         public ActionResult Put(int id, [FromBody] SekaniLevel level)
         {
             if (id != level.Id)
+            {
                 return StatusCode(400);
+            }
 
             var l = _unitOfWork.SekaniLevels.Get(id);
             l.Title = level.Title;
@@ -78,6 +85,6 @@ namespace API.Controllers
             return Ok();
         }
 
-        
+
     }
 }

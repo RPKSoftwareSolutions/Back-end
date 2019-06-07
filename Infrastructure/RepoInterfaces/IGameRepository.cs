@@ -7,7 +7,7 @@ namespace TKD.Infrastructure.RepoInterfaces
 {
    public interface IGameRepository
    {
-       SekaniWord GetRandomSekaniWord(int userId, int userLevel);
+       IList<SekaniWord> GetRandomSekaniWord(int userId, int userLevel,int takeWords, int topicId);
        IList<EnglishWord> GetDifferentEnglishWords(int englishWordId);
    }
 }

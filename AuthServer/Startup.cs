@@ -90,7 +90,7 @@ namespace AuthServer
             //{
                 app.UseDeveloperExceptionPage();
             //}
-
+   
             app.UseIdentityServer();
             app.UseCors(options =>
             {
@@ -100,10 +100,7 @@ namespace AuthServer
                 options.AllowCredentials();
             });
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+       
         }
     }
 }

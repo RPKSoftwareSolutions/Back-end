@@ -3,7 +3,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TKD.Domain.TKDModels;
@@ -13,7 +12,7 @@ namespace API.Controllers
 {
     [Route("[controller]")]
     [Authorize]
-    public class TopicsController: Controller
+    public class TopicsController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
         public TopicsController(IUnitOfWork unitOfWork)
@@ -37,12 +36,29 @@ namespace API.Controllers
             var R = PageRecordsSelector.GetPageRecords(subset, pageSize, pageIndex, count);
             return Ok(R);
         }
+        [HttpGet("getLockImage/{id}")]
+        public byte[] getLockImage(int id)
+        {
+            var item = this._unitOfWork.Topics.Get(id);
+            return item.LockImage;
+        }
+
+        [HttpGet("getUnlockImage/{id}")]
+        public byte[] getUnlockImage(int id)
+        {
+            var item = this._unitOfWork.Topics.Get(id);
+            return item.UnlockImage;
+        }
 
         [HttpGet("get/{id}")]
         public ActionResult Get(int id)
         {
             var item = this._unitOfWork.Topics.Get(id);
-            if (item == null) return new NotFoundResult();
+            if (item == null)
+            {
+                return new NotFoundResult();
+            }
+
             return Ok(item);
         }
 
@@ -59,7 +75,9 @@ namespace API.Controllers
         public ActionResult Put(int id, [FromBody] Topic item)
         {
             if (id != item.Id)
+            {
                 return StatusCode(400);
+            }
 
             var l = _unitOfWork.Topics.Get(id);
             l.Notes = item.Notes;

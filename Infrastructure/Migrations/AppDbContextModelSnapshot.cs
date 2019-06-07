@@ -481,9 +481,13 @@ namespace TKD.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<byte[]>("LockImage");
+
                     b.Property<string>("Notes");
 
                     b.Property<string>("Title");
+
+                    b.Property<byte[]>("UnlockImage");
 
                     b.Property<DateTime>("UpdateTime");
 
